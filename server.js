@@ -5,24 +5,24 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var passport = require('passport');
+// var passport = require('passport');
 var expressSession = require('express-session');
 var cookieParser   = require("cookie-parser");
 
 // Setting up for config/routes
 var routes = require('./config/routes');
 // Setting up the Passport Strategies
-require("./config/passport")(passport);
+// require("./config/passport")(passport);
 
-// session and cookie 
-app.use(cookieParser() );
-app.use(expressSession({secret: 'mySecretKey'}));
-app.use(passport.initialize());
-app.use(passport.session());
+// // session and cookie 
+// app.use(cookieParser() );
+// app.use(expressSession({secret: 'mySecretKey'}));
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(methodOverride('_method'));
-app.use(logger('dev'));
+// app.use(methodOverride('_method'));
+// app.use(logger('dev'));
 
 // View engines
 app.use(express.static(__dirname + '/public'));
