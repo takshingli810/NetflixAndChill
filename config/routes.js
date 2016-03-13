@@ -11,8 +11,34 @@ var likesController = require('../controllers/likesController');
 var oAuthController = require('../controllers/oAuthController');
 var passport = require('passport');
 
+
+
 router.route('/')
   .get(usersController.renderLandingPage);
+
+//about page
+router.route('/about')
+  .get(function (req, res) {
+    res.render("./pages/about");
+  });
+
+//matches page, just using for testing views
+router.route('/user/matches')
+  .get(function(req, res) {
+    res.render("./pages/my_matches");
+  });
+
+//other user profile, just using for testing views
+router.route('/otheruser')
+  .get(function(req, res) {
+    res.render("./pages/other_profile");
+  });
+
+//my profile, just using for testing views
+router.route('/myprofile')
+  .get(function(req, res) {
+    res.render("./pages/my_profile");
+  });
 
 
 router.route('/auth/facebook')
