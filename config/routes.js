@@ -16,8 +16,9 @@ router.route('/')
 
 
 // facebook OAuth **Need to link to login modal**
-router.route('/auth/facebook', passport
-  .authenticate('facebook'), {scope: 'user'});
+router.get('/auth/facebook', function(req, res){ 
+  passport.authenticate('facebook'), {scope: 'user'};
+});
 
 router.route('/auth/facebook/callback',
   passport.authenticate('facebook', {

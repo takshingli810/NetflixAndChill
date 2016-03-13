@@ -6,6 +6,12 @@ module.exports = mongoose.model('User',{
     access_token: String,
     firstName: String,
     lastName: String,
-    email: String
+    email: String,
+    gender: String,
+    birthdate: Date,
+    sexualPref: String,
+    location: String,
+    profilePic: String,
+    password_digest: String
   }
 });
