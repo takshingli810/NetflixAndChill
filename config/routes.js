@@ -10,10 +10,13 @@ var usersController = require('../controllers/users');
 var likesController = require('../controllers/likes');
 
 
+//Testing landing page
 router.route('/')
   .get(usersController.renderLandingPage);
 
-
+//Testing create (temp)
+router.route('/add-movie')
+  .get(likesController.renderAddForm);
 
 ///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
 
