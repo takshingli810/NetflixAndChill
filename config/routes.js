@@ -18,6 +18,10 @@ router.route('/')
 router.route('/add-movie')
   .get(likesController.renderAddForm);
 
+//introductory API page route COME BACK TO THIS
+router.route('/api')
+  .get(usersController);
+
 ///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
 
   // {

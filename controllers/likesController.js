@@ -13,7 +13,14 @@ function renderAddForm (req, res) {
 }
 
 function getAPI(req, res){
-  
+  res.json({
+    message: "This is the API for Netflix and Chill",
+    documentation_url: "https://github.com/takshingli810/NetlfixAndChill",
+    base_url: "http://netflixandchill.herokuapp.com",
+    endpoints: [
+      {method: "GET", path: "/api", description: "Describes available endpoints"}
+    ]
+  });
 }
 
 function getLikesAPI (req, res){

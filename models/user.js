@@ -11,8 +11,8 @@ var UserSchema = mongoose.Schema({
   location: String,
   profilePic: String,
   password_digest: String,
-  likes: Array,
-
+  //STILL UNSURE ABOUT WHERE THIS REFERENCED DATA WORKS
+  likes: [{type: mongoose.Schema.Types.ObjectID, ref: 'Like'}]
 });
 
 var User = mongoose.model('User', UserSchema);
