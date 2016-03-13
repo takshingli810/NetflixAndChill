@@ -6,6 +6,7 @@
 
 
 var db = ("../models/");
+var User = require("../models/user");
 var Like = require("../models/like");
 var mongoose = require('mongoose');
 

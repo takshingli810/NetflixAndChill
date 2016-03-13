@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/netflixandchill");
 var Schema = mongoose.Schema;
 
 var Like = require("./like");
@@ -16,7 +15,7 @@ var UserSchema = new Schema({
   profilePic: String,
   password_digest: String,
   likes: [{
-    type: Schema.Types.ObjectID,  //NOTE
+    type: Schema.Types.ObjectId,  //NOTE
     ref: 'Like'
   }]
 });

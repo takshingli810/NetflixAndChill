@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-// mongoose.connect("mongodb://localhost/netflixandchill");
 var Schema = mongoose.Schema;
 
 //not sure if we should change these to reflect OMDB attributes better?
