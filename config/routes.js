@@ -8,33 +8,30 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var usersController = require('../controllers/users');
 var likesController = require('../controllers/likes');
-
+var passport = require('passport');
 
 router.route('/')
   .get(usersController.renderLandingPage);
 
 
 
-///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
+// facebook OAuth **Need to link to login modal**
+router.route('/auth/facebook', passport
+  .authenticate('facebook'), {scope: 'user'});
 
-  // {
-  // **this is the facebook Auth route NEED TO MOVE TO ROUTER.JS**
-  //
-  // app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'} ));
-  // app.get('/auth/facebook/callback',
-  //   passport.authenticate('facebook', {
-  //     successRedirect: '/',
-  //     failureRedirect: '/'
-  //   })
-  // );
-  // // Logout
-  // app.get("/logout", function(req, res){
-  //   req.logout();
-  //   res.redirect("/");
-  // });
-  // ===========================================================
-  // }
+router.route('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    // this needs to route to profile page for user_id but first need to sort out ID
+    successRedirect: "/",
+    // also needs to change to route back to where they will get error message for authenicate 
+    failureRedirect: "/" 
+  }));
 
-//-------------------------------------------------------------
+// Logout
+  router.route("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+});
+
 
 module.exports = router;

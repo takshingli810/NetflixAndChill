@@ -5,24 +5,23 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-//FOR OAUTH UNCOMMENT THEN
-// var passport = require('passport');
-// var expressSession = require('express-session');
-// var cookieParser   = require("cookie-parser");
+// passport for facebook OAuth
+var passport = require('passport');
+var cookieParser   = require("cookie-parser");
+var expressSession = require('express-session');
 
 // Setting up for config/routes
 var routes = require('./config/routes');
 
-
 //OAUTH
 // Setting up the Passport Strategies
-// require("./config/passport")(passport);
+require("./config/passport")(passport);
 
 // // session and cookie
-// app.use(cookieParser() );
-// app.use(expressSession({secret: 'mySecretKey'}));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(cookieParser() ); // requiring cookie parser  
+// app.use(expressSession({secret: 'mySecretKey'})); // fetching for secret.js
+app.use(passport.initialize()); // initialization for passport 
+app.use(passport.session());
 
 
 app.use(bodyParser.json());
@@ -39,6 +38,23 @@ hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
 
 
+// // facebook OAuth **Need to link to login modal**
+// app.get('/auth/facebook', passport
+//   .authenticate('facebook'), {scope: 'user'});
+
+// app.get('/auth/facebook/callback',
+//   passport.authenticate('facebook', {
+//     // this needs to route to profile page for user_id but first need to sort out ID
+//     successRedirect: "/",
+//     // also needs to change to route back to where they will get error message for authenicate 
+//     failureRedirect: "/" 
+//   }));
+
+// // Logout
+//   app.get("/logout", function(req, res){
+//     req.logout();
+//     res.redirect("/");
+// });
 
 /**********
  * SERVER *
@@ -48,3 +64,5 @@ app.use(routes);
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is running on http://localhost:3000/');
 });
+
+
