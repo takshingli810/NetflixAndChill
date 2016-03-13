@@ -1,0 +1,14 @@
+<div id="matches-page" class="col-md-8">
+	<h1>My Matches</h1>
+	<div id="matches-div">
+		{{#each matches}}
+			<div class="match-div">
+				<a href="/users/{{id}}" class="match-image"><img src="{{profilePic}}"></a>
+				<a href="/users/{{id}}" class="match-name"><p>{{firstName}} {{lastName}}</p></a>
+				<p>{{user.gender}}, born {{user.birthdate}}</p>
+				<p>Location: {{user.location}}</p>
+				<p>50% match</p>
+			</div>
+		{{/each}}
+	</div>
+</div>

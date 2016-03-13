@@ -1,0 +1,11 @@
+<div id="sidebar" class="col-md-4">
+	<img src="{{user.profilePic}}">
+	<div id="sidebar-text">
+		<h2>{{user.firstName}} {{user.lastName}}</h2>
+		<p>{{user.gender}}, born {{user.birthdate}}</p>
+		<p>Location: {{user.location}}</p>
+	</div>
+	<div id="sidebar-buttons">
+		<a href="/users/{{user._id}}/edit" class="btn btn-default" id="edit-profile-button">Edit My Profile</a>
+	</div>
+</div>
