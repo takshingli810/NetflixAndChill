@@ -1,4 +1,6 @@
-var User = {
+var mongoose = require('mongoose');
+
+module.exports = mongoose.model('User', {
   firstName: String,
   lastName: String,
   gender: String,
@@ -8,4 +10,4 @@ var User = {
   location: String,
   profilePic: String,
   password_digest: String
-}
+});
