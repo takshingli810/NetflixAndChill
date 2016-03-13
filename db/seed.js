@@ -12,29 +12,6 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/netflixandchill');
 console.log("DB IS CONNECTED");
 
-var usersList = [
-  {
-    firstName: "Brian",
-    lastName: "Li",
-    gender: "Male"
-    // likes: [likesList, likesList[1]]
-  },
-
-  {
-    firstName: "Jessie",
-    lastName: "Hong",
-    gender: "Female"
-    // likes: [likesList[0], likesList[2]]
-  },
-
-  {
-    firstName: "Nidhi",
-    lastName: "Reddy",
-    gender: "Female"
-    // likes: [likesList[1]]
-  }
-]
-
 var likesList = [
   {
     _id: 1,
@@ -63,6 +40,31 @@ var likesList = [
     yearOfRelease: "2014-"
   }
 ];
+
+var usersList = [
+  {
+    firstName: "Brian",
+    lastName: "Li",
+    gender: "Male"
+    // likes: [likesList[0], likesList[1]]
+  },
+
+  {
+    firstName: "Jessie",
+    lastName: "Hong",
+    gender: "Female"
+    // likes: [likesList[0].title, likesList[2].title]
+  },
+
+  {
+    firstName: "Nidhi",
+    lastName: "Reddy",
+    gender: "Female"
+    // likes: [likesList[1].title]
+  }
+]
+
+
 
 User.remove({}, function(err, likes){
   User.create(usersList, function(err, users){
