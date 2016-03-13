@@ -20,7 +20,11 @@ router.route('/add-movie')
 
 //introductory API page route COME BACK TO THIS
 router.route('/api')
-  .get(usersController);
+  .get(usersController.getAPI);
+
+//introductory API page route COME BACK TO THIS
+router.route('/api/users')
+  .get(usersController.getUsersAPI);
 
 ///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
 

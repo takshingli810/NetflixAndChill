@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+// mongoose.connect("mongodb://localhost/netflixandchill");
+var Schema = mongoose.Schema;
 
 //not sure if we should change these to reflect OMDB attributes better?
-var LikeSchema = mongoose.Schema({
+var LikeSchema = new Schema({
   title: String,
   imageUrl: String,
   plot: String,
@@ -12,3 +14,12 @@ var LikeSchema = mongoose.Schema({
 var Like = mongoose.model('Like', LikeSchema);
 
 module.exports = Like;
+
+// Close connection on close
+// process.on('exit', function() {
+//   console.log('About to exit...');
+//   mongoose.disconnect(function() {
+//     console.log("Disconnected DB");
+//     process.exit(); // now exit the node app
+//   });
+// });
