@@ -38,24 +38,6 @@ hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
 
 
-// // facebook OAuth **Need to link to login modal**
-// app.get('/auth/facebook', passport
-//   .authenticate('facebook'), {scope: 'user'});
-
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', {
-//     // this needs to route to profile page for user_id but first need to sort out ID
-//     successRedirect: "/",
-//     // also needs to change to route back to where they will get error message for authenicate 
-//     failureRedirect: "/" 
-//   }));
-
-// // Logout
-//   app.get("/logout", function(req, res){
-//     req.logout();
-//     res.redirect("/");
-// });
-
 /**********
  * SERVER *
  **********/
