@@ -6,8 +6,8 @@ mongoose.connect('mongodb://localhost/netflixandchill');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var usersController = require('../controllers/users');
-var likesController = require('../controllers/likes');
+var usersController = require('../controllers/usersController');
+var likesController = require('../controllers/likesController');
 
 
 //Testing landing page

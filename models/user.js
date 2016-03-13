@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Like = require("./like");
 
-module.exports = mongoose.model('User', {
+var UserSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
   gender: String,
@@ -9,5 +10,11 @@ module.exports = mongoose.model('User', {
   email: String,
   location: String,
   profilePic: String,
-  password_digest: String
+  password_digest: String,
+  likes: Array,
+
 });
+
+var User = mongoose.model('User', UserSchema);
+
+module.exports = User;

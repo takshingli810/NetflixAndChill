@@ -5,8 +5,8 @@
 //ADD movie to our User's "LIKES"
 
 
-var db = ("./models/");
-var Like = require("./models/likes");
+var db = ("../models/");
+var Like = require("../models/like");
 var mongoose = require('mongoose');
 
 var likesList = [

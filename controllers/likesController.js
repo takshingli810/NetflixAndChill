@@ -9,7 +9,21 @@ function returnError (err) {
 }
 
 function renderAddForm (req, res) {
-  res.render('./partials/temp_addmovieform');
+  res.render('./partials/temp_addlikesform');
+}
+
+function getAPI(req, res){
+  
+}
+
+function getLikesAPI (req, res){
+  // res.json(Like.find({}, function(err){
+  //     if(err){
+  //       console.log("ERROR: ", err);
+  //       }
+  //   });
+  //
+  // );
 }
 
 
