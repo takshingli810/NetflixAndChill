@@ -6,12 +6,36 @@ mongoose.connect('mongodb://localhost/netflixandchill');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var usersController = require('../controllers/users');
-var likesController = require('../controllers/likes');
+var usersController = require('../controllers/usersController');
+var likesController = require('../controllers/likesController');
 
 
 router.route('/')
   .get(usersController.renderLandingPage);
+
+//about page
+router.route('/about')
+  .get(function (req, res) {
+    res.render("./pages/about");
+  });
+
+//matches page, just using for testing views
+router.route('/user/matches')
+  .get(function(req, res) {
+    res.render("./pages/my_matches");
+  });
+
+//other user profile, just using for testing views
+router.route('/otheruser')
+  .get(function(req, res) {
+    res.render("./pages/other_profile");
+  });
+
+//my profile, just using for testing views
+router.route('/myprofile')
+  .get(function(req, res) {
+    res.render("./pages/my_profile");
+  });
 
 
 
