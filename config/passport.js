@@ -33,18 +33,18 @@ module.exports = function(passport){
 
     process.nextTick(function() {
 
-      User.findOne({ 'fb.id' : profile.id }, function(err, user) {
+      User.findOne({ 'id' : profile.id }, function(err, user) {
         if (err) return done(err);
         if (user) {
           return done(null, user);
         } else {
 
           var newUser = new User();
-          newUser.fb.id           = profile.id;
-          newUser.fb.access_token = access_token;
-          newUser.fb.firstName    = profile.name.givenName;
-          newUser.fb.lastName     = profile.name.familyName;
-          newUser.fb.email        = profile.emails[0].value;
+          newUser.id           = profile.id;
+          newUser.access_token = access_token;
+          newUser.firstName    = profile.name.givenName;
+          newUser.lastName     = profile.name.familyName;
+          newUser.email        = profile.emails[0].value;
 
           newUser.save(function(err) {
             if (err)
@@ -59,4 +59,3 @@ module.exports = function(passport){
   }));
 
 };
-
