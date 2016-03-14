@@ -61,7 +61,7 @@ function getMovies(){
               allMovies += "<img src='../images/no-photo-available.jpg'>";
           }
 
-          allMovies += "<h1>" + element.Title + "</h1>";
+          allMovies += "<h1>" + element.Title + ", " + element.Year "</h1>";
           allMovies += "<p>" + element.Plot + "</p>";
 
 
