@@ -48,6 +48,8 @@ module.exports = function(passport){
           newUser.birthDate    = profile.birthday;
           newUser.gender       = profile.gender;
 
+          console.log("USER: ", user);
+
           newUser.save(function(err) {
             if (err)
               throw err;
