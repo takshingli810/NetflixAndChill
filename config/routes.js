@@ -10,8 +10,13 @@ var usersController = require('../controllers/usersController');
 var likesController = require('../controllers/likesController');
 
 
+//Testing landing page
 router.route('/')
   .get(usersController.renderLandingPage);
+
+//Testing create (temp)
+router.route('/add-movie')
+  .get(likesController.renderAddForm);
 
 //about page
 router.route('/about')
@@ -37,7 +42,13 @@ router.route('/myprofile')
     res.render("./pages/my_profile");
   });
 
+//introductory API page route COME BACK TO THIS
+router.route('/api')
+  .get(usersController.getAPI);
 
+//introductory API page route COME BACK TO THIS
+router.route('/api/users')
+  .get(usersController.getUsersAPI);
 
 ///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
 

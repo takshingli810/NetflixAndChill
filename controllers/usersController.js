@@ -12,7 +12,6 @@ function renderLandingPage (req, res) {
   res.render('./pages/landing_page');
 }
 
-
 module.exports = {
 	renderLandingPage: renderLandingPage
 };
