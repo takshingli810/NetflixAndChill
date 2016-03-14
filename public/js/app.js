@@ -34,11 +34,7 @@ function getMovies(){
     //save form data to variable
     var searchTerm = encodeURI($searchTerm.val());
 
-    // url: "https://api.themoviedb.org/search/keyword?query=" + searchTerm + "&api_key=" + key
-
     //ajax request to GET the movie with the title of the searchTerm
-    //"http://www.omdbapi.com/?t="
-    //To do - Why is only one result showing up? Is there a way to search with keywords?
     $.ajax({
       type: 'GET',
       url: "http://www.omdbapi.com/?s=" + searchTerm,
