@@ -50,6 +50,7 @@ router.route('/api')
 router.route('/api/users')
   .get(usersController.getUsersAPI);
 
+
 //likes route to view all movies that have been liked
 router.route('/api/likes')
   .get(likesController.getLikesAPI);
