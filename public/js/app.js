@@ -14,14 +14,8 @@ $(function() {
 // function to SEARCH FOR MOVIES (searchLikes.hbs template)
 function getMovies(){
 
-
-
-
   //name of entire search form
   var $searchForm = $("#searchForm");
-
-  //need to compile handlebars?
-  // var template = Handlebars.compile($searchForm.html());
 
   //where the results will be appended
   var $searchResults = $(".search-results");
