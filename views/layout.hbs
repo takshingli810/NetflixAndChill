@@ -17,11 +17,18 @@
 </head>
 <body>
 
-{{>logged_out_navbar}}
+<div>
+{{!-- need to pass in data for user --}}
+  {{#if user }}
+    {{>logged_in_navbar}}
+  {{else}}
+    {{>logged_out_navbar}}
+  {{/if}}
+</div>
 
 {{{body}}}
 
-
 </body>
+
 </html>
 

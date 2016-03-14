@@ -44,7 +44,6 @@ function getMovies(){
       success: function(result){
         console.log(result);
 
-
         var allMovies = '<div>';
 
         // iterate over the data result set
@@ -58,7 +57,6 @@ function getMovies(){
 
           allMovies += "<h1>" + element.Title + ", " + element.Year + "</h1>";
         });
-
 
         allMovies += '</div>';
 
@@ -77,8 +75,5 @@ function getMovies(){
     $searchTerm.focus();
 
   }); //end of on submit
-
-
-
 
 };//end of getMovies
