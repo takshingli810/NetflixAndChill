@@ -1,0 +1,38 @@
+<!--This form is just to check whether our 'Create' function works  -->
+
+<section class="search-form container">
+      <div>
+      <div class="col-md-10 col-md-offset-1">
+
+        <form method="post" action="/search" id="searchForm" class="form-horizontal">
+          <fieldset>
+
+            <!-- Form Name -->
+            <legend>Search for your favorite movies and tv shows</legend>
+
+            <!-- Search By Movie Name-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="title"></label>
+              <div class="col-md-4">
+              <input id="searchTerm" name="search" type="text" placeholder="Search by title..." class="form-control input-md" required="">
+
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton">Search</label>
+              <div class="col-md-4">
+                <input id="search-movie-btn" class="btn btn-primary" type="submit"></input>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="search-results">
+
+      </div>
+
+    </div>
+</section>

@@ -4,7 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/netflixandchill');
+mongoose.connect('mongodb://localhost/netflixandchill');
 
 // passport for facebook OAuth
 var passport = require('passport');
@@ -20,7 +20,7 @@ require("./config/passport")(passport);
 
 // // session and cookie
 app.use(cookieParser() ); // requiring cookie parser  
-// app.use(expressSession({secret: 'mySecretKey'})); // fetching for secret.js
+app.use(expressSession({secret: 'mySecretKey'})); // fetching for secret.js
 app.use(passport.initialize()); // initialization for passport 
 app.use(passport.session());
 
