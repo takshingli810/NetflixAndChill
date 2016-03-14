@@ -39,9 +39,9 @@ var UserSchema = new Schema({
 
 
 
-var User = mongoose.model('User', UserSchema);
+// var User = mongoose.model('User', UserSchema);
 
-module.exports = User;
+// module.exports = User;
 
 // Close connection on close
 // process.on('exit', function() {
