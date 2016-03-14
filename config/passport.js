@@ -25,17 +25,18 @@ module.exports = function(passport){
     clientSecret    : OAuth.fb.clientSecret,
     callbackURL     : 'http://localhost:3000/auth/facebook/callback',
     enableProof     : true,
-    profileFields   : ['name', 'emails']
+    profileFields   : ['name', 'emails', 'gender', 'birthday', 'picture']
   }, function(access_token, refresh_token, profile, done) {
 
     // // Use this to see the information returned from Facebook
-    // console.log(profile)
+    console.log("Profile pic: ", profile.photos[0].value);
 
     process.nextTick(function() {
 
       User.findOne({ 'id' : profile.id }, function(err, user) {
         if (err) return done(err);
         if (user) {
+
           return done(null, user);
         } else {
 
@@ -45,10 +46,12 @@ module.exports = function(passport){
           newUser.firstName    = profile.name.givenName;
           newUser.lastName     = profile.name.familyName;
           newUser.email        = profile.emails[0].value;
-          newUser.birthDate    = profile.birthday;
+          newUser.birthday     = profile._json.birthday;
           newUser.gender       = profile.gender;
+          newUser.profilePic   = profile.photos.value;
 
-          console.log("USER: ", user);
+          // console.log("USER: ", newUser);
+
 
           newUser.save(function(err) {
             if (err)

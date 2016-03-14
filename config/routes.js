@@ -71,7 +71,7 @@ router.route('/api/users')
 // Facebook OAuth URL
 router.route('/auth/facebook')
   .get(passport.authenticate('facebook', {
-    scope: 'email'
+    scope: 'email,public_profile,user_birthday'
   }));
 
 // Facebook callback URL

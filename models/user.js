@@ -10,7 +10,7 @@ var UserSchema = new Schema({
   firstName: String,
   lastName: String,
   gender: String,
-  birthDate: String,
+  birthday: String,
   sexualPref: String,
   email: String,
   location: String,
