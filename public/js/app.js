@@ -5,7 +5,7 @@ var user = {};
 $(function() {
     console.log( "ready!" );
     $("#signup-button").click(function(){
-        $("#signUpModal").modal();
+        // $("#signUpModal").modal();
         console.log("no issues with jquery");
     });
 
