@@ -50,10 +50,15 @@ router.route('/api')
   .get(usersController.getAPI);
 
 router.route('/auth/facebook')
-  .get(oAuthController.redirectAuthFacebook);
+  .get(passport.authenticate('facebook', {
+    scope: 'email'
+  }));
 
 router.route('/auth/facebook/callback')
-  .get(oAuthController.callBackAuthFacebook);
+  .get(passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/about'
+  }));
 
 router.route('/api/users')
   .get(usersController.getUsersAPI);
