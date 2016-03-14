@@ -35,47 +35,9 @@ function getUsersAPI (req, res){
 }
 
 
-//Delete a user --- Jessie
-function destroy (req, res) {
-  User.remove({_id: req.params.id}, function(err, users){
-    if (err){
-      res.status(500).send();
-      console.log("ERROR: ", err);
-    } else {
-      res.redirect("/");
-    }
-  });
-}
-
-//edit function--get form to edit user -- Jessie
-function edit (req, res) {
-  User.find({_id: req.params.id}, function(err, users){
-    if (err){
-      res.status(500).send();
-      console.log("ERROR: ", err);
-    } else {
-      res.render("./partials/edit_profile");
-    }
-  });
-}
-
-//update function: WIP -- Jessie
-function update (req, res) {
-  User.find({_id: req.params.id}, function(err, user){
-    if (err) {
-      res.status(500).send();
-      console.log("ERROR: ", err);
-    }else {
-      res.send(JSON.stringify(user));
-    }
-  });
-}
 
 module.exports = {
 	renderLandingPage: renderLandingPage,
 	getAPI: getAPI,
 	getUsersAPI: getUsersAPI,
-  destroy: destroy,
-  edit: edit,
-  update: update
 };

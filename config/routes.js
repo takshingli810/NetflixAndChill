@@ -51,15 +51,6 @@ router.route('/api/users')
   .get(usersController.getUsersAPI);
 
 
-//JESSIE'S ROUTES FROM SUNDAY NIGHT
-//edit user route
-router.route('/users/:id/edit')
-  .get(usersController.edit);
-
-//delete user route
-router.route('/users/:id')
-  .delete(usersController.destroy);
-
 //likes route to view all movies that have been liked
 router.route('/api/likes')
   .get(likesController.getLikesAPI);
