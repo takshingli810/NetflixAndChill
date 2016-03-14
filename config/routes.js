@@ -13,8 +13,13 @@ var passport = require('passport');
 
 
 
+//Testing landing page
 router.route('/')
   .get(usersController.renderLandingPage);
+
+//Testing create (temp)
+router.route('/add-movie')
+  .get(likesController.renderAddForm);
 
 //about page
 router.route('/about')
@@ -40,29 +45,18 @@ router.route('/myprofile')
     res.render("./pages/my_profile");
   });
 
+//introductory API page route COME BACK TO THIS
+router.route('/api')
+  .get(usersController.getAPI);
 
 router.route('/auth/facebook')
   .get(oAuthController.redirectAuthFacebook);
 
 router.route('/auth/facebook/callback')
   .get(oAuthController.callBackAuthFacebook);
-// // facebook OAuth **Need to link to login modal**
-// router.route('/auth/facebook', 
-//   passport.authenticate('facebook'), {scope: 'user'});
 
-// router.route('/auth/facebook/callback',
-//   passport.authenticate('facebook', {
-//     // this needs to route to profile page for user_id but first need to sort out ID
-//     successRedirect: "/",
-//     // also needs to change to route back to where they will get error message for authenicate 
-//     failureRedirect: "/" 
-//   }));
-
-// // Logout
-//   router.route("/logout", function(req, res){
-//     req.logout();
-//     res.redirect("/");
-// });
+router.route('/api/users')
+  .get(usersController.getUsersAPI);
 
 
 module.exports = router;

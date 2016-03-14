@@ -4,6 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/netflixandchill');
 
 // passport for facebook OAuth
 var passport = require('passport');
