@@ -8,6 +8,8 @@ $(function() {
         $("#signUpModal").modal();
         console.log("no issues with jquery");
     });
+
+    getMovies();
 });
 
 //delete user ajax call
