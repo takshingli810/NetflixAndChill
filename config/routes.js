@@ -50,6 +50,14 @@ router.route('/api')
 router.route('/api/users')
   .get(usersController.getUsersAPI);
 
+//edit user route
+router.route('/users/:id/edit')
+  .get(usersController.edit);
+
+//delete user route
+router.route('/users/:id')
+  .delete(usersController.destroy);
+
 ///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
 
   // {
