@@ -1,0 +1,52 @@
+{{!--COMMENTED OUT, USING HARD DATA FOR NOW
+<div id="matches-page" class="col-md-8">
+	<h1>My Matches</h1>
+	<div id="matches-div">
+		{{#each matches}}
+			<div class="match-div">
+				<a href="/users/{{id}}" class="match-image"><img src="{{profilePic}}"></a>
+				<a href="/users/{{id}}" class="match-name"><p>{{firstName}} {{lastName}}</p></a>
+				<p>{{user.gender}}, born {{user.birthdate}}</p>
+				<p>Location: {{user.location}}</p>
+				<p>50% match</p>
+			</div>
+		{{/each}}
+	</div>
+</div>
+--}}
+
+<div id="sidebar" class="col-md-4" style="background-color: pink">
+	<img src="/images/einstein.png">
+	<div id="sidebar-text">
+		<h2>Albert Einstein</h2>
+		<p>Male, born 08/14/1979</p>
+		<p>Location: ?</p>
+	</div>
+</div>
+
+<div id="matches-page" class="col-md-8" style="background-color: azure">
+	<h1>My Matches</h1>
+	<div id="matches-div">
+			<div class="match-div col-sm-4">
+				<a href="/users/{{id}}" class="match-image"><img src="/images/einstein.png"></a>
+				<a href="/users/{{id}}" class="match-name"><p>Albert Einstein</p></a>
+				<p>Male, born 08/14/1979</p>
+				<p>Location: ?</p>
+				<p>50% match</p>
+			</div>
+			<div class="match-div col-sm-4">
+				<a href="/users/{{id}}" class="match-image"><img src="/images/einstein.png"></a>
+				<a href="/users/{{id}}" class="match-name"><p>Albert Einstein</p></a>
+				<p>Male, born 08/14/1979</p>
+				<p>Location: ?</p>
+				<p>50% match</p>
+			</div>
+			<div class="match-div col-sm-4">
+				<a href="/users/{{id}}" class="match-image"><img src="/images/einstein.png"></a>
+				<a href="/users/{{id}}" class="match-name"><p>Albert Einstein</p></a>
+				<p>Male, born 08/14/1979</p>
+				<p>Location: ?</p>
+				<p>50% match</p>
+			</div>
+	</div>
+</div>

@@ -9,9 +9,8 @@ function returnError (err) {
 }
 
 function renderLandingPage (req, res) {
-  res.render('./partials/landing_page');
+  res.render('./pages/landing_page');
 }
-
 
 module.exports = {
 	renderLandingPage: renderLandingPage
