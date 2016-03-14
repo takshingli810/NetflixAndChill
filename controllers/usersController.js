@@ -59,7 +59,7 @@ function edit (req, res) {
   });
 }
 
-//update function
+//update function: WIP -- Jessie
 function update (req, res) {
   User.find({_id: req.params.id}, function(err, user){
     if (err) {
@@ -76,5 +76,6 @@ module.exports = {
 	getAPI: getAPI,
 	getUsersAPI: getUsersAPI,
   destroy: destroy,
-  edit: edit
+  edit: edit,
+  update: update
 };
