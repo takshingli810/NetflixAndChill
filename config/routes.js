@@ -15,8 +15,8 @@ router.route('/')
   .get(usersController.renderLandingPage);
 
 //Testing create (temp)
-router.route('/add-movie')
-  .get(likesController.renderAddForm);
+router.route('/search')
+  .get(likesController.renderSearchLikes);
 
 //about page
 router.route('/about')
@@ -42,13 +42,18 @@ router.route('/myprofile')
     res.render("./pages/my_profile");
   });
 
-//introductory API page route COME BACK TO THIS
+//introductory API page route
 router.route('/api')
   .get(usersController.getAPI);
 
-//introductory API page route COME BACK TO THIS
+//users route to view all users and their likes
 router.route('/api/users')
   .get(usersController.getUsersAPI);
+
+
+//likes route to view all movies that have been liked
+router.route('/api/likes')
+  .get(likesController.getLikesAPI);
 
 ///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
 

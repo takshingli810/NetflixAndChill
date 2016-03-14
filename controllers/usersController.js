@@ -34,8 +34,10 @@ function getUsersAPI (req, res){
   });
 }
 
+
+
 module.exports = {
 	renderLandingPage: renderLandingPage,
 	getAPI: getAPI,
-	getUsersAPI: getUsersAPI
+	getUsersAPI: getUsersAPI,
 };
