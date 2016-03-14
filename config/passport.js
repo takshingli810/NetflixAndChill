@@ -45,6 +45,8 @@ module.exports = function(passport){
           newUser.firstName    = profile.name.givenName;
           newUser.lastName     = profile.name.familyName;
           newUser.email        = profile.emails[0].value;
+          newUser.birthDate    = profile.birthday;
+          newUser.gender       = profile.gender;
 
           newUser.save(function(err) {
             if (err)
