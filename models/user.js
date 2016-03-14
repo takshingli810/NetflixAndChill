@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-<<<<<<< HEAD
+
 module.exports = mongoose.model('User',{
   fb: {
     id: String,
@@ -16,7 +16,8 @@ module.exports = mongoose.model('User',{
     profilePic: String,
     password_digest: String
   }
-=======
+});
+
 var Like = require("./like");
 
 //STILL UNSURE ABOUT WHERE THIS REFERENCED DATA WORKS
@@ -34,7 +35,6 @@ var UserSchema = new Schema({
     type: Schema.Types.ObjectId,  //NOTE
     ref: 'Like'
   }]
->>>>>>> ec3b6aff8ee6354bbe68d34f382284910afee3ce
 });
 
 
