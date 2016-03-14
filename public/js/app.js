@@ -1,7 +1,9 @@
 //CLIENT-SIDE JS
-
 //MAIN FUNCTION
-$(document).ready(function(){
 
-  
+$(function() {
+    console.log( "ready!" );
+    $("#signup-button").click(function(){
+        $("#signUpModal").modal();
+    });
 });

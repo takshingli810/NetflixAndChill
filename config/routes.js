@@ -18,6 +18,30 @@ router.route('/')
 router.route('/add-movie')
   .get(likesController.renderAddForm);
 
+//about page
+router.route('/about')
+  .get(function (req, res) {
+    res.render("./pages/about");
+  });
+
+//matches page, just using for testing views
+router.route('/user/matches')
+  .get(function(req, res) {
+    res.render("./pages/my_matches");
+  });
+
+//other user profile, just using for testing views
+router.route('/otheruser')
+  .get(function(req, res) {
+    res.render("./pages/other_profile");
+  });
+
+//my profile, just using for testing views
+router.route('/myprofile')
+  .get(function(req, res) {
+    res.render("./pages/my_profile");
+  });
+
 //introductory API page route COME BACK TO THIS
 router.route('/api')
   .get(usersController.getAPI);

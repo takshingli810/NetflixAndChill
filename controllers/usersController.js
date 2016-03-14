@@ -9,34 +9,9 @@ function returnError (err) {
 }
 
 function renderLandingPage (req, res) {
-  res.render('./partials/landing_page');
-}
-
-
-function getAPI(req, res){
-  res.json({
-    message: "This is the API for Netflix and Chill",
-    documentation_url: "https://github.com/takshingli810/NetlfixAndChill",
-    base_url: "http://netflixandchill.herokuapp.com",
-    endpoints: [
-      {method: "GET", path: "/api", description: "Describes available endpoints"}
-    ]
-  });
-}
-
-//SHOW ALL LIKES OF ALL USERS
-function getUsersAPI (req, res){
-  User.find(function(err, users){
-    if(err){
-      console.log("ERROR: ", err);
-    }
-
-    res.json({users: users});
-  });
+  res.render('./pages/landing_page');
 }
 
 module.exports = {
-	renderLandingPage: renderLandingPage,
-  getAPI: getAPI,
-  getUsersAPI: getUsersAPI
+	renderLandingPage: renderLandingPage
 };
