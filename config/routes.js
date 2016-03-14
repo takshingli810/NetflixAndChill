@@ -34,19 +34,19 @@ router.route('/search')
 //matches page, just using for testing views
 router.route('/user/matches')
   .get(function(req, res) {
-    res.render("./pages/my_matches");
+    res.render("./pages/my_matches",  {user: req.user});
   });
 
 //other user profile, just using for testing views
 router.route('/otheruser')
   .get(function(req, res) {
-    res.render("./pages/other_profile");
+    res.render("./pages/other_profile", {user: req.user});
   });
 
 //my profile, just using for testing views
 router.route('/myprofile')
   .get(function(req, res) {
-    res.render("./pages/my_profile");
+    res.render("./pages/my_profile", {user: req.user});
   });
 
 // *************************** //
@@ -77,8 +77,8 @@ router.route('/auth/facebook')
 // Facebook callback URL
 router.route('/auth/facebook/callback')
   .get(passport.authenticate('facebook', {
-    successRedirect: '/', // this needs to be changed to user profile
-    failureRedirect: '/' 
+    successRedirect: '/myprofile', // this needs to be changed to user profile
+    failureRedirect: '/'
   }));
 
 // Sign out
