@@ -1,0 +1,14 @@
+<div id="edit-profile-div" class="col-md-8 col-md-offset-4">
+	<form id="edit-profile-form" class=".form" onsubmit="user.editProfile(event)">
+		<label for="firstName" value="First Name">
+		<input type="text" name="firstName" placeholder="{{user.firstName}}">
+		<input type="text" name="lastName" placeholder="{{user.lastName}}">
+		<input type="text" name="gender" placeholder="{{user.gender}}">
+		<input type="text" name="birthdate" placeholder="{{user.birthdate}}">
+		<input type="text" name="sexualPref" placeholder="{{user.sexualPref}}">
+		<input type="text" name="location" placeholder="{{user.location}}">
+		<input type="submit" value="Save Changes"></input>
+	</form>
+	<a href="/user/{{user._id}}" class="btn btn-default">Cancel</a>
+	<button id="delete-account-button" class="btn btn-danger">Delete Account</button>
+</div>
