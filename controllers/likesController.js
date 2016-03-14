@@ -8,8 +8,8 @@ function returnError (err) {
   return console.log(err);
 }
 
-function renderAddForm (req, res) {
-  res.render('./partials/temp_addlikesform');
+function renderSearchLikes (req, res) {
+  res.render('./partials/searchLikes');
 }
 
 
@@ -26,6 +26,6 @@ function getLikesAPI (req, res){
 
 
 module.exports = {
-	renderAddForm: renderAddForm,
+	renderSearchLikes: renderSearchLikes,
 	getLikesAPI: getLikesAPI
 };
