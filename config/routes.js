@@ -27,13 +27,13 @@ router.route('/about')
 // Jessie's routes from Mon Night //
 // *************************** //
 
-//show my profile-- will soon delete.
+// show my profile-- will soon delete.
 router.route('/myprofile')
-  .get(usersController.showMyProfile);
+  .get(usersController.show);
 
 //show other user profile? WIP
 router.route('/users/:id')
-  .get(usersController.showOtherProfile)
+  .get(usersController.show)
 //delete user route
   .delete(usersController.destroy)
 //update user fields
@@ -93,11 +93,35 @@ router.route('/auth/facebook')
   }));
 
 // Facebook callback URL
+// app.get('/auth/facebook/callback', function(req, res, next) {
+//   passport.authenticate('facebook', {successRedirect: "/users/" + req.user.id});
+// });
 router.route('/auth/facebook/callback')
   .get(passport.authenticate('facebook', {
-    successRedirect: '/myprofile', // this needs to be changed to user profile
+    successRedirect: '/myprofile',
     failureRedirect: '/'
   }));
+
+//route for showing profile page
+app.get('/users/:id', isLoggedIn, function(req, res) {
+  res.render('./pages/my_profile', {
+    user: req.user
+  });
+});
+
+
+
+//route middleware
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()) {
+    return(next());
+  } else {
+    res.redirect('/');
+  }
+}
+
+
+
 
 // router.route('/auth/facebook/callback')
 //   .get(passport.authenticate('facebook', usersController.show));

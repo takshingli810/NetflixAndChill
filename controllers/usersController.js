@@ -36,15 +36,13 @@ function getUsersAPI (req, res){
 
 //JESSIE's CONTROLLER FUNCTIONS FROM MON NIGHT
 
-//Show my profile --- Jessie
-function showMyProfile (req, res) {
-  // console.log(req.user);
-  res.render("./pages/my_profile", {user: req.user});
-}
 
-//Show someone else's profile --- Jessie
-function showOtherProfile (req, res) {
+//Show profile --- Jessie
+function show (req, res) {
   console.log("route is working");
+  console.log(req.user);
+
+  res.render("./pages/my_profile", {user: req.user});
 }
 
 //Delete a user --- Jessie
@@ -106,8 +104,7 @@ module.exports = {
   renderLandingPage: renderLandingPage,
   getAPI: getAPI,
   getUsersAPI: getUsersAPI,
-  showMyProfile: showMyProfile,
-  showOtherProfile: showOtherProfile,
+  show: show,
   destroy: destroy,
   edit: edit,
   update: update
