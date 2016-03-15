@@ -61,6 +61,9 @@ router.route('/api')
 router.route('/api/likes')
   .get(likesController.getLikesAPI);
 
+router.route('/api/likes')
+  .post(likesController.postLikesAPI); //in testing
+
 //users route to view all users and their attributes
 router.route('/api/users')
   .get(usersController.getUsersAPI);

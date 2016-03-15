@@ -10,11 +10,49 @@ $(function() {
     });
 
     getMovies();
+
+    $('.add-like').on('click', function(event){
+      createLike(event);
+    });
 });
 
-function createLike(event){
+// function createLike(event){
+//   event.preventDefault();
+//   console.log(event);
+// }
 
-}
+//CREATE LIKE
+function createLike(event){
+  event.preventDefault();
+
+  console.log("HI");
+
+  console.log(event);
+
+  //info about the new like
+  var newLike= {
+    // name: $name,
+    // artistName: $artistName,
+    // releaseDate: $releaseDate,
+    // genres: $genres,
+    // description: $description,
+    // imageUrl: $imageUrl
+    title: "IS THIS WORKING"
+  };
+
+  $.ajax({
+    type: 'POST',
+    url: '/api/likes',
+    data: newLike,
+    success: function(newLike){
+      console.log(newLike);
+    },
+    error: function(err) {
+      alert("issue with create likes: " + err);
+    }
+  });
+};
+
 
 // function to SEARCH FOR MOVIES (searchLikes.hbs template)
 function getMovies(){
@@ -52,7 +90,10 @@ function getMovies(){
 
         // iterate over the data result set
         $.each(result.Search, function(index, element) {
-          allMovies += "<button id=" + element.imdbID + " value='+'>+</button>"
+
+          allMovies += "<form id='add-like'>"
+                      +"<input type='submit' value='+'></input>"
+                      +"</form>";
           if(element.Poster !== "N/A"){
               allMovies += "<div><img src=" + element.Poster + ">";
           } else {

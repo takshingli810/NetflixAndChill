@@ -9,13 +9,17 @@ function returnError (err) {
 }
 
 // //Click on '+' and add movie to user's 'Likes'
-// function createLikes(req, res){
-//   // var imdbID = req.body.imdbID;
-//
-//   console.log("CREATING LIKES");
-// }
-
-
+function postLikesAPI(req, res) {
+    var like = req.body;
+    Like.create({title: like}, function(err, like) {
+      err ?
+        // handle error
+        res.status(500).send() :
+        // handle success
+        // res.status(201).send(JSON.stringify(like));
+        res.redirect('/myprofile');
+    });
+  }
 
 function renderSearchLikes (req, res) {
   res.render('./partials/searchLikes');
@@ -36,6 +40,6 @@ function getLikesAPI (req, res){
 
 module.exports = {
 	renderSearchLikes: renderSearchLikes,
-	getLikesAPI: getLikesAPI
-  // createLikes: createLikes
+	getLikesAPI: getLikesAPI,
+  postLikesAPI: postLikesAPI
 };
