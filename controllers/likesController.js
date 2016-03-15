@@ -11,23 +11,24 @@ function returnError (err) {
 
 // //Click on '+' and add movie to 'Likes' collection & API
 function postLikesAPI(req, res) {
-    var imdbID = req.body.imdbID;
+  var imdbID = req.body.imdbID;
 
-    UserLike.count({imdbID : imdbID}, function(err, count){
-      if(count === 0){
-        UserLike.create({imdbID: imdbID}, function(err, userlike) {
-          err ? res.status(500).send() : res.status(201);
-        });
-      }
-      else{
-        console.log("ERROR WITH USER LIKE CREATION ", err);
-      }
-    });
-  }
+  UserLike.count({imdbID : imdbID}, function(err, count){
+    if(count === 0){
+      UserLike.create({imdbID: imdbID}, function(err, userlike) {
+        err ? res.status(500).send() : res.status(201);
+        //push onto req.session.user.id User 'likes' array ?
+      });
+    }
+    else{
+      console.log("ERROR WITH USER LIKE CREATION ", err);
+    }
+  });
+}
 
 //SHOW ALL LIKES OF ALL USERS
 function getLikesAPI (req, res){
-  UserLike.find(function(err, userlikes){
+  UserLike.find({}, function(err, userlikes){
     if(err){
       console.log("ERROR: ", err);
     }
@@ -36,13 +37,13 @@ function getLikesAPI (req, res){
   });
 }
 
+function renderMyLikes (req, res){
+
+}
+
 function renderSearchLikes (req, res) {
   res.render('./partials/searchLikes');
 }
-
-
-
-
 
 module.exports = {
 	renderSearchLikes: renderSearchLikes,

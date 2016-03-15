@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Like = require("./like");
+var UserLike = require("./userLike");
 
 //STILL UNSURE ABOUT WHERE THIS REFERENCED DATA WORKS
 var UserSchema = new Schema({
@@ -17,8 +17,8 @@ var UserSchema = new Schema({
   profilePic: String,
   password_digest: String,
   likes: [{
-    type: Schema.Types.ObjectId,  //NOTE
-    ref: 'Like'
+    type: Schema.Types.ObjectId,
+    ref: 'UserLike'
   }]
 });
 

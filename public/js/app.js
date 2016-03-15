@@ -1,6 +1,6 @@
 //CLIENT-SIDE JS
 //MAIN FUNCTION
-var user = {};
+// var user = {};
 
 $(function() {
     console.log( "ready!" );
@@ -33,10 +33,11 @@ function createLike(event){
     data: newLike,
     dataType: 'json',
     success: function(newLike){
-      console.log(newLike);
+      console.log("HELLO");
+      console.log(renderLikes());
     },
     error: function(err) {
-      console.log("issue with create likes: " + err);
+      console.log("issue with create likes POST: " + err);
     }
   });
 
@@ -44,17 +45,15 @@ function createLike(event){
 
 //show all likes in the MY LIKES div
 function renderLikes(){
-  // GETTING LIKES AND RENDERING ON MY LIKES PARTIAL
+  // GETTING LIKES AND RENDERING ON MY LIKES PARTIAL=
+  console.log("YO RENDER LIKES ");
+
   $.ajax({
     type: 'GET',
     url: '/api/userlikes',
-    success: function(likes){
-      $.each(likesObject, function(i, likesArray){
-        console.log(likesArray);
-        $.each(likesArray, function(j, like){
-          $('.movie-div').append('<div>' + like.title + '</div>');
-        });
-      })
+    success: function(userLikes){
+      console.log("USER LIKES ", userLikes);
+      // console.log(req.params);
     },
     error: function(err) {
       alert("issue with create likes: " + err);
@@ -100,6 +99,7 @@ function getMovies(){
           //adds a button to each movie (+)
           movie += "<form id='add-like' onsubmit='createLike(event)'>"
                 +  "<input class='hidden' type='hidden' value=" + imdbID + " name='userlike' id=" + imdbID + "></input>"
+//                + "<input class='hidden' type='hidden' value="
                 +  "<input type='submit' value='+'></input>"
                 +  "</form>";
           //if there is no poster URL then it just adds a default image
