@@ -26,8 +26,6 @@ function createLike(event){
     imdbID: event.target.children[0].value
   }
 
-  console.log(newLike);
-
   //posting to backend (can view on API LIKES)
   $.ajax({
     type: 'POST',
@@ -36,10 +34,9 @@ function createLike(event){
     dataType: 'json',
     success: function(newLike){
       console.log(newLike);
-      $('.movie-div').append('<div> NEW LIKE' + "INSERT NEW LIKE HERE"+ '</div>');
     },
     error: function(err) {
-      alert("issue with create likes: " + err);
+      console.log("issue with create likes: " + err);
     }
   });
 
@@ -50,14 +47,13 @@ function renderLikes(){
   // GETTING LIKES AND RENDERING ON MY LIKES PARTIAL
   $.ajax({
     type: 'GET',
-    url: '/api/likes',
+    url: '/api/userlikes',
     success: function(likes){
       $.each(likesObject, function(i, likesArray){
         console.log(likesArray);
         $.each(likesArray, function(j, like){
           $('.movie-div').append('<div>' + like.title + '</div>');
         });
-        // $('.movie-div').append('<div>' + like[0].title + '</div>');
       })
     },
     error: function(err) {
