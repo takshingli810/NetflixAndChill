@@ -16,18 +16,22 @@ $(function() {
 
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
-function createLike(event, newLike){
-  event.preventDefault();
+function createLike(event, title){
   console.log(event);
+  event.preventDefault();
+
+  var newLike = {
+    title: title
+  }
 
   //posting to backend (can view on API LIKES)
   $.ajax({
     type: 'POST',
-    url: '/api/likes',
+    url: '/api/userlikes',
     data: newLike,
     success: function(newLike){
-      renderLikes();
-
+      // renderLikes();
+      console.log(newLike);
       $('.movie-div').append('<div> NEW LIKE' + "INSERT NEW LIKE HERE"+ '</div>');
     },
     error: function(err) {
@@ -84,41 +88,33 @@ function getMovies(){
       dataType: 'json', //no data is being passed in
       success: function(result){
         console.log(result);
-        var allMovies = '<div>';
+        var movie = "<div>";
         // iterate over the data result set
         $.each(result.Search, function(index, element) {
           //what we'll be passing into the 'createLike' method
           //window. is to make it a global variable
           //currently only pulling data from the first thing added
-          window.newLike = {
-            title: element.Title,
-            yearOfRelease: element.Year,
-            imageUrl: element.Poster,
-            imdbID: element.imdbID
-          };
 
-
-
-          // $searchResults.append("NEW LIKE: ", JSON.serialize(window.newLike));
-          console.log(newLike);
+          var title = element.Title;
+          console.log("TITLE : ", title);
 
           //adds a button to each movie (+)
-          allMovies += "<form id='add-like' onsubmit='createLike(event, newLike)'>"
-                      +"<input type='submit' value='+'></input>"
-                      +"</form>";
+          movie += "<form id='add-like' onsubmit='createLike(event, " + title + ")'>"
+                +  "<input title=" + title + " type='submit' value='+'></input>"
+                +  "</form>";
           //if there is no poster URL then it just adds a default image
           if(element.Poster !== "N/A"){
-              allMovies += "<div><img src=" + element.Poster + ">";
+              movie += "<div><img src=" + element.Poster + ">";
           } else {
-              allMovies += "<img src='../images/no-photo-available.jpg'>";
+              movie += "<img src='../images/no-photo-available.jpg'>";
           }
-          allMovies += "<h1>" + element.Title + ", " + element.Year + "</h1>";
+          movie += "<h1>" + element.Title + ", " + element.Year + "</h1>";
         });
 
-        allMovies += '</div>';
+        movie += '</div>';
 
         // insert the html
-        $searchResults.append(allMovies);
+        $searchResults.append(movie);
       },
       //if theres an error with the AJAX request
       error: function(err){

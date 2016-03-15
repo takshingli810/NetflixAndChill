@@ -13,12 +13,3 @@ var LikeSchema = new Schema({
 var Like = mongoose.model('Like', LikeSchema);
 
 module.exports = Like;
-
-// Close connection on close
-// process.on('exit', function() {
-//   console.log('About to exit...');
-//   mongoose.disconnect(function() {
-//     console.log("Disconnected DB");
-//     process.exit(); // now exit the node app
-//   });
-// });
