@@ -16,21 +16,25 @@ $(function() {
 
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
-function createLike(event, title){
-  console.log(event);
+function createLike(event){
+  // console.log(event);
   event.preventDefault();
+  console.log(this);
+  console.log(event);
 
   var newLike = {
-    title: title
+    imdbID: event.target.children[0].value
   }
+
+  console.log(newLike);
 
   //posting to backend (can view on API LIKES)
   $.ajax({
     type: 'POST',
     url: '/api/userlikes',
     data: newLike,
+    dataType: 'json',
     success: function(newLike){
-      // renderLikes();
       console.log(newLike);
       $('.movie-div').append('<div> NEW LIKE' + "INSERT NEW LIKE HERE"+ '</div>');
     },
@@ -91,16 +95,16 @@ function getMovies(){
         var movie = "<div>";
         // iterate over the data result set
         $.each(result.Search, function(index, element) {
-          //what we'll be passing into the 'createLike' method
-          //window. is to make it a global variable
-          //currently only pulling data from the first thing added
 
-          var title = element.Title;
-          console.log("TITLE : ", title);
+          //imdb ID since omdb ID isn't available?
+          var imdbID = element.imdbID;
+
+          console.log("IMDB ID ", imdbID);
 
           //adds a button to each movie (+)
-          movie += "<form id='add-like' onsubmit='createLike(event, " + title + ")'>"
-                +  "<input title=" + title + " type='submit' value='+'></input>"
+          movie += "<form id='add-like' onsubmit='createLike(event)'>"
+                +  "<input class='hidden' type='hidden' value=" + imdbID + " name='userlike' id=" + imdbID + "></input>"
+                +  "<input type='submit' value='+'></input>"
                 +  "</form>";
           //if there is no poster URL then it just adds a default image
           if(element.Poster !== "N/A"){

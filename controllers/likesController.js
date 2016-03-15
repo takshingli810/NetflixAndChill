@@ -11,8 +11,8 @@ function returnError (err) {
 
 // //Click on '+' and add movie to 'Likes' collection & API
 function postLikesAPI(req, res) {
-    var title = req.body.title;
-    UserLike.create({title: title}, function(err, userlike) {
+    var imdbID = req.body.imdbID;
+    UserLike.create({imdbID: imdbID}, function(err, userlike) {
       err ? res.status(500).send() : res.redirect('/api/userLikes');
         // handle success
         // res.status(201).send(JSON.stringify(like));
