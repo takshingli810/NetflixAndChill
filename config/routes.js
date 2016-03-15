@@ -26,6 +26,15 @@ router.route('/about')
 // *************************** //
 // Jessie's routes from Mon Night //
 // *************************** //
+
+//show my profile-- will soon delete.
+router.route('/myprofile')
+  .get(usersController.showMyProfile);
+
+//show other user profile? WIP
+router.route('/users/:id')
+  .get(usersController.showOtherProfile);
+
 //edit user route
 router.route('/users/:id/edit')
   .get(usersController.edit);
@@ -55,12 +64,7 @@ router.route('/otheruser')
     res.render("./pages/other_profile", {user: req.user});
   });
 
-//my profile, just using for testing views
-router.route('/myprofile')
-  .get(function(req, res) {
-    console.log("hi daniel!!!!!!!!!!!!!!!!!!!!!!:", req.user);
-    res.render("./pages/my_profile", {user: req.user});
-  });
+
 
 // *************************** //
 // Introductory API Page Route //
@@ -93,6 +97,28 @@ router.route('/auth/facebook/callback')
     successRedirect: '/myprofile', // this needs to be changed to user profile
     failureRedirect: '/'
   }));
+
+//custom callback in an attempt to pass profile id through to URL
+//modeled after passport documentation example.
+// router.route('/auth/facebook/callback')
+  // .get(function(req, res, next) {
+  //   passport.authenticate('facebook', function(err, user, info) {
+  //     console.log("HERE WE ARE: ", user);
+  //     if (err) {
+  //       res.status(401).send();
+  //       console.log("ERROR: ", err);
+  //     } else if (!user) {
+  //       console.log("Not a user");
+  //       res.redirect("/");
+  //     } else {
+  //       req.logIn(user, function(err) {
+  //         if (err) {console.log("ERROR: ", err);}
+  //         res.redirect('/users/' + profile.id);
+  //       });
+  //     }
+  //   });
+  // });
+
 
 // Sign out
 router.route("/logout")

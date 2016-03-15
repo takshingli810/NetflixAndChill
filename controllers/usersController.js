@@ -34,7 +34,19 @@ function getUsersAPI (req, res){
   });
 }
 
-//JESSIE's CONTROLLER FUNCTIONS FROM SUN NIGHT
+//JESSIE's CONTROLLER FUNCTIONS FROM MON NIGHT
+
+//Show my profile --- Jessie
+function showMyProfile (req, res) {
+  console.log(req.user);
+  res.render("./pages/my_profile", {user: req.user});
+}
+
+//Show someone else's profile --- Jessie
+function showOtherProfile (req, res) {
+  console.log("route is working");
+}
+
 //Delete a user --- Jessie
 function destroy (req, res) {
   User.remove({_id: req.params.id}, function(err, users){
@@ -49,12 +61,15 @@ function destroy (req, res) {
 
 //edit function--get form to edit user -- Jessie
 function edit (req, res) {
-  User.find({_id: req.params.id}, function(err, users){
+  // console.log("banana");
+  // User.find({_id: req.params.id}, function(err, user){
+  User.find({_id: '56e7647123eda25453d391aa'}, function(err, user){
     if (err){
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      res.render("./partials/edit_profile");
+  // console.log("banana");
+      res.render("./partials/edit_profile", {user: user});
     }
   });
 }
@@ -65,9 +80,26 @@ function update (req, res) {
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
-    }else {
-      res.send(JSON.stringify(user));
-    }
+    } if (req.body.firstName) {user.firstName = req.body.firstName; }
+    if (req.body.lastName) {user.lastName = req.body.lastName; }
+    if (req.body.gender) {user.gender = req.body.gender; }  
+    if (req.body.location) {user.location = req.body.location; }
+    if (req.body.birthday) {user.birthday = req.body.birthday; }
+    if (req.body.sexualPref) {user.sexualPref = req.body.sexualPref; }
+    var edited_details = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      gender: user.gender,
+      location: user.location,
+      birthday: user.birthday,
+      sexualPref: user.sexualPref
+    };
+    User.update({_id: req.params.id}, edited_details, function(err, user) {
+      if (err) {
+        console.log("ERROR: ", err);
+      // } res.send(JSON.stringify(user));
+      } res.redirect('/myprofile'); //will later have to change
+    });
   });
 }
 
@@ -75,6 +107,8 @@ module.exports = {
   renderLandingPage: renderLandingPage,
   getAPI: getAPI,
   getUsersAPI: getUsersAPI,
+  showMyProfile: showMyProfile,
+  showOtherProfile: showOtherProfile,
   destroy: destroy,
   edit: edit,
   update: update
