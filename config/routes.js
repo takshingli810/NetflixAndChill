@@ -86,6 +86,7 @@ router.route('/auth/facebook/callback')
 router.route("/logout")
   .get(function(req, res){
     console.log("LOGGED OUT");
+    req.session.user=null;
     req.logout();
     res.redirect("/");
 });

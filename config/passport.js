@@ -29,7 +29,7 @@ module.exports = function(passport){
   }, function(access_token, refresh_token, profile, done) {
 
     // // Use this to see the information returned from Facebook
-    console.log("Profile pic: ", profile);
+    console.log("Profile pic: ", profile.photos[0].value);
 
     process.nextTick(function() {
 
