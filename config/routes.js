@@ -24,6 +24,18 @@ router.route('/about')
   });
 
 // *************************** //
+// Jessie's routes from Mon Night //
+// *************************** //
+//edit user route
+router.route('/users/:id/edit')
+  .get(usersController.edit);
+
+//delete user route
+router.route('/users/:id')
+  .delete(usersController.destroy);
+
+
+// *************************** //
 // Might be changed or deleted //
 // *************************** //
 

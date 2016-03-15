@@ -77,3 +77,15 @@ function getMovies(){
   }); //end of on submit
 
 };//end of getMovies
+
+
+
+//AJAX CALLS JESSIE SUNDAY NIGHT
+app.editUser = function(e) {
+  e.preventDefault();
+  var user= $(e.target).serialize();
+
+  $.put("/users/", user)
+    .done(function)
+};
+
