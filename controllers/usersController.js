@@ -38,7 +38,7 @@ function getUsersAPI (req, res){
 
 //Show my profile --- Jessie
 function showMyProfile (req, res) {
-  console.log(req.user);
+  // console.log(req.user);
   res.render("./pages/my_profile", {user: req.user});
 }
 
@@ -59,16 +59,14 @@ function destroy (req, res) {
   });
 }
 
-//edit function--get form to edit user -- Jessie
+//edit function--get form to edit user --WORKING
 function edit (req, res) {
-  // console.log("banana");
-  // User.find({_id: req.params.id}, function(err, user){
-  User.find({_id: '56e7647123eda25453d391aa'}, function(err, user){
+  User.find({_id: req.params.id}, function(err, user){
     if (err){
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-  // console.log("banana");
+      console.log("access token: ", user[0].access_token);
       res.render("./partials/edit_profile", {user: user});
     }
   });

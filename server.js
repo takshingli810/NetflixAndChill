@@ -4,6 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var methodOverride = require('method-override');
 mongoose.connect('mongodb://localhost/netflixandchill');
 
 // passport for facebook OAuth
@@ -28,6 +29,9 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(logger('dev'));
+
+// method override
+app.use(methodOverride('_method'));
 
 // View engines
 app.use(express.static(__dirname + '/public'));

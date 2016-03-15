@@ -6,7 +6,7 @@ var User = require('../models/user');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var OAuth = require('../secrets');
-console.log(OAuth);
+// console.log(OAuth);
 
 module.exports = function(passport){
   passport.serializeUser(function(user, done) {
@@ -23,13 +23,14 @@ module.exports = function(passport){
   passport.use('facebook', new FacebookStrategy({
     clientID        : OAuth.fb.clientID,
     clientSecret    : OAuth.fb.clientSecret,
-    callbackURL     : 'http://localhost:3000/auth/facebook/callback',
+    callbackURL     : '/auth/facebook/callback',
     enableProof     : true,
     profileFields   : ['name', 'emails', 'gender', 'birthday', 'picture.type(large)']
   }, function(access_token, refresh_token, profile, done) {
 
     // // Use this to see the information returned from Facebook
-    console.log("Profile pic: ", profile.photos[0].value);
+    // console.log(profile);
+
 
     process.nextTick(function() {
 

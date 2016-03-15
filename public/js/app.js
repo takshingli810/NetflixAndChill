@@ -42,7 +42,7 @@ function getMovies(){
      //v=1 is version 1, t means title
       dataType: 'json', //no data is being passed in
       success: function(result){
-        console.log(result);
+        // console.log(result);
 
         var allMovies = '<div>';
 
@@ -80,12 +80,18 @@ function getMovies(){
 
 
 
-//AJAX CALLS JESSIE SUNDAY NIGHT
-app.editUser = function(e) {
+// AJAX CALLS JESSIE MONDAY NIGHT
+user.editUser = function(e) {
   e.preventDefault();
-  var user= $(e.target).serialize();
+  var user = $(e.target).serialize();
+  console.log(user);
 
   $.put("/users/", user)
-    .done(function)
+    .done(function(res) {
+      console.log("profile changes saved");
+    })
+    .fail(function(err) {
+      console.log("ERROR: ", err);
+    });
 };
 

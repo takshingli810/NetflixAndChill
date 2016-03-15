@@ -33,15 +33,16 @@ router.route('/myprofile')
 
 //show other user profile? WIP
 router.route('/users/:id')
-  .get(usersController.showOtherProfile);
+  .get(usersController.showOtherProfile)
+//delete user route
+  .delete(usersController.destroy)
+//update user fields
+  .put(usersController.update);
 
 //edit user route
 router.route('/users/:id/edit')
   .get(usersController.edit);
 
-//delete user route
-router.route('/users/:id')
-  .delete(usersController.destroy);
 
 
 // *************************** //
@@ -113,7 +114,7 @@ router.route('/auth/facebook/callback')
   //     } else {
   //       req.logIn(user, function(err) {
   //         if (err) {console.log("ERROR: ", err);}
-  //         res.redirect('/users/' + profile.id);
+  //         res.redirect('/users/' + req.user.id);
   //       });
   //     }
   //   });
