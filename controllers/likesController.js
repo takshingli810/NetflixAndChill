@@ -22,7 +22,7 @@ function postLikesAPI(req, res) {
       else{
         console.log("ERROR WITH USER LIKE CREATION ", err);
       }
-    })
+    });
   }
 
 //SHOW ALL LIKES OF ALL USERS
