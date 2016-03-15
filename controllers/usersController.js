@@ -74,6 +74,7 @@ function edit (req, res) {
 
 //update function: WIP -- Jessie
 function update (req, res) {
+  console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user){
     if (err) {
       res.status(500).send();

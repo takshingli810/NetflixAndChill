@@ -5,7 +5,7 @@ var Like = require("./like");
 
 //STILL UNSURE ABOUT WHERE THIS REFERENCED DATA WORKS
 var UserSchema = new Schema({
-  id: String,
+  facebookID: String,
   access_token: String,
   firstName: String,
   lastName: String,

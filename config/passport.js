@@ -43,7 +43,7 @@ module.exports = function(passport){
         } else {
 
           var newUser = new User();
-          newUser.id           = profile.id;
+          newUser.facebookID           = profile.id;
           newUser.access_token = access_token;
           newUser.firstName    = profile.name.givenName;
           newUser.lastName     = profile.name.familyName;

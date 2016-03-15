@@ -99,6 +99,9 @@ router.route('/auth/facebook/callback')
     failureRedirect: '/'
   }));
 
+// router.route('/auth/facebook/callback')
+//   .get(passport.authenticate('facebook', usersController.show));
+
 //custom callback in an attempt to pass profile id through to URL
 //modeled after passport documentation example.
 // router.route('/auth/facebook/callback')
