@@ -1,0 +1,14 @@
+/*TEMP GRID CSS*/
+
+.search-results img{
+  width: 15%;
+}
+
+.search-results h1{
+  font-size: 12px;
+}
+
+.search-results div{
+  display: grid;
+  position: relative;
+}
