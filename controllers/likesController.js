@@ -8,23 +8,19 @@ function returnError (err) {
   return console.log(err);
 }
 
-// //Click on '+' and add movie to user's 'Likes'
+// //Click on '+' and add movie to 'Likes' collection & API
 function postLikesAPI(req, res) {
-    var like = req.body;
-    Like.create({title: like}, function(err, like) {
-      err ?
-        // handle error
-        res.status(500).send() :
+    var title = req.body.title;
+    var yearOfRelease = req.body.yearOfRelease;
+    var imageUrl = req.body.imageUrl;
+    var imdbID = req.body.imdbID;
+    Like.create({title: title, yearOfRelease: yearOfRelease,
+      imageUrl: imageUrl, imdbID: imdbID}, function(err, like) {
+      err ? res.status(500).send() : res.redirect('/api/likes');
         // handle success
         // res.status(201).send(JSON.stringify(like));
-        res.redirect('/myprofile');
     });
   }
-
-function renderSearchLikes (req, res) {
-  res.render('./partials/searchLikes');
-}
-
 
 //SHOW ALL LIKES OF ALL USERS
 function getLikesAPI (req, res){
@@ -36,6 +32,13 @@ function getLikesAPI (req, res){
     res.json({likes: likes});
   });
 }
+
+function renderSearchLikes (req, res) {
+  res.render('./partials/searchLikes');
+}
+
+
+
 
 
 module.exports = {
