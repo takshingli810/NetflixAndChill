@@ -46,6 +46,7 @@ router.route('/otheruser')
 //my profile, just using for testing views
 router.route('/myprofile')
   .get(function(req, res) {
+    console.log("hi daniel!!!!!!!!!!!!!!!!!!!!!!:", req.user);
     res.render("./pages/my_profile", {user: req.user});
   });
 
@@ -71,7 +72,7 @@ router.route('/api/users')
 // Facebook OAuth URL
 router.route('/auth/facebook')
   .get(passport.authenticate('facebook', {
-    scope: 'email,public_profile,user_birthday'
+    scope: 'email,public_profile,user_photos,user_birthday'
   }));
 
 // Facebook callback URL

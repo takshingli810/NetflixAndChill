@@ -15,8 +15,12 @@ console.log("DB IS CONNECTED");
 User.remove({}, function(err, users){
   if(err){
       console.log("ERROR: ", err);
+      process.exit();
+      mongoose.connection.close();
     } else {
       console.log("WORKED");
+      process.exit();
+      mongoose.connection.close();
     }
 });
 
