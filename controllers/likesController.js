@@ -8,6 +8,15 @@ function returnError (err) {
   return console.log(err);
 }
 
+// //Click on '+' and add movie to user's 'Likes'
+// function createLikes(req, res){
+//   // var imdbID = req.body.imdbID;
+//
+//   console.log("CREATING LIKES");
+// }
+
+
+
 function renderSearchLikes (req, res) {
   res.render('./partials/searchLikes');
 }
@@ -28,4 +37,5 @@ function getLikesAPI (req, res){
 module.exports = {
 	renderSearchLikes: renderSearchLikes,
 	getLikesAPI: getLikesAPI
+  // createLikes: createLikes
 };

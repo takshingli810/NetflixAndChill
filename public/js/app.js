@@ -12,6 +12,10 @@ $(function() {
     getMovies();
 });
 
+function createLike(event){
+
+}
+
 // function to SEARCH FOR MOVIES (searchLikes.hbs template)
 function getMovies(){
 
@@ -48,9 +52,9 @@ function getMovies(){
 
         // iterate over the data result set
         $.each(result.Search, function(index, element) {
-
+          allMovies += "<button id=" + element.imdbID + " value='+'>+</button>"
           if(element.Poster !== "N/A"){
-              allMovies += "<img src=" + element.Poster + ">";
+              allMovies += "<div><img src=" + element.Poster + ">";
           } else {
               allMovies += "<img src='../images/no-photo-available.jpg'>";
           }
