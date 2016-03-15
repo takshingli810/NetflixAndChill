@@ -1,14 +1,19 @@
 <div id="edit-profile-div" class="col-md-8 col-md-offset-4">
-	<form id="edit-profile-form" class=".form" onsubmit="user.editProfile(event)">
-		<label for="firstName" value="First Name">
-		<input type="text" name="firstName" placeholder="{{user.firstName}}">
-		<input type="text" name="lastName" placeholder="{{user.lastName}}">
-		<input type="text" name="gender" placeholder="{{user.gender}}">
-		<input type="text" name="birthdate" placeholder="{{user.birthdate}}">
-		<input type="text" name="sexualPref" placeholder="{{user.sexualPref}}">
-		<input type="text" name="location" placeholder="{{user.location}}">
-		<input type="submit" value="Save Changes"></input>
+	<form id="edit-profile-form" class="form" onsubmit="user.editProfile(event)">
+		<label for="firstName" class="form-group">First Name</label>
+		<input type="text" id="firstName" name="firstName" class="form-control" value="{{user.firstName}}"><br>
+		<label for="lastName" class="form-group">Last Name</label>
+		<input type="text" id="lastName" name="lastName"  class="form-control" value="{{user.lastName}}"><br>
+		<label for="gender" class="form-group">Gender <span><i>(please specify "male", "female", or "other")</i></span></label>
+		<input type="text" id="gender" name="gender"  class="form-control" value="{{user.gender}}"><br>
+		<label for="birthday" class="form-group">Birthday</label>
+		<input type="text" id="birthday" name="birthday"  class="form-control" value="{{user.birthday}}"><br>
+		<label for="sexualPref" class="form-group">Sexual Preference</label>
+		<input type="text" id="sexualPref" name="sexualPref"  class="form-control" value="{{user.sexualPref}}"><br>
+		<label for="location" class="form-group">Location</label>
+		<input type="text" id="location" name="location"  class="form-control" value="{{user.location}}"><br>
+		<input type="submit" value="Save Changes" class="btn btn-default"></input>
 	</form>
-	<a href="/user/{{user._id}}" class="btn btn-default">Cancel</a>
+	<a href="/user/{{user._id}}" class="btn btn-default">Cancel</a><br>
 	<button id="delete-account-button" class="btn btn-danger">Delete Account</button>
 </div>
