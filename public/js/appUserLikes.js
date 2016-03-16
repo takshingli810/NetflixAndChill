@@ -19,27 +19,26 @@ $(function() {
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
 
-  //from the hidden input type in my_profile
-  var userID = $('#user-id').attr("user-id");
-
   event.preventDefault();
   var newLike = {
-    imdbID: event.target.children[0].value,
-    users: userID  //will use req.body.userID to push into users array
+    imdbID: event.target.children[0].value
   }
+
+  //from the hidden input type in my_profile
+  var userID = $('#user-id').attr("user-id");
 
   //posting to backend (can view on API LIKES)
   $.ajax({
     type: 'POST',
-    url: '/api/likes',
+    url: '/api/userlikes',
     data: newLike,
-    dataType: 'json',
-    success: function(newLike){
-      console.log("POSTING TO Likes");
-    },
-    error: function(err) {
-      console.log("issue with create likes POST: " + err);
-    }
+    dataType: 'json'
+    // success: function(newLike){
+    //   console.log("POSTING TO USERLIKES");
+    // },
+    // error: function(err) {
+    //   console.log("issue with create likes POST: " + err);
+    // }
   });
 
 };
@@ -52,9 +51,9 @@ function renderLikes(){
 
   $.ajax({
     type: 'GET',
-    url: '/api/likes',
-    success: function(likes){
-      console.log("LIKES ", likes);
+    url: '/api/userlikes',
+    success: function(userLikes){
+      console.log("USER LIKES ", userLikes);
     },
     error: function(err) {
       alert("issue with create likes: " + err);
@@ -99,7 +98,8 @@ function getMovies(){
 
           //adds a button to each movie (+)
           movie += "<form id='add-like' onsubmit='createLike(event)'>"
-                +  "<input class='hidden' type='hidden' value=" + imdbID + " name='like' id=" + imdbID + "></input>"
+                +  "<input class='hidden' type='hidden' value=" + imdbID + " name='userlike' id=" + imdbID + "></input>"
+//                + "<input class='hidden' type='hidden' value="
                 +  "<input type='submit' value='+'></input>"
                 +  "</form>";
           //if there is no poster URL then it just adds a default image

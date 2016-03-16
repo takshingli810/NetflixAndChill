@@ -12,28 +12,45 @@ function returnError (err) {
 // //Click on '+' and add movie to 'Likes' collection & API
 function postLikesAPI(req, res) {
   var imdbID = req.body.imdbID;
+  var userID = req.body.users;
 
-  UserLike.count({imdbID : imdbID}, function(err, count){
+  //ensures that imdbID is not inputted twice in the 'likes' db
+  //if so, creates like if it's original
+  //else it updates the like with additional users
+  Like.count({imdbID : imdbID}, function(err, count){
     if(count === 0){
-      UserLike.create({imdbID: imdbID}, function(err, userlike) {
+      Like.create({imdbID: imdbID, users: userID}, function(err, like) {
         err ? res.status(500).send() : res.status(201);
-        //push onto req.session.user.id User 'likes' array ?
       });
     }
     else{
-      console.log("ERROR WITH USER LIKE CREATION ", err);
+      Like.findOne({imdbID: imdbID}, function(err, likes){
+        if(err){
+          console.log("WHY!!!!!");
+        }
+        else{
+          users.update(
+          {imdbID : imdbID},
+          {$push: {users: userID}}
+          )
+        }
+      });
+      console.log("more than one like on this movie");
     }
+
+
   });
-}
+
+};
 
 //SHOW ALL LIKES OF ALL USERS
 function getLikesAPI (req, res){
-  UserLike.find({}, function(err, userlikes){
+  Like.find({}, function(err, likes){
     if(err){
       console.log("ERROR: ", err);
     }
 
-    res.json({userlikes: userlikes});
+    res.json({likes: likes});
   });
 }
 

@@ -23,7 +23,7 @@ User.remove({}, function(err, users){
     }
 });
 
-UserLike.remove({}, function(err, users){
+Like.remove({}, function(err, users){
   if(err){
       console.log("ERROR: ", err);
       process.exit();

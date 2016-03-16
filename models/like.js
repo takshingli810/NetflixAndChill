@@ -1,9 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//not sure if we should change these to reflect OMDB attributes better?
+var User = require("./user");
+
+
 var LikeSchema = new Schema({
-  imdbID: String
+  imdbID: String,
+  users: []
 });
 
 var Like = mongoose.model('Like', LikeSchema);
@@ -16,3 +19,8 @@ module.exports = Like;
 // plot: String,
 // imdbID: String, //from OMDB JSON object
 // yearOfRelease: String
+
+//  {
+//     type: Schema.Types.ObjectId,
+//     ref: 'User'
+//   }

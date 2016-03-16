@@ -57,10 +57,10 @@ router.route('/api')
   .get(usersController.getAPI);
 
 //likes route to view all movies that have been liked
-router.route('/api/userlikes')
+router.route('/api/likes')
   .get(likesController.getLikesAPI);
 
-router.route('/api/userlikes')
+router.route('/api/likes')
   .post(likesController.postLikesAPI); //in testing
 
 //users route to view all users and their attributes
