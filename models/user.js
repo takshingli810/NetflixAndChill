@@ -15,11 +15,7 @@ var UserSchema = new Schema({
   email: String,
   location: String,
   profilePic: String,
-  password_digest: String,
-  likes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'UserLike'
-  }]
+  password_digest: String
 });
 
 var User = mongoose.model('User', UserSchema);

@@ -1,12 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//not sure if we should change these to reflect OMDB attributes better?
+var User = require("./user");
+var Like = require("./like");
+
+//join table with user and movie/tv show likes
 var UserLikeSchema = new Schema({
-  imdbID: String, //from OMDB JSON object
   users: [{
-    type: Schema.Types.ObjectId,  //all of the users who like this thing
+    type: Schema.Types.ObjectId,
     ref: 'User'
+  }],
+  likes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Like'
   }]
 });
 
