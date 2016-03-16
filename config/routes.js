@@ -1,5 +1,4 @@
 var express = require('express');
-var app = express();
 var router = express.Router();
 var mongoose = require('mongoose');
 var path = require('path');
@@ -82,39 +81,10 @@ router.route('/api/likes')
 router.route('/api/users')
   .get(usersController.getUsersAPI);
 
+
 // ************** //
 // FaceBook OAuth //
 // ************** //
-
-//sessions stuff
-app.use(
-  session({
-    secret:'mySecretKey',
-    resave: false,
-    saveUninitialized: true
-  })
-);
-
-// //extend 'req' to help manage sessions
-app.use(function (req, res, next) {
-    //login a user
-    req.login = function (user) {
-      req.session.userId = user._id;
-    };
-    //find current user
-    req.currentUser = function (cb) {
-      User.findOne({_id: req.session.userId},
-        function (err, user) {
-          req.user = user;
-          cb(null,user);
-        });
-    };
-    //logout current user
-    req.logout = function () {
-      req.session.userId = null;
-      req.user = null;
-    };
-});
 
 // Facebook OAuth URL
 router.route('/auth/facebook')
@@ -122,7 +92,6 @@ router.route('/auth/facebook')
 );
 
 // Facebook callback URL
-
 router.route('/auth/facebook/callback').get(function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     // pull FB id out of user
@@ -134,21 +103,18 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
         res.redirect("/");
         console.log("ERROR: ", err);
       } else {
-    // creating a session obj that contains PID
-        session.userId = user[0].id;
+        // creating a session obj that contains PID
+        req.login(user[0]);
         var id = user[0].id;
-      // repl.start('> ').context.user = user;
+        // repl.start('> ').context.user = user;
         // call next to call next function OR just render the view as callback
         res.redirect('/users/' + id);
-        // next();
-      }
-    // }, function(req, res, next) {
-    //     res.render('./pages/my_profile', {user: user[0]});      
+      }   
     });
   })(req, res, next);
 });
 
-
+//this was built by ilias, do not touch yet! 
 // router.route('/auth/facebook/callback')
 //   .get(passport.authenticate('facebook'), function(err, user, info) {
 //     repl.start('> ').context.user = user;
@@ -157,13 +123,11 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
     // WORKING
 
 
-
-
 // Sign out
 router.route("/logout")
   .get(function(req, res){
-    console.log("LOGGED OUT");
-    session.userId = null; //need to be sure that we actually edited the session object! Unsure how to test
+    req.logout();
+    console.log("checking if my session was cleared:", req.session);
     res.redirect("/");
 });
 

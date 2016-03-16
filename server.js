@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var methodOverride = require('method-override');
+var session = require('express-session');
+var User = require('./models/user');
 mongoose.connect('mongodb://localhost/netflixandchill');
 
 // passport for facebook OAuth
@@ -33,6 +35,7 @@ app.use(logger('dev'));
 // method override
 app.use(methodOverride('_method'));
 
+
 // View engines
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname + '/views'));
@@ -42,6 +45,37 @@ var hbsutils = require('hbs-utils')(hbs);
 hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
 
+//sessions stuff
+app.use(
+  session({
+    secret:'mySecretKey',
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+//extend 'req' to help manage sessions
+app.use(function (req, res, next) {
+    //login a user
+    req.login = function (user) {
+      req.session.userId = user._id;
+    };
+    //find current user
+    req.currentUser = function (cb) {
+      User.findOne({_id: req.session.userId},
+        function (err, user) {
+          req.user = user;
+          cb(null,user);
+        });
+    };
+    //logout current user
+    req.logout = function () {
+      req.session.userId = null;
+      req.user = null;
+    };
+    // console.log(arguments[2])
+    next();
+});
 
 
 /**********

@@ -47,13 +47,15 @@ function show (req, res) {
   console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
    // repl.start('> ').context.user = user;
+   req.currentUser(function(err, currentUser) {
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      console.log(user[0]);
-      res.render('./pages/my_profile', {user: user[0]}); //sidebar partial is no longer getting passed the user
+      console.log("req.session", req.session);
+      res.render('./pages/my_profile', {currentUser: currentUser, user: user[0]}); //sidebar partial is no longer getting passed the user
     }
+   });
   });
 }
 
@@ -64,7 +66,7 @@ function edit (req, res) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      res.render("./partials/edit_profile", {user: user[0]});
+      res.render("./pages/edit_profile", {user: user[0]});
     }
   });
 }
