@@ -49,8 +49,6 @@ router.route('/users/:id')
 
 
 
-
-
 // *************************** //
 // Might be changed or deleted //
 // *************************** //
@@ -103,13 +101,9 @@ app.use(
 
 //extend 'req' to help manage sessions
 app.use(function (req, res, next) {
-    //login a user
-    req.login = function (user) {
-      req.session.userId = user.facebookID;
-    };
     //find current user
     req.currentUser = function (cb) {
-      db.User.findOne({facebookID: req.session.userId},
+      db.User.findOne({_id: req.session.userId},
         function (err, user) {
           req.user = user;
           cb(null,user);
@@ -126,15 +120,26 @@ router.route('/auth/facebook')
 
 router.route('/auth/facebook/callback').get(function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
-    // repl.start('> ').context.user = user;
     // pull FB id out of user
     var facebookID = user.facebookID;
     // find the associated user w/ that ID, then you'd have your own userID
+    User.find({facebookID: facebookID}, function(err, user) {
+      if (err) {
+        res.status(500).send();
+        res.redirect("/");
+        console.log("ERROR: ", err);
+      } else {
+    // repl.start('> ').context.user = user;
     // creating a session obj that contains PID
-    session.userId = facebookID;
-    console.log(session.userId);
-    // call next to call next function OR just render the view as callback
-    res.render('./pages/my_profile', {user: user});
+        session.userId = user[0].id;
+        console.log(session.userId);
+        // call next to call next function OR just render the view as callback
+        res.render('./pages/my_profile', {user: user[0]});   
+        // next();
+      }
+    // }, function(req, res, next) {
+    //     res.render('./pages/my_profile', {user: user[0]});      
+    });
   })(req, res, next);
 });
 

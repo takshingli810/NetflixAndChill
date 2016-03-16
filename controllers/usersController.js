@@ -51,34 +51,22 @@ function show (req, res) {
   });
 }
 
-//Delete a user --- Jessie
-function destroy (req, res) {
-  User.remove({_id: req.params.id}, function(err, users){
-    if (err){
-      res.status(500).send();
-      console.log("ERROR: ", err);
-    } else {
-      res.redirect("/");
-    }
-  });
-}
-
 //edit function--get form to edit user --WORKING
 function edit (req, res) {
-  User.find({facebookID: req.params.id}, function(err, user){
+  User.find({_id: req.params.id}, function(err, user){
     if (err){
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      res.render("./partials/edit_profile", {user: user});
+      res.render("./partials/edit_profile", {user: user[0]});
     }
   });
 }
 
-//update function -- Jessie
+//update function -- Jessie -- Working
 function update (req, res) {
-  console.log(req.params);
-  User.find({facebookID: req.params.id}, function(err, user){
+  var id = req.body.userId;
+  User.find({_id: id}, function(err, user){
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
@@ -96,12 +84,26 @@ function update (req, res) {
       birthday: user.birthday,
       sexualPref: user.sexualPref
     };
-    // console.log(req.params.id);
-    User.update({facebookID: req.params.id}, edited_details, function(err, user) {
+    User.update({_id: id}, edited_details, function(err, user) {
       if (err) {
         console.log("ERROR: ", err);
-      } res.redirect('/users/' + user.facebookID); //will later have to change
+      } else {
+      res.redirect('/users/' + id); //redirects to correct show page!
+      }
     });
+  });
+}
+
+
+//Delete a user --- Jessie
+function destroy (req, res) {
+  User.remove({_id: req.params.id}, function(err, users){
+    if (err){
+      res.status(500).send();
+      console.log("ERROR: ", err);
+    } else {
+      res.redirect("/");
+    }
   });
 }
 
