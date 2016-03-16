@@ -39,8 +39,7 @@ function getUsersAPI (req, res){
   });
 }
 
-//JESSIE's CONTROLLER FUNCTIONS FROM MON NIGHT
-
+//JESSIE's CONTROLLER FUNCTIONS
 
 //Show profile --- Jessie -- WORKING
 function show (req, res) {
@@ -74,14 +73,6 @@ function edit (req, res) {
    });
   });
 }   
-//     if (err){
-//       res.status(500).send();
-//       console.log("ERROR: ", err);
-//     } else {
-//       res.render("./pages/edit_profile", {user: user[0]});
-//     }
-//   });
-// }
 
 //update function -- Jessie -- Working, changes persist
 function update (req, res) {
