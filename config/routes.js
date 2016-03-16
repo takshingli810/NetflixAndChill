@@ -2,21 +2,20 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/netflixandchill');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var usersController = require('../controllers/usersController');
 var likesController = require('../controllers/likesController');
+var passport = require('passport');
 
+// *********** //
+// Static Page //
+// *********** //
 
-//Testing landing page
+//Landing page
 router.route('/')
   .get(usersController.renderLandingPage);
-
-//Testing create (temp)
-router.route('/add-movie')
-  .get(likesController.renderAddForm);
 
 //about page
 router.route('/about')
@@ -24,52 +23,74 @@ router.route('/about')
     res.render("./pages/about");
   });
 
+// *************************** //
+// Might be changed or deleted //
+// *************************** //
+
+//Testing create (temp)
+router.route('/search')
+  .get(likesController.renderSearchLikes);
+
 //matches page, just using for testing views
 router.route('/user/matches')
   .get(function(req, res) {
-    res.render("./pages/my_matches");
+    res.render("./pages/my_matches",  {user: req.user});
   });
 
 //other user profile, just using for testing views
 router.route('/otheruser')
   .get(function(req, res) {
-    res.render("./pages/other_profile");
+    res.render("./pages/other_profile", {user: req.user});
   });
 
 //my profile, just using for testing views
 router.route('/myprofile')
   .get(function(req, res) {
-    res.render("./pages/my_profile");
+    res.render("./pages/my_profile", {user: req.user});
   });
 
-//introductory API page route COME BACK TO THIS
+// *************************** //
+// Introductory API Page Route //
+// *************************** //
+
 router.route('/api')
   .get(usersController.getAPI);
 
-//introductory API page route COME BACK TO THIS
+//likes route to view all movies that have been liked
+router.route('/api/likes')
+  .get(likesController.getLikesAPI);
+
+router.route('/api/likes')
+  .post(likesController.postLikesAPI); //in testing
+
+//users route to view all users and their attributes
 router.route('/api/users')
   .get(usersController.getUsersAPI);
 
-///OAUTH STUFFFFFFF!!!!!!! ---------------------------------------
+// ************** //
+// FaceBook OAuth //
+// ************** //
 
-  // {
-  // **this is the facebook Auth route NEED TO MOVE TO ROUTER.JS**
-  //
-  // app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'} ));
-  // app.get('/auth/facebook/callback',
-  //   passport.authenticate('facebook', {
-  //     successRedirect: '/',
-  //     failureRedirect: '/'
-  //   })
-  // );
-  // // Logout
-  // app.get("/logout", function(req, res){
-  //   req.logout();
-  //   res.redirect("/");
-  // });
-  // ===========================================================
-  // }
+// Facebook OAuth URL
+router.route('/auth/facebook')
+  .get(passport.authenticate('facebook', {
+    scope: 'email,public_profile,user_photos,user_birthday'
+  }));
 
-//-------------------------------------------------------------
+// Facebook callback URL
+router.route('/auth/facebook/callback')
+  .get(passport.authenticate('facebook', {
+    successRedirect: '/myprofile', // this needs to be changed to user profile
+    failureRedirect: '/'
+  }));
+
+// Sign out
+router.route("/logout")
+  .get(function(req, res){
+    console.log("LOGGED OUT");
+    req.session.user=null;
+    req.logout();
+    res.redirect("/");
+});
 
 module.exports = router;

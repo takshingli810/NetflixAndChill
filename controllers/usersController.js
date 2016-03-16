@@ -9,7 +9,7 @@ function returnError (err) {
 }
 
 function renderLandingPage (req, res) {
-  res.render('./pages/landing_page');
+  res.render('./pages/landing_page', {user: req.user});
 }
 
 function getAPI(req, res){
@@ -33,6 +33,8 @@ function getUsersAPI (req, res){
     res.json({users: users});
   });
 }
+
+
 
 module.exports = {
 	renderLandingPage: renderLandingPage,
