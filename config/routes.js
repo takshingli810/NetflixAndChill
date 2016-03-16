@@ -67,6 +67,10 @@ router.route('/api/likes')
 router.route('/api/users')
   .get(usersController.getUsersAPI);
 
+//users route to post movies to users array in api
+router.route('/api/users')
+  .post(usersController.addMoviesToUsersAPI);
+
 // ************** //
 // FaceBook OAuth //
 // ************** //

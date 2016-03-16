@@ -12,7 +12,7 @@ function returnError (err) {
 // //Click on '+' and add movie to 'Likes' collection & API
 function postLikesAPI(req, res) {
   var imdbID = req.body.imdbID;
-  var userID = req.body.users;
+  var userID = req.body.userID;
   //ensures that imdbID is not inputted twice in the 'likes' db
   //if so, creates like if it's original
   //else it updates the like with additional users
