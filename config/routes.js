@@ -46,7 +46,6 @@ router.route('/otheruser')
 //my profile, just using for testing views
 router.route('/myprofile')
   .get(function(req, res) {
-    console.log("hi daniel!!!!!!!!!!!!!!!!!!!!!!:", req.user);
     res.render("./pages/my_profile", {user: req.user});
   });
 
@@ -60,6 +59,9 @@ router.route('/api')
 //likes route to view all movies that have been liked
 router.route('/api/likes')
   .get(likesController.getLikesAPI);
+
+router.route('/api/likes')
+  .post(likesController.postLikesAPI); //in testing
 
 //users route to view all users and their attributes
 router.route('/api/users')
