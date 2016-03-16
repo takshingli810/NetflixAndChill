@@ -44,17 +44,17 @@ module.exports = function(passport){
         } else {
 
           var user = new User();
-          newUser.facebookID   = profile.id;
-          newUser.access_token = access_token;
-          newUser.firstName    = profile.name.givenName;
-          newUser.lastName     = profile.name.familyName;
-          newUser.email        = profile.emails[0].value;
-          newUser.birthday     = profile._json.birthday;
-          newUser.gender       = profile.gender;
-          newUser.profilePic   = profile.photos[0].value;
+          user.facebookID   = profile.id;
+          user.access_token = access_token;
+          user.firstName    = profile.name.givenName;
+          user.lastName     = profile.name.familyName;
+          user.email        = profile.emails[0].value;
+          user.birthday     = profile._json.birthday;
+          user.gender       = profile.gender;
+          user.profilePic   = profile.photos[0].value;
 
 
-          newUser.save(function(err) {
+          user.save(function(err) {
             if (err)
               throw err;
 

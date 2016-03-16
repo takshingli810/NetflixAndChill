@@ -47,7 +47,6 @@ function show (req, res) {
   console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
    // repl.start('> ').context.user = user;
-   // console.log(req.currentUser());
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
@@ -77,7 +76,8 @@ function update (req, res) {
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
-    } if (req.body.firstName) {user.firstName = req.body.firstName; }
+    } if (req.body.status) {user.status = req.body.status; }
+    if (req.body.firstName) {user.firstName = req.body.firstName; }
     if (req.body.lastName) {user.lastName = req.body.lastName; }
     if (req.body.gender) {user.gender = req.body.gender; }  
     if (req.body.location) {user.location = req.body.location; }
@@ -89,7 +89,8 @@ function update (req, res) {
       gender: user.gender,
       location: user.location,
       birthday: user.birthday,
-      sexualPref: user.sexualPref
+      sexualPref: user.sexualPref,
+      status: user.status
     };
     User.update({_id: id}, edited_details, function(err, user) {
       if (err) {
@@ -103,7 +104,7 @@ function update (req, res) {
 
 
 //Delete a user -- WORKING -- Jessie
-//Deletes a user from the database, not completely sure if 
+//Deletes a user from the database
 function destroy (req, res) {
   console.log(req.params.id);
   User.remove({_id: req.params.id}, function(err, users){

@@ -13,6 +13,8 @@ var UserSchema = new Schema({
   birthday: String,
   sexualPref: String,
   email: String,
+  //hello here, this is new info!
+  status: String,
   location: String,
   profilePic: String,
   password_digest: String,
