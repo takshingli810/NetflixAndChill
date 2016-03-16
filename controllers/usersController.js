@@ -1,3 +1,7 @@
+var repl = require('repl');
+var routes = require('../config/routes');
+
+
 /************
  * DATABASE *
  ************/
@@ -9,7 +13,7 @@ function returnError (err) {
 }
 
 function renderLandingPage (req, res) {
-  console.log(session.userId);
+  // console.log(session.userId);
   res.render('./pages/landing_page', {user: req.user});
 }
 
@@ -42,6 +46,8 @@ function getUsersAPI (req, res){
 function show (req, res) {
   console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
+   // repl.start('> ').context.user = user;
+   // console.log(req.currentUser());
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);

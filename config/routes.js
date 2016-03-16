@@ -19,9 +19,7 @@ var repl = require('repl');
 
 //Landing page
 router.route('/')
-  .get(function(req, res) {
-    console.log(session);
-  });
+  .get(usersController.renderLandingPage);
 
 //about page
 router.route('/about')
@@ -98,20 +96,25 @@ app.use(
 );
 
 // //extend 'req' to help manage sessions
-// app.use(function (req, res, next) {
-//     //find current user
-//     req.currentUser = function (cb) {
-//       db.User.findOne({_id: req.session.userId},
-//         function (err, user) {
-//           req.user = user;
-//           cb(null,user);
-//         });
-//     };
-//     req.logout = function (cb) {
-//       req.session.userId = null;
-//       req.user = null;
-//     };
-// });
+app.use(function (req, res, next) {
+    //login a user
+    req.login = function (user) {
+      req.session.userId = user._id;
+    };
+    //find current user
+    req.currentUser = function (cb) {
+      User.findOne({_id: req.session.userId},
+        function (err, user) {
+          req.user = user;
+          cb(null,user);
+        });
+    };
+    //logout current user
+    req.logout = function () {
+      req.session.userId = null;
+      req.user = null;
+    };
+});
 
 // Facebook OAuth URL
 router.route('/auth/facebook')
@@ -124,19 +127,19 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     // pull FB id out of user
     var facebookID = user.facebookID;
-    // find the associated user w/ that ID, then you'd have your own userID
+    // find the associated user w/ that ID
     User.find({facebookID: facebookID}, function(err, user) {
       if (err) {
         res.status(500).send();
         res.redirect("/");
         console.log("ERROR: ", err);
       } else {
-    // repl.start('> ').context.user = user;
     // creating a session obj that contains PID
         session.userId = user[0].id;
-        console.log(session.userId);
+        var id = user[0].id;
+      // repl.start('> ').context.user = user;
         // call next to call next function OR just render the view as callback
-        res.render('./pages/my_profile', {user: user[0]});   
+        res.redirect('/users/' + id);
         // next();
       }
     // }, function(req, res, next) {
@@ -145,25 +148,14 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
   })(req, res, next);
 });
 
-// app.get('/auth/facebook/callback', function(req, res, next) {
-//   passport.authenticate('facebook', function(err, user, info) {
-//     repl.start('> ').context.user = user;
-//   })(req, res, next);
-// });
 
 // router.route('/auth/facebook/callback')
 //   .get(passport.authenticate('facebook'), function(err, user, info) {
 //     repl.start('> ').context.user = user;
 //   })(req, res, next);
   // .get(passport.authenticate('facebook', {successRedirect: "/", failureRedirect: "/"}));
-    // WORKING: 
+    // WORKING
 
-// old route for showing profile page
-// app.get('/users/:id', isLoggedIn, function(req, res) {
-//   res.render('./pages/my_profile', {
-//     user: req.user
-//   });
-// });
 
 
 

@@ -43,7 +43,7 @@ module.exports = function(passport){
           return done(null, user);
         } else {
 
-          var newUser = new User();
+          var user = new User();
           newUser.facebookID   = profile.id;
           newUser.access_token = access_token;
           newUser.firstName    = profile.name.givenName;
@@ -58,7 +58,7 @@ module.exports = function(passport){
             if (err)
               throw err;
 
-            return done(null, newUser);
+            return done(null, user);
           });
         }
 
