@@ -17,7 +17,39 @@ $(function() {
 
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
+function addMovieToUsers(event){
+
+  //from the hidden input type in my_profile
+  var userID = $('#user-id').attr("user-id");
+
+  event.preventDefault();
+  var newMovie = {
+    imdbID: event.target.children[0].value,
+    userID: userID  //will use req.body.userID to push into users array
+  }
+
+  //posting to backend (can view on API LIKES)
+  $.ajax({
+    type: 'POST',
+    url: '/api/users',
+    data: newMovie,
+    dataType: 'json',
+    success: function(newMovie){
+      console.log("POSTING TO MOVIES");
+    },
+    error: function(err) {
+      console.log("issue with add movies POST: " + err);
+    }
+  });
+
+};
+
+
+//CREATE LIKE
+//newLike is a JSON object that is created in the AJAX request
 function createLike(event){
+
+  addMovieToUsers(event);
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -25,7 +57,7 @@ function createLike(event){
   event.preventDefault();
   var newLike = {
     imdbID: event.target.children[0].value,
-    users: userID  //will use req.body.userID to push into users array
+    userID: userID  //will use req.body.userID to push into users array
   }
 
   //posting to backend (can view on API LIKES)
