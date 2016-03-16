@@ -52,8 +52,8 @@ function show (req, res) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      console.log("req.session", req.session);
-      res.render('./pages/my_profile', {currentUser: currentUser, user: user[0]}); //sidebar partial is no longer getting passed the user
+      // console.log("req.session", req.session);
+      res.render('./pages/my_profile', {currentUser: currentUser, user: user[0]});
     }
    });
   });
@@ -62,14 +62,26 @@ function show (req, res) {
 //edit function--get form to edit user -- Jessie -- WORKING
 function edit (req, res) {
   User.find({_id: req.params.id}, function(err, user){
-    if (err){
+
+    req.currentUser(function(err, currentUser) {
+    if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      res.render("./pages/edit_profile", {user: user[0]});
+      // console.log("req.session", req.session);
+      res.render('./pages/edit_profile', {currentUser: currentUser, user: user[0]});
     }
+   });
   });
-}
+}   
+//     if (err){
+//       res.status(500).send();
+//       console.log("ERROR: ", err);
+//     } else {
+//       res.render("./pages/edit_profile", {user: user[0]});
+//     }
+//   });
+// }
 
 //update function -- Jessie -- Working, changes persist
 function update (req, res) {

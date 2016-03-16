@@ -35,7 +35,6 @@ app.use(logger('dev'));
 // method override
 app.use(methodOverride('_method'));
 
-
 // View engines
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname + '/views'));
@@ -44,6 +43,16 @@ var hbs = require('hbs');
 var hbsutils = require('hbs-utils')(hbs);
 hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
+
+
+//handlebars helper to see if user is current user
+hbs.registerHelper('ifUser', function(lvalue, rvalue, options) {
+	if( lvalue._id == rvalue.id ) {
+		return options.fn(this);
+	} else {
+		return options.inverse(this);
+	}
+});
 
 //sessions stuff
 app.use(
@@ -73,7 +82,6 @@ app.use(function (req, res, next) {
       req.session.userId = null;
       req.user = null;
     };
-    // console.log(arguments[2])
     next();
 });
 
