@@ -18,11 +18,11 @@ $(function() {
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
-
+  event.preventDefault();
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
 
-  event.preventDefault();
+
   var newMovie = {
     imdbID: event.target.children[0].value,
     userID: userID  //will use req.body.userID to push into users array
@@ -59,6 +59,8 @@ function createLike(event){
     imdbID: event.target.children[0].value,
     userID: userID  //will use req.body.userID to push into users array
   }
+
+
 
   //posting to backend (can view on API LIKES)
   $.ajax({
