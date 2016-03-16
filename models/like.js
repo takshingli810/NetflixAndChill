@@ -1,26 +1,24 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var User = require("./user");
-
-
+//not sure if we should change these to reflect OMDB attributes better?
 var LikeSchema = new Schema({
-  imdbID: String,
-  users: []
+  title: String,
+  imageUrl: String,
+  plot: String,
+  imdbID: String, //from OMDB JSON object
+  yearOfRelease: String
 });
 
 var Like = mongoose.model('Like', LikeSchema);
 
 module.exports = Like;
 
-//IF WE WANT MORE DATA STORED WITH US
-// title: String,
-// imageUrl: String,
-// plot: String,
-// imdbID: String, //from OMDB JSON object
-// yearOfRelease: String
-
-//  {
-//     type: Schema.Types.ObjectId,
-//     ref: 'User'
-//   }
+// Close connection on close
+// process.on('exit', function() {
+//   console.log('About to exit...');
+//   mongoose.disconnect(function() {
+//     console.log("Disconnected DB");
+//     process.exit(); // now exit the node app
+//   });
+// });
