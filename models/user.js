@@ -18,7 +18,7 @@ var UserSchema = new Schema({
   location: String,
   profilePic: String,
   password_digest: String,
-  likes: []
+  movies: []
 });
 
 var User = mongoose.model('User', UserSchema);

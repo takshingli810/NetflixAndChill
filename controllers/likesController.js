@@ -2,7 +2,7 @@
  * DATABASE *
  ************/
 var Like = require('../models/like');
-var UserLike = require('../models/userLike');
+// var UserLike = require('../models/userLike');
 var User = require('../models/user');
 
 function returnError (err) {
@@ -23,18 +23,30 @@ function postLikesAPI(req, res) {
         err ? res.status(500).send() : res.status(201);
       });
     }
-    else{
-      Like.findOne({imdbID: imdbID}, function(err, likes){
-        if(err){
-          console.log("WHY!!!!!");
-        }
-        else{
-          users.update(
-          {imdbID : imdbID},
-          {$push: {users: userID}}
-          )
-        }
-      });
+    else {
+        Like.findOne({imdbID: imdbID}, function(err, like){
+            if(err){
+              console.log("ERROR WITH FIND ONE ", err);
+            }
+            else{
+              //FIND IF USER IS ALREADY ON ARRAY
+
+
+              like.users.push(userID);
+              like.save( function(err){
+                if(err){
+                  console.log("ERROR WITH SAVE: ", err);
+                }
+                else{
+                  res.status(201);
+                }
+              }
+
+              );
+              console.log(userID);
+            }
+
+        });
       console.log("more than one like on this movie");
     }
 
@@ -42,6 +54,30 @@ function postLikesAPI(req, res) {
   });
 
 };
+
+// if(err){
+//   console.log("WHY!!!!!");
+// }
+// else{
+//   console.log("HITTING FIND ONE");
+//
+//   var usersArray = [];
+//   usersArray.push(userID);
+//
+//   like.users.forEach(function(user, index){
+//     User.findOne({_id: user}, function(err, like){
+//       console.log(like);
+//       usersArray.push(user);
+//
+//       console.log(usersArray);
+//
+//
+//
+//     });
+//
+//     like.users = usersArray;
+//
+//   });
 
 //SHOW ALL LIKES OF ALL USERS
 function getLikesAPI (req, res){

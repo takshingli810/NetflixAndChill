@@ -6,11 +6,11 @@
 //
 // //join table with user and movie/tv show likes
 // var UserLikeSchema = new Schema({
-//   users: [{
+//   user: [{
 //     type: Schema.Types.ObjectId,
 //     ref: 'User'
 //   }],
-//   likes: [{
+//   like: [{
 //     type: Schema.Types.ObjectId,
 //     ref: 'Like'
 //   }]
