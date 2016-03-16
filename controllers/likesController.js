@@ -13,7 +13,6 @@ function returnError (err) {
 function postLikesAPI(req, res) {
   var imdbID = req.body.imdbID;
   var userID = req.body.users;
-
   //ensures that imdbID is not inputted twice in the 'likes' db
   //if so, creates like if it's original
   //else it updates the like with additional users
@@ -30,54 +29,27 @@ function postLikesAPI(req, res) {
             }
             else{
               //FIND IF USER IS ALREADY ON ARRAY
-
-
-              like.users.push(userID);
-              like.save( function(err){
-                if(err){
-                  console.log("ERROR WITH SAVE: ", err);
-                }
-                else{
-                  res.status(201);
-                }
-              }
-
-              );
+              if (like.users.indexOf(userID)=== -1 ){
+                //pushes user onto Like users array
+                like.users.push(userID);
+                like.save( function(err){
+                  if(err){
+                    console.log("ERROR WITH SAVE: ", err);
+                  }
+                  else{
+                    res.status(201);
+                  }
+                });
+              };
               console.log(userID);
             }
 
         });
       console.log("more than one like on this movie");
     }
-
-
   });
-
 };
 
-// if(err){
-//   console.log("WHY!!!!!");
-// }
-// else{
-//   console.log("HITTING FIND ONE");
-//
-//   var usersArray = [];
-//   usersArray.push(userID);
-//
-//   like.users.forEach(function(user, index){
-//     User.findOne({_id: user}, function(err, like){
-//       console.log(like);
-//       usersArray.push(user);
-//
-//       console.log(usersArray);
-//
-//
-//
-//     });
-//
-//     like.users = usersArray;
-//
-//   });
 
 //SHOW ALL LIKES OF ALL USERS
 function getLikesAPI (req, res){
