@@ -6,6 +6,8 @@ var User = require('../models/user');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var OAuth = require('../secrets');
+
+var repl = require('repl');
 // console.log(OAuth);
 
 module.exports = function(passport){
@@ -25,10 +27,8 @@ module.exports = function(passport){
     clientSecret    : OAuth.fb.clientSecret,
     callbackURL     : '/auth/facebook/callback',
     enableProof     : true,
-    profileFields   : ['name', 'emails', 'gender', 'birthday', 'picture.type(large)'],
-    passReqToCallback : true
-  }, function(req, access_token, refresh_token, profile, done) {
-
+    profileFields   : ['name', 'emails', 'gender', 'birthday', 'picture.type(large)']
+  }, function(access_token, refresh_token, profile, done) {
     // // Use this to see the information returned from Facebook
     // console.log(profile);
 
@@ -36,10 +36,11 @@ module.exports = function(passport){
     process.nextTick(function() {
 
       User.findOne({ 'facebookID' : profile.id }, function(err, user) {
-        if (err) return done(err);
-
-        if (user) {
-
+        if (err) {
+          console.log("ERROR")
+          return done(err);
+        } else if (user) {
+          console.log("FOUND FB USER")
           return done(null, user);
         } else {
 

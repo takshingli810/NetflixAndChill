@@ -10,7 +10,7 @@ mongoose.connect('mongodb://localhost/netflixandchill');
 // passport for facebook OAuth
 var passport = require('passport');
 var cookieParser   = require("cookie-parser");
-var expressSession = require('express-session');
+var session = require('express-session');
 
 // Setting up for config/routes
 var routes = require('./config/routes');
@@ -21,7 +21,13 @@ require("./config/passport")(passport);
 
 // // session and cookie
 app.use(cookieParser() ); // requiring cookie parser  
-app.use(expressSession({secret: 'mySecretKey'})); // fetching for secret.js
+// app.use(
+//   session({
+//     secret:'mySecretKey',
+//     resave: false,
+//     saveUninitialized: true
+//   })
+// );
 app.use(passport.initialize()); // initialization for passport 
 app.use(passport.session());
 
@@ -42,6 +48,7 @@ var hbsutils = require('hbs-utils')(hbs);
 hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
 
+//sessions things
 
 /**********
  * SERVER *

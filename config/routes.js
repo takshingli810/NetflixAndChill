@@ -8,6 +8,10 @@ var logger = require('morgan');
 var usersController = require('../controllers/usersController');
 var likesController = require('../controllers/likesController');
 var passport = require('passport');
+var session = require('express-session');
+var User = require('../models/user');
+//debugging
+var repl = require('repl');
 
 // *********** //
 // Static Page //
@@ -86,21 +90,64 @@ router.route('/api/users')
 // FaceBook OAuth //
 // ************** //
 
+//sessions stuff
+app.use(
+  session({
+    secret:'mySecretKey',
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+//extend 'req' to help manage sessions
+app.use(function (req, res, next) {
+    //login a user
+    req.login = function (user) {
+      req.session.userId = user.facebookID;
+    };
+    //find current user
+    req.currentUser = function (cb) {
+      db.User.findOne({facebookID: req.session.userId},
+        function (err, user) {
+          req.user = user;
+          cb(null,user);
+        });
+    };
+});
+
 // Facebook OAuth URL
 router.route('/auth/facebook')
-  .get(passport.authenticate('facebook', {
-    scope: 'email,public_profile,user_photos,user_birthday'
-  }));
+  .get(passport.authenticate('facebook', { scope: 'email,public_profile,user_photos,user_birthday'})
+);
 
 // Facebook callback URL
+
 // app.get('/auth/facebook/callback', function(req, res, next) {
-//   passport.authenticate('facebook', {successRedirect: "/users/" + req.user.id});
+//   passport.authenticate('facebook', function(err, user, info) {
+//     repl.start('> ').context.user = user;
+//   })(req, res, next);
 // });
-router.route('/auth/facebook/callback')
-  .get(passport.authenticate('facebook', {
-    successRedirect: '/myprofile',
-    failureRedirect: '/'
-  }));
+
+router.route('/auth/facebook/callback').get(function(req, res, next) {
+  passport.authenticate('facebook', function(err, user, info) {
+    // repl.start('> ').context.user = user;
+    // pull FB id out of user
+    var facebookID = user.facebookID;
+    // find the associated user w/ that ID, then you'd have your own userID
+    // creating a session obj that contains PID
+    session.userId = facebookID;
+    console.log(session.userId);
+    // call next to call next function OR just render the view as callback
+    res.render('./pages/my_profile', {user: user});
+  })(req, res, next);
+});
+
+// router.route('/auth/facebook/callback')
+//   .get(passport.authenticate('facebook'), function(err, user, info) {
+//     repl.start('> ').context.user = user;
+//   })(req, res, next);
+  // .get(passport.authenticate('facebook', {successRedirect: "/", failureRedirect: "/"}));
+    // WORKING: 
 
 //route for showing profile page
 app.get('/users/:id', isLoggedIn, function(req, res) {
@@ -121,38 +168,11 @@ function isLoggedIn(req, res, next) {
 }
 
 
-
-
-// router.route('/auth/facebook/callback')
-//   .get(passport.authenticate('facebook', usersController.show));
-
-//custom callback in an attempt to pass profile id through to URL
-//modeled after passport documentation example.
-// router.route('/auth/facebook/callback')
-  // .get(function(req, res, next) {
-  //   passport.authenticate('facebook', function(err, user, info) {
-  //     console.log("HERE WE ARE: ", user);
-  //     if (err) {
-  //       res.status(401).send();
-  //       console.log("ERROR: ", err);
-  //     } else if (!user) {
-  //       console.log("Not a user");
-  //       res.redirect("/");
-  //     } else {
-  //       req.logIn(user, function(err) {
-  //         if (err) {console.log("ERROR: ", err);}
-  //         res.redirect('/users/' + req.user.id);
-  //       });
-  //     }
-  //   });
-  // });
-
-
 // Sign out
 router.route("/logout")
   .get(function(req, res){
     console.log("LOGGED OUT");
-    req.session.user=null;
+    req.session.userId = null;
     req.logout();
     res.redirect("/");
 });
