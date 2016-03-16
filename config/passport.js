@@ -8,7 +8,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var OAuth = require('../secrets');
 
 var repl = require('repl');
-// console.log(OAuth);
 
 module.exports = function(passport){
   passport.serializeUser(function(user, done) {
@@ -37,10 +36,10 @@ module.exports = function(passport){
 
       User.findOne({ 'facebookID' : profile.id }, function(err, user) {
         if (err) {
-          console.log("ERROR")
+          console.log("ERROR");
           return done(err);
         } else if (user) {
-          console.log("FOUND FB USER")
+          console.log("FOUND FB USER");
           return done(null, user);
         } else {
 
@@ -53,8 +52,6 @@ module.exports = function(passport){
           newUser.birthday     = profile._json.birthday;
           newUser.gender       = profile.gender;
           newUser.profilePic   = profile.photos[0].value;
-
-          // console.log("USER: ", newUser);
 
 
           newUser.save(function(err) {

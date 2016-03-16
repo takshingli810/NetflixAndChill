@@ -31,21 +31,23 @@ router.route('/about')
 // Jessie's routes from Mon Night //
 // *************************** //
 
-// show my profile-- will soon delete.
-router.route('/myprofile')
-  .get(usersController.show);
-
-//show other user profile? WIP
-router.route('/users/:id')
-  .get(usersController.show)
-//delete user route
-  .delete(usersController.destroy)
-//update user fields
-  .put(usersController.update);
+// // show my profile-- will soon delete.
+// router.route('/myprofile')
+//   .get(usersController.show);
 
 //edit user route
 router.route('/users/:id/edit')
   .get(usersController.edit);
+
+//show profile
+router.route('/users/:id')
+  .get(usersController.show)
+//delete user route
+  .delete(usersController.destroy)
+//update user details
+  .put(usersController.update);
+
+
 
 
 
@@ -122,12 +124,6 @@ router.route('/auth/facebook')
 
 // Facebook callback URL
 
-// app.get('/auth/facebook/callback', function(req, res, next) {
-//   passport.authenticate('facebook', function(err, user, info) {
-//     repl.start('> ').context.user = user;
-//   })(req, res, next);
-// });
-
 router.route('/auth/facebook/callback').get(function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     // repl.start('> ').context.user = user;
@@ -142,6 +138,12 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
   })(req, res, next);
 });
 
+// app.get('/auth/facebook/callback', function(req, res, next) {
+//   passport.authenticate('facebook', function(err, user, info) {
+//     repl.start('> ').context.user = user;
+//   })(req, res, next);
+// });
+
 // router.route('/auth/facebook/callback')
 //   .get(passport.authenticate('facebook'), function(err, user, info) {
 //     repl.start('> ').context.user = user;
@@ -149,12 +151,12 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
   // .get(passport.authenticate('facebook', {successRedirect: "/", failureRedirect: "/"}));
     // WORKING: 
 
-//route for showing profile page
-app.get('/users/:id', isLoggedIn, function(req, res) {
-  res.render('./pages/my_profile', {
-    user: req.user
-  });
-});
+// old route for showing profile page
+// app.get('/users/:id', isLoggedIn, function(req, res) {
+//   res.render('./pages/my_profile', {
+//     user: req.user
+//   });
+// });
 
 
 

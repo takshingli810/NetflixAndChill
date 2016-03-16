@@ -21,13 +21,7 @@ require("./config/passport")(passport);
 
 // // session and cookie
 app.use(cookieParser() ); // requiring cookie parser  
-// app.use(
-//   session({
-//     secret:'mySecretKey',
-//     resave: false,
-//     saveUninitialized: true
-//   })
-// );
+//moved express-session to routes
 app.use(passport.initialize()); // initialization for passport 
 app.use(passport.session());
 
@@ -48,7 +42,7 @@ var hbsutils = require('hbs-utils')(hbs);
 hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
 
-//sessions things
+
 
 /**********
  * SERVER *

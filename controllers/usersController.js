@@ -39,10 +39,16 @@ function getUsersAPI (req, res){
 
 //Show profile --- Jessie
 function show (req, res) {
-  console.log("route is working");
-  console.log(req.user);
-
-  res.render("./pages/my_profile", {user: req.user});
+  console.log(req.params.id);
+  User.find({'facebookID': req.params.id}, function(err, user) {
+    if (err) {
+      res.status(500).send();
+      console.log("ERROR: ", err);
+    } else {
+      console.log(user);
+      res.render('./pages/my_profile', {user: user}); //sidebar partial is no longer getting passed the user
+    }
+  });
 }
 
 //Delete a user --- Jessie
@@ -59,21 +65,20 @@ function destroy (req, res) {
 
 //edit function--get form to edit user --WORKING
 function edit (req, res) {
-  User.find({_id: req.params.id}, function(err, user){
+  User.find({facebookID: req.params.id}, function(err, user){
     if (err){
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      console.log("access token: ", user[0].access_token);
       res.render("./partials/edit_profile", {user: user});
     }
   });
 }
 
-//update function: WIP -- Jessie
+//update function -- Jessie
 function update (req, res) {
-  console.log(req.params.id);
-  User.find({_id: req.params.id}, function(err, user){
+  console.log(req.params);
+  User.find({facebookID: req.params.id}, function(err, user){
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
@@ -91,11 +96,11 @@ function update (req, res) {
       birthday: user.birthday,
       sexualPref: user.sexualPref
     };
-    User.update({_id: req.params.id}, edited_details, function(err, user) {
+    // console.log(req.params.id);
+    User.update({facebookID: req.params.id}, edited_details, function(err, user) {
       if (err) {
         console.log("ERROR: ", err);
-      // } res.send(JSON.stringify(user));
-      } res.redirect('/myprofile'); //will later have to change
+      } res.redirect('/users/' + user.facebookID); //will later have to change
     });
   });
 }

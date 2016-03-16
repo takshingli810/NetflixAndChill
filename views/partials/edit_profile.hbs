@@ -1,5 +1,5 @@
 <div id="edit-profile-div" class="col-md-8 col-md-offset-4">
-	<form id="edit-profile-form" class="form" action="/users/{{user.[0].id}}?_method=put" method="POST">
+	<form id="edit-profile-form" class="form" action="/users/{{user.[0].facebookID}}?_method=put" method="POST">
 		<label for="firstName" class="form-group">First Name</label>
 		<input type="text" id="firstName" name="firstName" class="form-control" value={{user.[0].firstName}}><br>
 		<label for="lastName" class="form-group">Last Name</label>
@@ -14,6 +14,6 @@
 		<input type="text" id="location" name="location"  class="form-control" value="{{user.[0].location}}"><br>
 		<input type="submit" value="Save Changes" class="btn btn-default"></input>
 	</form>
-	<a href="/myprofile" class="btn btn-default">Cancel</a><br>
-	<a href="/users/{{user.[0].id}}" id="delete-account-button" class="btn btn-danger">Delete Account</button>
+	<a href="/users/{{user.[0].facebookID}}" class="btn btn-default">Cancel</a><br>
+	<a href="/users/{{user.[0].facebookID}}" id="delete-account-button" class="btn btn-danger">Delete Account</button>
 </div>
