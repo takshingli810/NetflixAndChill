@@ -18,11 +18,16 @@ var routes = require('./config/routes');
 // Setting up the Passport Strategies
 require("./config/passport")(passport);
 
+//Trying to get User ID in app.js
+// var store  = new express.session.MemoryStore;
+
 // // session and cookie
 app.use(cookieParser() ); // requiring cookie parser
 app.use(expressSession({secret: 'mySecretKey'})); // fetching for secret.js
 app.use(passport.initialize()); // initialization for passport
 app.use(passport.session());
+
+
 
 
 app.use(bodyParser.json());

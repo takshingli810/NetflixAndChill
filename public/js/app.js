@@ -4,6 +4,7 @@
 
 $(function() {
     console.log( "ready!" );
+
     $("#signup-button").click(function(){
         // $("#signUpModal").modal();
         console.log("no issues with jquery");
@@ -17,28 +18,27 @@ $(function() {
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
-  // console.log(event);
-  event.preventDefault();
-  console.log(this);
-  console.log(event);
 
+  event.preventDefault();
   var newLike = {
     imdbID: event.target.children[0].value
   }
+
+  //from the hidden input type in my_profile
+  var userID = $('#user-id').attr("user-id");
 
   //posting to backend (can view on API LIKES)
   $.ajax({
     type: 'POST',
     url: '/api/userlikes',
     data: newLike,
-    dataType: 'json',
-    success: function(newLike){
-      console.log("HELLO");
-      console.log(renderLikes());
-    },
-    error: function(err) {
-      console.log("issue with create likes POST: " + err);
-    }
+    dataType: 'json'
+    // success: function(newLike){
+    //   console.log("POSTING TO USERLIKES");
+    // },
+    // error: function(err) {
+    //   console.log("issue with create likes POST: " + err);
+    // }
   });
 
 };
@@ -48,12 +48,12 @@ function renderLikes(){
   // GETTING LIKES AND RENDERING ON MY LIKES PARTIAL=
   console.log("YO RENDER LIKES ");
 
+
   $.ajax({
     type: 'GET',
     url: '/api/userlikes',
     success: function(userLikes){
       console.log("USER LIKES ", userLikes);
-      // console.log(req.params);
     },
     error: function(err) {
       alert("issue with create likes: " + err);
