@@ -19,7 +19,9 @@ var repl = require('repl');
 
 //Landing page
 router.route('/')
-  .get(usersController.renderLandingPage);
+  .get(function(req, res) {
+    console.log(session);
+  });
 
 //about page
 router.route('/about')
@@ -30,10 +32,6 @@ router.route('/about')
 // *************************** //
 // Jessie's routes from Mon Night //
 // *************************** //
-
-// // show my profile-- will soon delete.
-// router.route('/myprofile')
-//   .get(usersController.show);
 
 //edit user route
 router.route('/users/:id/edit')
@@ -99,17 +97,21 @@ app.use(
   })
 );
 
-//extend 'req' to help manage sessions
-app.use(function (req, res, next) {
-    //find current user
-    req.currentUser = function (cb) {
-      db.User.findOne({_id: req.session.userId},
-        function (err, user) {
-          req.user = user;
-          cb(null,user);
-        });
-    };
-});
+// //extend 'req' to help manage sessions
+// app.use(function (req, res, next) {
+//     //find current user
+//     req.currentUser = function (cb) {
+//       db.User.findOne({_id: req.session.userId},
+//         function (err, user) {
+//           req.user = user;
+//           cb(null,user);
+//         });
+//     };
+//     req.logout = function (cb) {
+//       req.session.userId = null;
+//       req.user = null;
+//     };
+// });
 
 // Facebook OAuth URL
 router.route('/auth/facebook')
@@ -165,22 +167,11 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
 
 
 
-//route middleware
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()) {
-    return(next());
-  } else {
-    res.redirect('/');
-  }
-}
-
-
 // Sign out
 router.route("/logout")
   .get(function(req, res){
     console.log("LOGGED OUT");
-    req.session.userId = null;
-    req.logout();
+    session.userId = null; //need to be sure that we actually edited the session object! Unsure how to test
     res.redirect("/");
 });
 

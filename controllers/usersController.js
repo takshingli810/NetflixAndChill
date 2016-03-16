@@ -9,6 +9,7 @@ function returnError (err) {
 }
 
 function renderLandingPage (req, res) {
+  console.log(session.userId);
   res.render('./pages/landing_page', {user: req.user});
 }
 
@@ -37,21 +38,21 @@ function getUsersAPI (req, res){
 //JESSIE's CONTROLLER FUNCTIONS FROM MON NIGHT
 
 
-//Show profile --- Jessie
+//Show profile --- Jessie -- WORKING
 function show (req, res) {
   console.log(req.params.id);
-  User.find({'facebookID': req.params.id}, function(err, user) {
+  User.find({_id: req.params.id}, function(err, user) {
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      console.log(user);
-      res.render('./pages/my_profile', {user: user}); //sidebar partial is no longer getting passed the user
+      console.log(user[0]);
+      res.render('./pages/my_profile', {user: user[0]}); //sidebar partial is no longer getting passed the user
     }
   });
 }
 
-//edit function--get form to edit user --WORKING
+//edit function--get form to edit user -- Jessie -- WORKING
 function edit (req, res) {
   User.find({_id: req.params.id}, function(err, user){
     if (err){
@@ -63,7 +64,7 @@ function edit (req, res) {
   });
 }
 
-//update function -- Jessie -- Working
+//update function -- Jessie -- Working, changes persist
 function update (req, res) {
   var id = req.body.userId;
   User.find({_id: id}, function(err, user){
@@ -88,21 +89,24 @@ function update (req, res) {
       if (err) {
         console.log("ERROR: ", err);
       } else {
-      res.redirect('/users/' + id); //redirects to correct show page!
+      res.redirect('/users/' + id); //redirects to correct show page URL! DATA IS THERE THANK GOD
       }
     });
   });
 }
 
 
-//Delete a user --- Jessie
+//Delete a user -- WORKING -- Jessie
+//Deletes a user from the database, not completely sure if 
 function destroy (req, res) {
+  console.log(req.params.id);
   User.remove({_id: req.params.id}, function(err, users){
     if (err){
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      res.redirect("/");
+      //redirect to logout because you also want to reset the session object w/ user id = to null
+      res.redirect("/logout");
     }
   });
 }
