@@ -10,6 +10,8 @@ $(function() {
         console.log("no issues with jquery");
     });
 
+    // renderLikes();
+
     //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
     getMovies();
 
@@ -28,19 +30,24 @@ function renderLikes(event){
     url: '/api/users/' + userID + '/movies',
     dataType: 'json',
     success: function(usersMovies){
-
-      usersMovies.forEach(function(movie){
-        //ajax request to GET the movie with the title of the searchTerm
+      //movie id is same as imdbID in users movies array
+      usersMovies.forEach(function(movieID){
+        //ajax request to GET the movie with the imdbID of the movie
         $.ajax({
           type: 'GET',
-          url: "http://www.omdbapi.com/?i=" + movie,
+          url: "http://www.omdbapi.com/?i=" + movieID,
           dataType: 'json',
           success: function(result){
             console.log(result);
             // iterate over the data result set
-            $.each(result.Search, function(index, element) {
-                console.log(element.Title);
-            });
+
+            // $.each(result.Search, function(index, element) {
+            //     console.log(element.Title);
+            //
+            //     var movieDiv = "<div class= 'movie-div col-md-4'><img src={{element.Poster}}></div>";
+            //
+            //     $('.movies-grid').prepend("HI" + movieDiv);
+            // });
           },
           //if theres an error with the AJAX request
           error: function(err){
@@ -62,8 +69,6 @@ function renderLikes(event){
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
   event.preventDefault();
-
-  $('.movies-grid').prepend("imdbID");
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -89,7 +94,7 @@ function addMovieToUsers(event){
     }
   });
 
-  renderLikes(event);
+  // renderLikes(event);
 
 };
 

@@ -70,13 +70,21 @@ function addMoviesToUsersAPI(req, res) {
 
 function showUserAPI(req, res){
   User.findOne({_id: req.params.id}, function(err, user){
+    if(err){
+      console.log("Show users route not working", err);
+    }
     res.json(user);
   })
 }
 
 function showUserMoviesAPI(req, res){
   User.findOne({_id: req.params.id}, function(err, user){
-    res.json(user.movies);
+    if(err){
+      console.log("Show user movies route not working", err);
+    }
+    else{
+      res.json(user.movies);
+    }
   })
 }
 
