@@ -62,9 +62,6 @@ function getLikesAPI (req, res){
   });
 }
 
-function renderMyLikes (req, res){
-
-}
 
 function renderSearchLikes (req, res) {
   res.render('./partials/searchLikes');

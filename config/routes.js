@@ -85,6 +85,14 @@ router.route('/api/users')
 router.route('/api/users')
   .post(usersController.addMoviesToUsersAPI);
 
+//show only user
+router.route('/api/users/:id')
+  .get(usersController.showUserAPI);
+
+//show user's movies
+router.route('/api/users/:id/movies')
+  .get(usersController.showUserMoviesAPI);
+
 // ************** //
 // FaceBook OAuth //
 // ************** //
