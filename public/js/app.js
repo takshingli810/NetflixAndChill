@@ -19,7 +19,7 @@ $(function() {
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
   event.preventDefault();
-  //from the hidden input type in my_profile
+  //from the hidden input type in profile_show
   var userID = $('#user-id').attr("user-id");
 
 
@@ -51,7 +51,7 @@ function createLike(event){
 
   addMovieToUsers(event);
 
-  //from the hidden input type in my_profile
+  //from the hidden input type in profile_show
   var userID = $('#user-id').attr("user-id");
 
   event.preventDefault();

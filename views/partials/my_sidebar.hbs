@@ -14,10 +14,13 @@
 					{{else}}
 						<span>?</span>
 					{{/if}}</p>
-		<p>Status: {{#if user.status}}
+					{{#if user.status}}
+					<p>Status: 
 						{{user.status}}
 					{{else}}
-						<span>What are you currently watching?</span>
+						{{#ifUser user currentUser}}
+							<p>Status: <span><i>What are you currently watching?</i></span>
+						{{/ifUser}}
 					{{/if}}</p>
 	</div>
 	{{#ifUser user currentUser}}

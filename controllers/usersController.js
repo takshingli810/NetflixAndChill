@@ -86,7 +86,7 @@ function show (req, res) {
       console.log("ERROR: ", err);
     } else {
       // console.log("req.session", req.session);
-      res.render('./pages/my_profile', {currentUser: currentUser, user: user[0]});
+      res.render('./pages/profile_show', {currentUser: currentUser, user: user[0]});
     }
    });
   });
