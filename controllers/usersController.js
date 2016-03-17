@@ -190,6 +190,7 @@ function showMatches (req, res) {
     } else {
       User.find({}, function (err, users) {
         console.log("users ", users);
+        
         res.render('./pages/matches', {currentUser: currentUser, user: user[0]});
       });
     }
