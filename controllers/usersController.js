@@ -68,10 +68,23 @@ function addMoviesToUsersAPI(req, res) {
 };
 
 
+function showUserAPI(req, res){
+  User.findOne({_id: req.params.id}, function(err, user){
+    res.json(user);
+  })
+}
+
+function showUserMoviesAPI(req, res){
+  User.findOne({_id: req.params.id}, function(err, user){
+    res.json(user.movies);
+  })
+}
 
 module.exports = {
 	renderLandingPage: renderLandingPage,
 	getAPI: getAPI,
 	getUsersAPI: getUsersAPI,
-  addMoviesToUsersAPI: addMoviesToUsersAPI
+  addMoviesToUsersAPI: addMoviesToUsersAPI,
+  showUserAPI: showUserAPI,
+  showUserMoviesAPI: showUserMoviesAPI
 };

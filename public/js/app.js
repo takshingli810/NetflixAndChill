@@ -15,16 +15,63 @@ $(function() {
 
 });
 
-//CREATE LIKE
-//newLike is a JSON object that is created in the AJAX request
-function addMovieToUsers(event){
-  event.preventDefault();
+
+//show all likes in the MY LIKES div
+function renderLikes(event){
+
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
 
+  //posting to backend (can view on API LIKES)
+  $.ajax({
+    type: 'GET',
+    url: '/api/users/' + userID + '/movies',
+    dataType: 'json',
+    success: function(usersMovies){
+
+      usersMovies.forEach(function(movie){
+        //ajax request to GET the movie with the title of the searchTerm
+        $.ajax({
+          type: 'GET',
+          url: "http://www.omdbapi.com/?i=" + movie,
+          dataType: 'json',
+          success: function(result){
+            console.log(result);
+            // iterate over the data result set
+            $.each(result.Search, function(index, element) {
+                console.log(element.Title);
+            });
+          },
+          //if theres an error with the AJAX request
+          error: function(err){
+            console.log("AJAX not working in render movies... ", err);
+            }
+          }); //end of AJAX
+
+        }); //end of on submit
+
+      },
+      error: function(err) {
+        console.log("render Likes: ", err);
+      }
+    });
+
+};
+
+//ADD MOVIES TO USERS
+//newLike is a JSON object that is created in the AJAX request
+function addMovieToUsers(event){
+  event.preventDefault();
+
+  $('.movies-grid').prepend("imdbID");
+
+  //from the hidden input type in my_profile
+  var userID = $('#user-id').attr("user-id");
+
+  var imdbID = event.target.children[0].value;
 
   var newMovie = {
-    imdbID: event.target.children[0].value,
+    imdbID: imdbID,
     userID: userID  //will use req.body.userID to push into users array
   }
 
@@ -42,6 +89,8 @@ function addMovieToUsers(event){
     }
   });
 
+  renderLikes(event);
+
 };
 
 
@@ -49,18 +98,18 @@ function addMovieToUsers(event){
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
 
+    //from the hidden input type in my_profile
+    var userID = $('#user-id').attr("user-id");
+
+
   addMovieToUsers(event);
 
-  //from the hidden input type in my_profile
-  var userID = $('#user-id').attr("user-id");
 
   event.preventDefault();
   var newLike = {
     imdbID: event.target.children[0].value,
     userID: userID  //will use req.body.userID to push into users array
   }
-
-
 
   //posting to backend (can view on API LIKES)
   $.ajax({
@@ -78,23 +127,6 @@ function createLike(event){
 
 };
 
-//show all likes in the MY LIKES div
-function renderLikes(){
-  // GETTING LIKES AND RENDERING ON MY LIKES PARTIAL=
-  console.log("YO RENDER LIKES ");
-
-
-  $.ajax({
-    type: 'GET',
-    url: '/api/likes',
-    success: function(likes){
-      console.log("LIKES ", likes);
-    },
-    error: function(err) {
-      alert("issue with create likes: " + err);
-    }
-  });
-};
 
 
 // function to SEARCH FOR MOVIES (searchLikes.hbs template)
