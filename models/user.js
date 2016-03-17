@@ -20,11 +20,6 @@ var UserSchema = new Schema({
   profilePic: String,
   password_digest: String,
   movies: [],
-  //more new stuff peeps --Jessie
-  // matches: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'user'
-  // }]
 });
 
 
