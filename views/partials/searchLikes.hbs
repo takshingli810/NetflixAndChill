@@ -1,8 +1,8 @@
 <!--This form is to search for movies then add them to your 'likes'  -->
 
 <section class="search-form container">
-      <div>
-      <div class="col-md-10 col-md-offset-1">
+      {{!-- <div> --}}
+      <div class="movies-grid col-xl-8 col-offset-md-4">
         {{!-- method="post" action="/search"  --}}
         <form method="post" action="/api/likes" id="searchForm" class="form-horizontal">
           <fieldset>
@@ -28,11 +28,11 @@
             </div>
           </fieldset>
         </form>
+      {{!-- </div> --}}
+
+        <div class="search-results">
+
+        </div>
+
       </div>
-
-      <div class="search-results">
-
-      </div>
-
-    </div>
 </section>

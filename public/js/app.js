@@ -122,7 +122,7 @@ function getMovies(){
       dataType: 'json', //no data is being passed in
       success: function(result){
         console.log(result);
-        var movie = "<div>";
+        var movie = "<div style='background-color: pink'>";
         // iterate over the data result set
         $.each(result.Search, function(index, element) {
 
@@ -138,7 +138,7 @@ function getMovies(){
                 +  "</form>";
           //if there is no poster URL then it just adds a default image
           if(element.Poster !== "N/A"){
-              movie += "<div><img src=" + element.Poster + ">";
+              movie += "<img src=" + element.Poster + ">";
           } else {
               movie += "<img src='../images/no-photo-available.jpg'>";
           }

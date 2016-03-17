@@ -82,10 +82,11 @@ function show (req, res) {
    // repl.start('> ').context.user = user;
    req.currentUser(function(err, currentUser) {
     if (err) {
+      console.log("req.session", req.session);
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      // console.log("req.session", req.session);
+      console.log("req.session", req.session);
       res.render('./pages/profile_show', {currentUser: currentUser, user: user[0]});
     }
    });
