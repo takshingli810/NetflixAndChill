@@ -10,21 +10,73 @@ $(function() {
         console.log("no issues with jquery");
     });
 
+    // renderLikes();
+
     //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
     getMovies();
 
 });
 
-//CREATE LIKE
+
+//show all likes in the MY LIKES div
+function renderLikes(event){
+
+  //from the hidden input type in my_profile
+  var userID = $('#user-id').attr("user-id");
+
+  //posting to backend (can view on API LIKES)
+  $.ajax({
+    type: 'GET',
+    url: '/api/users/' + userID + '/movies',
+    dataType: 'json',
+    success: function(usersMovies){
+      //movie id is same as imdbID in users movies array
+      usersMovies.forEach(function(movieID){
+        //ajax request to GET the movie with the imdbID of the movie
+        $.ajax({
+          type: 'GET',
+          url: "http://www.omdbapi.com/?i=" + movieID,
+          dataType: 'json',
+          success: function(result){
+            console.log(result);
+            // iterate over the data result set
+
+            // $.each(result.Search, function(index, element) {
+            //     console.log(element.Title);
+            //
+            //     var movieDiv = "<div class= 'movie-div col-md-4'><img src={{element.Poster}}></div>";
+            //
+            //     $('.movies-grid').prepend("HI" + movieDiv);
+            // });
+          },
+          //if theres an error with the AJAX request
+          error: function(err){
+            console.log("AJAX not working in render movies... ", err);
+            }
+          }); //end of AJAX
+
+        }); //end of on submit
+
+      },
+      error: function(err) {
+        console.log("render Likes: ", err);
+      }
+    });
+
+};
+
+//ADD MOVIES TO USERS
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
   event.preventDefault();
-  //from the hidden input type in profile_show
+
+  //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
 
+  var imdbID = event.target.children[0].value;
 
   var newMovie = {
-    imdbID: event.target.children[0].value,
+    imdbID: imdbID,
     userID: userID  //will use req.body.userID to push into users array
   }
 
@@ -42,12 +94,18 @@ function addMovieToUsers(event){
     }
   });
 
+  // renderLikes(event);
+
 };
 
 
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
+
+    //from the hidden input type in my_profile
+    var userID = $('#user-id').attr("user-id");
+
 
   addMovieToUsers(event);
 
@@ -59,8 +117,6 @@ function createLike(event){
     imdbID: event.target.children[0].value,
     userID: userID  //will use req.body.userID to push into users array
   }
-
-
 
   //posting to backend (can view on API LIKES)
   $.ajax({
@@ -78,23 +134,6 @@ function createLike(event){
 
 };
 
-//show all likes in the MY LIKES div
-function renderLikes(){
-  // GETTING LIKES AND RENDERING ON MY LIKES PARTIAL=
-  console.log("YO RENDER LIKES ");
-
-
-  $.ajax({
-    type: 'GET',
-    url: '/api/likes',
-    success: function(likes){
-      console.log("LIKES ", likes);
-    },
-    error: function(err) {
-      alert("issue with create likes: " + err);
-    }
-  });
-};
 
 
 // function to SEARCH FOR MOVIES (searchLikes.hbs template)
@@ -177,4 +216,3 @@ function getMovies(){
 //       console.log("ERROR: ", err);
 //     });
 // };
-

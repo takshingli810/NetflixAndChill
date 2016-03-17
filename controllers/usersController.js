@@ -74,6 +74,27 @@ function addMoviesToUsersAPI(req, res) {
 };
 
 
+function showUserAPI(req, res){
+  User.findOne({_id: req.params.id}, function(err, user){
+    if(err){
+      console.log("Show users route not working", err);
+    }
+    res.json(user);
+  })
+}
+
+function showUserMoviesAPI(req, res){
+  User.findOne({_id: req.params.id}, function(err, user){
+    if(err){
+      console.log("Show user movies route not working", err);
+    }
+    else{
+      res.json(user.movies);
+    }
+  })
+}
+
+
 //JESSIE'S USER CRUD FUNCTIONS
 //Show profile --- Jessie -- WORKING
 function show (req, res) {
@@ -107,7 +128,7 @@ function edit (req, res) {
     }
    });
   });
-}   
+}
 
 //update function -- Jessie -- Working, changes persist
 function update (req, res) {
@@ -119,7 +140,7 @@ function update (req, res) {
     } if (req.body.status) {user.status = req.body.status; }
     if (req.body.firstName) {user.firstName = req.body.firstName; }
     if (req.body.lastName) {user.lastName = req.body.lastName; }
-    if (req.body.gender) {user.gender = req.body.gender; }  
+    if (req.body.gender) {user.gender = req.body.gender; }
     if (req.body.location) {user.location = req.body.location; }
     if (req.body.birthday) {user.birthday = req.body.birthday; }
     if (req.body.sexualPref) {user.sexualPref = req.body.sexualPref; }
