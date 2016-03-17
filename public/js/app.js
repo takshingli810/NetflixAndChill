@@ -1,6 +1,5 @@
 //CLIENT-SIDE JS
 //MAIN FUNCTION
-// var user = {};
 
 $(function() {
     console.log( "ready!" );
@@ -10,7 +9,6 @@ $(function() {
         console.log("no issues with jquery");
     });
 
-    // renderLikes();
 
     //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
     getMovies();
@@ -94,7 +92,7 @@ function addMovieToUsers(event){
     }
   });
 
-  // renderLikes(event);
+  renderLikes(event);
 
 };
 
@@ -102,10 +100,6 @@ function addMovieToUsers(event){
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
-
-    //from the hidden input type in my_profile
-    var userID = $('#user-id').attr("user-id");
-
 
   addMovieToUsers(event);
 
@@ -199,20 +193,3 @@ function getMovies(){
     $searchTerm.focus();
   }); //end of on submit
 };//end of getMovies
-
-
-
-// AJAX CALLS JESSIE MONDAY NIGHT -- will probably delete
-// user.editUser = function(e) {
-//   e.preventDefault();
-//   var user = $(e.target).serialize();
-//   console.log(user);
-
-//   $.put("/users/", user)
-//     .done(function(res) {
-//       console.log("profile changes saved");
-//     })
-//     .fail(function(err) {
-//       console.log("ERROR: ", err);
-//     });
-// };
