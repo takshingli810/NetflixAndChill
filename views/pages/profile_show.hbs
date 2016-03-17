@@ -4,7 +4,8 @@
 
 {{>my_sidebar}}
 
-{{>searchLikes}}
-{{!-- {{>search}} --}}
+{{#ifUser user currentUser}}
+	{{>searchLikes}}
+{{/ifUser}}
 
 {{>my_likes}}
