@@ -28,7 +28,7 @@ function getAPI(req, res){
   });
 }
 
-//SHOW ALL LIKES OF ALL USERS
+//SHOW ALL USERS
 function getUsersAPI (req, res){
   User.find(function(err, users){
     if(err){
@@ -70,7 +70,6 @@ function addMoviesToUsersAPI(req, res) {
       }
 
     });
-      console.log("ohno");
 };
 
 
@@ -186,5 +185,9 @@ module.exports = {
   destroy: destroy,
   edit: edit,
   update: update,
-  addMoviesToUsersAPI: addMoviesToUsersAPI
+  addMoviesToUsersAPI: addMoviesToUsersAPI,
+  showUserAPI: showUserAPI,
+  showUserMoviesAPI: showUserMoviesAPI,
+
+
 };
