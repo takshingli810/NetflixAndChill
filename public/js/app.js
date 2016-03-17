@@ -19,7 +19,8 @@ $(function() {
 
 
 //show all likes in the MY LIKES div
-function renderLikes(event){
+function renderLikes(){
+
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -43,7 +44,7 @@ function renderLikes(event){
 
             var movieDiv = "<div class= 'movie-div col-md-4'><p>" + result.Title + "</p>" + "<img src=" + result.Poster + "></div>";
 
-            $('.movies-grid').prepend("HI" + movieDiv);
+            $('.movies-grid').prepend(movieDiv);
 
           },
           //if theres an error with the AJAX request
@@ -66,6 +67,7 @@ function renderLikes(event){
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
   event.preventDefault();
+
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -100,12 +102,17 @@ function addMovieToUsers(event){
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
 
+
+
+
+
+  event.preventDefault();
+
   addMovieToUsers(event);
 
   //from the hidden input type in profile_show
   var userID = $('#user-id').attr("user-id");
 
-  event.preventDefault();
   var newLike = {
     imdbID: event.target.children[0].value,
     userID: userID  //will use req.body.userID to push into users array
@@ -125,6 +132,7 @@ function createLike(event){
     }
   });
 
+  renderLikes();
 };
 
 
