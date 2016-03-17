@@ -67,8 +67,22 @@ function renderSearchLikes (req, res) {
   res.render('./partials/searchLikes');
 }
 
+
+//DELETE LIKE - push out from queue
+//SHOW ALL LIKES OF ALL USERS
+function deleteLikesAPI (req, res){
+  Like.find({}, function(err, likes){
+    if(err){
+      console.log("ERROR: ", err);
+    }
+
+    res.json({likes: likes});
+  });
+}
+
 module.exports = {
 	renderSearchLikes: renderSearchLikes,
 	getLikesAPI: getLikesAPI,
-  postLikesAPI: postLikesAPI
+  postLikesAPI: postLikesAPI,
+  deleteLikesAPI: deleteLikesAPI
 };

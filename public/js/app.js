@@ -93,18 +93,12 @@ function addMovieToUsers(event){
     }
   });
 
-  // renderLikes(event);
-
 };
 
 
 //CREATE LIKE
 //newLike is a JSON object that is created in the AJAX request
 function createLike(event){
-
-
-
-
 
   event.preventDefault();
 
