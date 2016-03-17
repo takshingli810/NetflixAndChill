@@ -19,7 +19,12 @@ var UserSchema = new Schema({
   location: String,
   profilePic: String,
   password_digest: String,
-  movies: []
+  movies: [],
+  //more new stuff peeps --Jessie
+  // matches: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user'
+  // }]
 });
 
 

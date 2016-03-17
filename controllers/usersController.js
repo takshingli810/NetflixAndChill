@@ -177,6 +177,28 @@ function destroy (req, res) {
   });
 }
 
+//Show Matches page -- Jessie
+
+function showMatches (req, res) {
+  console.log(req.params.id);
+  User.find({_id: req.params.id}, function(err, user) {
+   // repl.start('> ').context.user = user;
+   req.currentUser(function(err, currentUser) {
+    if (err) {
+      res.status(500).send();
+      console.log("ERROR: ", err);
+    } else {
+      User.find({}, function (err, users) {
+        console.log("users ", users);
+        res.render('./pages/matches', {currentUser: currentUser, user: user[0]});
+      });
+    }
+
+    }); 
+   
+  });
+}
+
 module.exports = {
   renderLandingPage: renderLandingPage,
   getAPI: getAPI,
@@ -188,6 +210,6 @@ module.exports = {
   addMoviesToUsersAPI: addMoviesToUsersAPI,
   showUserAPI: showUserAPI,
   showUserMoviesAPI: showUserMoviesAPI,
-
+  showMatches: showMatches
 
 };

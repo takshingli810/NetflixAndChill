@@ -42,20 +42,18 @@ router.route('/users/:id')
 //update user details
   .put(usersController.update);
 
+// *************************** //
+// Jessie's MATCHES routes     //
+// *************************** //
+
+//matches page, just using for testing views
+router.route('/users/:id/matches')
+  .get(usersController.showMatches);
+
 
 // *************************** //
 // Might be changed or deleted //
 // *************************** //
-
-//Testing create (temp)
-router.route('/search')
-  .get(likesController.renderSearchLikes);
-
-//matches page, just using for testing views
-router.route('/user/matches')
-  .get(function(req, res) {
-    res.render("./pages/my_matches",  {user: req.user});
-  });
 
 //other user profile, just using for testing views
 router.route('/otheruser')
@@ -64,7 +62,7 @@ router.route('/otheruser')
   });
 
 // *************************** //
-// Introductory API Page Route //
+// API Routes                  //
 // *************************** //
 
 router.route('/api')
@@ -92,6 +90,8 @@ router.route('/api/users/:id')
 //show user's movies
 router.route('/api/users/:id/movies')
   .get(usersController.showUserMoviesAPI);
+
+
 
 // ************** //
 // FaceBook OAuth //
@@ -124,15 +124,6 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
     });
   })(req, res, next);
 });
-
-//this was built by ilias, do not touch yet! 
-// router.route('/auth/facebook/callback')
-//   .get(passport.authenticate('facebook'), function(err, user, info) {
-//     repl.start('> ').context.user = user;
-//   })(req, res, next);
-  // .get(passport.authenticate('facebook', {successRedirect: "/", failureRedirect: "/"}));
-    // WORKING
-
 
 // Sign out
 router.route("/logout")

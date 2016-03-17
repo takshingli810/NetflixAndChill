@@ -193,3 +193,16 @@ function getMovies(){
     $searchTerm.focus();
   }); //end of on submit
 };//end of getMovies
+
+
+//ajax call to get user matches
+function getMatches() { //(matches.hbs template)
+  
+  //where the results will be appended
+  var $matches = $('#matches-div');
+
+}
+
+
+
+
