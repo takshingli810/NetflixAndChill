@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 
 //STILL UNSURE ABOUT WHERE THIS REFERENCED DATA WORKS
 var UserSchema = new Schema({
-  id: String,
   access_token: String,
   firstName: String,
   lastName: String,
@@ -15,11 +14,14 @@ var UserSchema = new Schema({
   birthday: String,
   sexualPref: String,
   email: String,
+  facebookID: String,
+  status: String,
   location: String,
   profilePic: String,
   password_digest: String,
   movies: []
 });
+
 
 var User = mongoose.model('User', UserSchema);
 

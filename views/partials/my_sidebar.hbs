@@ -1,28 +1,29 @@
 {{!-- COMMENTED OUT, USING HARD DATA FOR NOW --}}
 <div id="sidebar" class="col-md-4">
-	{{!-- <img src="{{user.profilePic}}"> --}}
 	<div id="sidebar-text">
-		{{!-- {{user}} --}}
 		<img src="{{user.profilePic}}"></img>
-		{{!-- <h1>{{user.profilePic}}</h1> --}}
 		<h2>{{user.firstName}} {{user.lastName}}</h2>
 		<p>{{user.gender}}, born {{user.birthday}}</p>
-		{{!-- <p>Location: {{user.location}}</p> --}}
+		<p>Location: {{#if user.location}}
+						{{user.location}}
+					{{else}}
+						<span>?</span>
+					{{/if}}</p>
+		<p>Interested in: {{#if user.sexualPref}}
+						{{user.sexualPref}}
+					{{else}}
+						<span>?</span>
+					{{/if}}</p>
+		<p>Status: {{#if user.status}}
+						{{user.status}}
+					{{else}}
+						<span>What are you currently watching?</span>
+					{{/if}}</p>
 	</div>
+	{{#ifUser user currentUser}}
 	<div id="sidebar-buttons">
 		<a href="/users/{{user._id}}/edit" class="btn btn-default" id="edit-profile-button">Edit My Profile</a>
 	</div>
+	{{/ifUser}}
 </div>
 
-
-{{!-- <div id="sidebar" class="col-md-4" style="background-color: pink">
-	<img src="/images/einstein.png">
-	<div id="sidebar-text">
-		<h2>Albert Einstein</h2>
-		<p>Male, born 08/14/1979</p>
-		<p>Location: ?</p>
-	</div>
-	<div id="sidebar-buttons">
-		<a href="/users/{{user._id}}/edit" class="btn btn-default" id="edit-profile-button">Edit My Profile</a>
-	</div>
-</div> --}}

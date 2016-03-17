@@ -160,3 +160,21 @@ function getMovies(){
     $searchTerm.focus();
   }); //end of on submit
 };//end of getMovies
+
+
+
+// AJAX CALLS JESSIE MONDAY NIGHT -- will probably delete
+// user.editUser = function(e) {
+//   e.preventDefault();
+//   var user = $(e.target).serialize();
+//   console.log(user);
+
+//   $.put("/users/", user)
+//     .done(function(res) {
+//       console.log("profile changes saved");
+//     })
+//     .fail(function(err) {
+//       console.log("ERROR: ", err);
+//     });
+// };
+
