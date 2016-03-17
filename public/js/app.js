@@ -9,6 +9,8 @@ $(function() {
         console.log("no issues with jquery");
     });
 
+    //render all likes when they go to their profile
+    renderLikes();
 
     //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
     getMovies();
@@ -39,13 +41,10 @@ function renderLikes(event){
             console.log(result);
             // iterate over the data result set
 
-            // $.each(result.Search, function(index, element) {
-            //     console.log(element.Title);
-            //
-            //     var movieDiv = "<div class= 'movie-div col-md-4'><img src={{element.Poster}}></div>";
-            //
-            //     $('.movies-grid').prepend("HI" + movieDiv);
-            // });
+            var movieDiv = "<div class= 'movie-div col-md-4'><p>" + result.Title + "</p>" + "<img src=" + result.Poster + "></div>";
+
+            $('.movies-grid').prepend("HI" + movieDiv);
+
           },
           //if theres an error with the AJAX request
           error: function(err){
@@ -92,7 +91,7 @@ function addMovieToUsers(event){
     }
   });
 
-  renderLikes(event);
+  // renderLikes(event);
 
 };
 
