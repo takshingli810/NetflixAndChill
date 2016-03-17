@@ -17,25 +17,8 @@ var session = require('express-session');
 // Setting up for config/routes
 var routes = require('./config/routes');
 
-//OAUTH
-// Setting up the Passport Strategies
-require("./config/passport")(passport);
 
-// // session and cookie
-app.use(cookieParser() ); // requiring cookie parser  
-//moved express-session to routes
-app.use(passport.initialize()); // initialization for passport 
-app.use(passport.session());
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(logger('dev'));
-
-// method override
-app.use(methodOverride('_method'));
-
-// View engines
+// View engine stuff
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname + '/views'));
 app.set('view engine', 'hbs');
@@ -44,15 +27,28 @@ var hbsutils = require('hbs-utils')(hbs);
 hbs.registerPartials(__dirname + '/views/partials');
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
 
-
 //handlebars helper to see if user is current user
 hbs.registerHelper('ifUser', function(lvalue, rvalue, options) {
-	if( lvalue._id == rvalue.id ) {
-		return options.fn(this);
-	} else {
-		return options.inverse(this);
-	}
+  if( lvalue._id == rvalue.id ) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
 });
+
+//other middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(logger('dev'));
+app.use(cookieParser() ); // requiring cookie parser  
+app.use(methodOverride('_method'));
+
+
+//OAUTH and sessions things
+// Setting up the Passport Strategies
+require("./config/passport")(passport);
+app.use(passport.initialize()); // initialization for passport 
+app.use(passport.session());
 
 //sessions stuff
 app.use(
@@ -94,5 +90,3 @@ app.use(routes);
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is running on http://localhost:3000/');
 });
-
-

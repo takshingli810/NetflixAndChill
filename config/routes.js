@@ -27,7 +27,7 @@ router.route('/about')
   });
 
 // *************************** //
-// Jessie's routes from Mon Night //
+// Jessie's USER CRUD routes   //
 // *************************** //
 
 //edit user route
@@ -41,7 +41,6 @@ router.route('/users/:id')
   .delete(usersController.destroy)
 //update user details
   .put(usersController.update);
-
 
 
 // *************************** //
@@ -64,8 +63,6 @@ router.route('/otheruser')
     res.render("./pages/other_profile", {user: req.user});
   });
 
-
-
 // *************************** //
 // Introductory API Page Route //
 // *************************** //
@@ -77,10 +74,16 @@ router.route('/api')
 router.route('/api/likes')
   .get(likesController.getLikesAPI);
 
+router.route('/api/likes')
+  .post(likesController.postLikesAPI); //in testing
+
 //users route to view all users and their attributes
 router.route('/api/users')
   .get(usersController.getUsersAPI);
 
+//users route to post movies to users array in api
+router.route('/api/users')
+  .post(usersController.addMoviesToUsersAPI);
 
 // ************** //
 // FaceBook OAuth //
@@ -91,7 +94,7 @@ router.route('/auth/facebook')
   .get(passport.authenticate('facebook', { scope: 'email,public_profile,user_photos,user_birthday'})
 );
 
-// Facebook callback URL
+// Facebook callback URL -- Jessie
 router.route('/auth/facebook/callback').get(function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     // pull FB id out of user

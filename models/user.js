@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Like = require("./like");
+//unneeded?
+// var UserLike = require("./userLike");
+// var Like = require("./Like");
 
 //STILL UNSURE ABOUT WHERE THIS REFERENCED DATA WORKS
 var UserSchema = new Schema({
@@ -12,20 +14,21 @@ var UserSchema = new Schema({
   birthday: String,
   sexualPref: String,
   email: String,
-  //hello here, this is new info!
   facebookID: String,
   status: String,
-  //this is the end of my new info :)
   location: String,
   profilePic: String,
   password_digest: String,
-  likes: [{
-    type: Schema.Types.ObjectId,  //NOTE
-    ref: 'Like'
-  }]
+  movies: []
 });
 
 
 var User = mongoose.model('User', UserSchema);
 
 module.exports = User;
+
+//
+// likes: {
+//     type: Schema.Types.ObjectId,
+//     ref: 'Like'
+//   }

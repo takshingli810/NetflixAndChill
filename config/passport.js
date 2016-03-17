@@ -7,10 +7,10 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 var OAuth = require('../secrets');
 
-var repl = require('repl');
 
 module.exports = function(passport){
   passport.serializeUser(function(user, done) {
+    // console.log("user_id", user._id);
     done(null, user._id);
   });
 
@@ -28,9 +28,6 @@ module.exports = function(passport){
     enableProof     : true,
     profileFields   : ['name', 'emails', 'gender', 'birthday', 'picture.type(large)']
   }, function(access_token, refresh_token, profile, done) {
-    // // Use this to see the information returned from Facebook
-    // console.log(profile);
-
 
     process.nextTick(function() {
 

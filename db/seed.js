@@ -8,11 +8,22 @@
 var db = ("../models/");
 var User = require("../models/user");
 var Like = require("../models/like");
+var UserLike = require("../models/userLike");
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/netflixandchill');
 console.log("DB IS CONNECTED");
 
 User.remove({}, function(err, users){
+  if(err){
+      console.log("ERROR: ", err);
+      process.exit();
+      mongoose.connection.close();
+    } else {
+      console.log("WORKED");
+    }
+});
+
+Like.remove({}, function(err, users){
   if(err){
       console.log("ERROR: ", err);
       process.exit();
