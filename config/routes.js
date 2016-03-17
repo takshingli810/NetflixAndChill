@@ -93,6 +93,11 @@ router.route('/api/users/:id')
 router.route('/api/users/:id/movies')
   .get(usersController.showUserMoviesAPI);
 
+//delete imdbID from user
+//actually is an update since it just modifies array
+router.route('/api/users/:id/movies')
+  .put(usersController.deleteFromLikesAPI);
+
 // ************** //
 // FaceBook OAuth //
 // ************** //
@@ -120,12 +125,12 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
         // repl.start('> ').context.user = user;
         // call next to call next function OR just render the view as callback
         res.redirect('/users/' + id);
-      }   
+      }
     });
   })(req, res, next);
 });
 
-//this was built by ilias, do not touch yet! 
+//this was built by ilias, do not touch yet!
 // router.route('/auth/facebook/callback')
 //   .get(passport.authenticate('facebook'), function(err, user, info) {
 //     repl.start('> ').context.user = user;
