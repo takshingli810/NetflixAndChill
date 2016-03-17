@@ -19,7 +19,7 @@ var UserSchema = new Schema({
   location: String,
   profilePic: String,
   password_digest: String,
-  movies: [],
+  movies: []
 });
 
 

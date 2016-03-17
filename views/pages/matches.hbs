@@ -1,6 +1,9 @@
 <div id="matches-page" class="col-md-8">
 	<h1>{{user.firstName}}'s Matches</h1>
 	<div id="matches-div">
+	{{#each myMatches}}
+		{{firstName}}
+	{{/each}}
 {{!-- 		{{#each user.matches}}
 			<div class="match-div">
 				<a href="/users/{{id}}" class="match-image"><img src="{{profilePic}}"></a>

@@ -97,7 +97,7 @@ function showUserMoviesAPI(req, res){
 //JESSIE'S USER CRUD FUNCTIONS
 //Show profile --- Jessie -- WORKING
 function show (req, res) {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
    // repl.start('> ').context.user = user;
    req.currentUser(function(err, currentUser) {
@@ -180,25 +180,58 @@ function destroy (req, res) {
 //Show Matches page -- Jessie
 
 function showMatches (req, res) {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
    // repl.start('> ').context.user = user;
+   var myLikesArray = user[0].movies;
    req.currentUser(function(err, currentUser) {
+    console.log("this is the current user: ", currentUser.id);
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
-      User.find({}, function (err, users) {
-        console.log("users ", users);
-        
-        res.render('./pages/matches', {currentUser: currentUser, user: user[0]});
-      });
-    }
+        User.find({movies: {$in: myLikesArray}}, function (err, matches) {
+          if (err) {
+            console.log("ERROR: ", err);
+            res.status(400).send();
+          }
+          var myMatches = [];
+          // console.log("MATCHES: ",matches);
+          // repl.start('> ').context.matches = matches;
+          for (var i = 0; i < matches.length; i ++) {
+            //if the match is the current user, don't add them to matches.
+            if (matches[i]._id == currentUser.id) { continue; }
+              var myMatch = {};
+              myMatch.id = matches[i]._id;
+              myMatch.firstName = matches[i].firstName;
+              myMatch.lastName= matches[i].lastName;
+              myMatch.profilePic = matches[i].profilePic;
+              myMatch.location = matches[i].location;
+              //create an array to collect likes in common
+              myMatch.inCommon = [];
 
-    }); 
-   
+              var matchLikesArray =  matches[i].movies;
+              for (var j = 0; j < matchLikesArray.length; j ++) {
+                //if my Likes array has something in common with the matchLikes array, push it to inCommon.
+                if ((myLikesArray.indexOf(matchLikesArray[j])) !== -1) {
+                  myMatch.inCommon.push(matchLikesArray[j]);                    
+                }
+              }
+          //push myMatch to myMatches array.
+          myMatches.push(myMatch);
+          }
+          res.render('./pages/matches', {currentUser: currentUser, user: user[0], myMatches: myMatches});
+          console.log("HERE ARE MY MATCHES: ", myMatches);
+        });
+
+    //end else statement    
+    }
+  //end currentUser function
+  });
+//end user.find
   });
 }
+
 
 module.exports = {
   renderLandingPage: renderLandingPage,
