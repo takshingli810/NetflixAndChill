@@ -1,6 +1,8 @@
 /*BODY AND NAVBAR CSS - J*/
 body {
 	background-color: #141414;
+	/*temporary until merge*/
+	color: white;
 }
 
 .navbar-div {
@@ -9,37 +11,37 @@ body {
 
 /* TEXT CLASSES - J */
 .text-sm {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	font-size: 14px;
 	color: white;
 }
 .text-md {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	font-size: 18px;
 	color: white;
 }
 .text-lg {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-weight: 300;
    font-size: 22px;
    color: white;
 }
 .header-sm {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-weight: 300;
    font-size: 24px;
    color: white;
 }
 .header-md {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	font-size: 28px;
 	color: white;
 }
 .header-md {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	font-size: 36px;
 	color: white;
@@ -68,6 +70,11 @@ body {
 	text-align: center;
 }
 
+#signup-button{
+	margin: 0 auto;
+
+}
+
 
 /*TEMP GRID CSS*/
 .search-results img{
@@ -83,8 +90,34 @@ body {
   position: relative;
 }
 
-/*Jessie Starts CSS*/
+/*MY MATCHES*/
+.fb-logo{
+	width: 5%;
+}
 
+.fb-link{
+}
+
+.match-div{
+	padding-top: 10px;
+	background: #929292;
+	border-radius: 5px;
+	width: 250px;
+}
+
+.match-image{
+	border-radius: 5px;
+}
+
+.match-name{
+	text-align: center;
+	font-size: 20px;
+	color: white;
+}
+
+.match-name:hover{
+	color: red;
+}
 
 
 
