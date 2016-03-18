@@ -1,6 +1,6 @@
 #Netflix and "Chill" 
 ##Coming soon to a couch near you 😎
-###Welcome to NetFlix and "Chill" 🎥! Where you literally just watch netflix and "chill" or not 😝. That is entirely up to you and your future partner(s) 😉! This App will match you with someone(s) so that you can watch a show/movie with them real life or online.
+###Welcome to NetFlix and "Chill" 🎥! Where you literally just watch netflix and "chill" 😏 or not 😝. That is entirely up to you and your future partner(s) 😉! This App will match you with someone(s) so that you can watch a show/movie with them real life or online.
 #WELL, 
 ![alt tag](http://cdn.meme.am/instances/64372543.jpg)
 --------------------------------------------------------------------
