@@ -1,38 +1,36 @@
 <!--This form is to search for movies then add them to your 'likes'  -->
 
 <section class="search-form container">
-      <div>
-      <div class="col-md-10 col-md-offset-1">
-        {{!-- method="post" action="/search"  --}}
-        <form method="post" action="/api/likes" id="searchForm" class="form-horizontal">
-          <fieldset>
+<div>
+  <div class="col-md-8 col-md-offset-4">
+    <form method="post" action="/api/likes" id="searchForm" class="form-horizontal">
+      <fieldset>
 
-            <!-- Form Name -->
-            <legend>Search for your favorite movies and tv shows</legend>
+        <!-- Form Name -->
+        <legend class="header-md">Search for your favorite movies and tv shows</legend>
 
-            <!-- Search By Movie Name-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="title"></label>
-              <div class="col-md-4">
-              <input id="searchTerm" name="search" type="text" placeholder="Search by title..." class="form-control input-md" required="">
+        <!-- Search By Movie Name-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="title"></label>
+          <div class="col-md-4">
+          <input id="searchTerm" name="search" type="text" placeholder="Search by title..." class="form-control input-md text-md" required="">
 
-              </div>
-            </div>
+          </div>
+        </div>
 
-            <!-- Submit -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="singlebutton">Search</label>
-              <div class="col-md-4">
-                <input id="search-movie-btn" class="btn btn-primary" type="submit"></input>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-      </div>
+        <!-- Submit -->
+        <div class="form-group">
+          <div class="col-md-4">
+            <input id="search-movie-btn" class="btn btn-default text-md" type="submit" value="Search"></input>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 
-      <div class="search-results">
+  <div class="search-results">
 
-      </div>
+  </div>
 
-    </div>
+</div>
 </section>

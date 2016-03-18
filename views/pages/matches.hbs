@@ -1,54 +1,16 @@
-<div id="matches-page" class="col-md-8">
+<div id="matches-page" class="container">
 	<h1>{{user.firstName}}'s Matches</h1>
 	<div id="matches-div">
 	{{#each myMatches}}
-		{{firstName}}
+		<div id="match-div" class="col-md-4">
+			<a href="/users/{{id}}"><img class="match-image" src="{{profilePic}}"></a>
+			<br>
+			<a href="/users/{{id}}"><p>{{firstName}} {{lastName}}</p></a>
+			<p>{{gender}}</p>
+			<p>{{#if location}}Location: {{location}}{{else}}Location: ?{{/if}}</p>
+			<p>{{#if sexualPref}}Interested in: {{sexualPref}}{{else}}Interested in: ?{{/if}}</p>
+			<p>You and {{firstName}} have {{inCommon.length}} movie(s) in common!</p>
+		</div>
 	{{/each}}
-{{!-- 		{{#each user.matches}}
-			<div class="match-div">
-				<a href="/users/{{id}}" class="match-image"><img src="{{profilePic}}"></a>
-				<a href="/users/{{id}}" class="match-name"><p>{{firstName}} {{lastName}}</p></a>
-				<p>{{user.gender}}, born {{user.birthdate}}</p>
-				<p>Location: {{user.location}}</p>
-				<p>50% match</p>
-			</div>
-		{{/each}} --}}
 	</div>
 </div>
-
-{{!-- 
-<div id="sidebar" class="col-md-4" style="background-color: pink">
-	<img src="/images/einstein.png">
-	<div id="sidebar-text">
-		<h2>Albert Einstein</h2>
-		<p>Male, born 08/14/1979</p>
-		<p>Location: ?</p>
-	</div>
-</div> --}}
-
-{{!-- <div id="matches-page" class="col-md-8" style="background-color: azure">
-	<h1>My Matches</h1>
-	<div id="matches-div">
-			<div class="match-div col-sm-4">
-				<a href="/users/{{id}}" class="match-image"><img src="/images/einstein.png"></a>
-				<a href="/users/{{id}}" class="match-name"><p>Albert Einstein</p></a>
-				<p>Male, born 08/14/1979</p>
-				<p>Location: ?</p>
-				<p>50% match</p>
-			</div>
-			<div class="match-div col-sm-4">
-				<a href="/users/{{id}}" class="match-image"><img src="/images/einstein.png"></a>
-				<a href="/users/{{id}}" class="match-name"><p>Albert Einstein</p></a>
-				<p>Male, born 08/14/1979</p>
-				<p>Location: ?</p>
-				<p>50% match</p>
-			</div>
-			<div class="match-div col-sm-4">
-				<a href="/users/{{id}}" class="match-image"><img src="/images/einstein.png"></a>
-				<a href="/users/{{id}}" class="match-name"><p>Albert Einstein</p></a>
-				<p>Male, born 08/14/1979</p>
-				<p>Location: ?</p>
-				<p>50% match</p>
-			</div>
-	</div>
-</div> --}}

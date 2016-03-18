@@ -1,5 +1,75 @@
-/*TEMP GRID CSS*/
+/*BODY AND NAVBAR CSS - J*/
+body {
+	background-color: #141414;
+}
 
+.navbar-div {
+	background-color: #E50914;
+}
+
+/* TEXT CLASSES - J */
+.text-sm {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	font-size: 14px;
+	color: white;
+}
+.text-md {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	font-size: 18px;
+	color: white;
+}
+.text-lg {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   font-size: 22px;
+   color: white;
+}
+.header-sm {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   font-size: 24px;
+   color: white;
+}
+.header-md {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	font-size: 28px;
+	color: white;
+}
+.header-md {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	font-size: 36px;
+	color: white;
+}
+
+/*button CSS - J*/
+.btn-default {
+	color: #E50914;
+}
+
+/*Sidebar CSS - J*/
+#sidebar {
+	position: fixed;
+	top: 55px;
+	min-height: 100%;
+	width: 350px;
+	background-color: red;
+}
+#sidebar-content {
+	padding: 15px;
+	padding-top: 60px;
+	vertical-align: middle;
+	text-align: center;
+}
+#sidebar-buttons {
+	text-align: center;
+}
+
+
+/*TEMP GRID CSS*/
 .search-results img{
   width: 15%;
 }
@@ -12,3 +82,11 @@
   display: grid;
   position: relative;
 }
+
+/*Jessie Starts CSS*/
+
+
+
+
+
+/*MediaQueries*/

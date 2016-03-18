@@ -190,16 +190,16 @@ function showMatches (req, res) {
       res.status(500).send();
       console.log("ERROR: ", err);
     } else {
+      //returns an array of users who have at least one like in common with currentUser
         User.find({movies: {$in: myLikesArray}}, function (err, matches) {
           if (err) {
             console.log("ERROR: ", err);
             res.status(400).send();
           }
           var myMatches = [];
-          // console.log("MATCHES: ",matches);
           // repl.start('> ').context.matches = matches;
           for (var i = 0; i < matches.length; i ++) {
-            //if the match is the current user, don't add them to matches.
+            //if the match is the current user, don't add them to matches array.
             if (matches[i]._id == currentUser.id) { continue; }
               var myMatch = {};
               myMatch.id = matches[i]._id;
@@ -207,12 +207,14 @@ function showMatches (req, res) {
               myMatch.lastName= matches[i].lastName;
               myMatch.profilePic = matches[i].profilePic;
               myMatch.location = matches[i].location;
-              //create an array to collect likes in common
+              myMatch.sexualPref = matches[i].sexualPref;
+              myMatch.gender = matches[i].gender;
+              //create an array to collect movie titles that you have in common
               myMatch.inCommon = [];
 
               var matchLikesArray =  matches[i].movies;
               for (var j = 0; j < matchLikesArray.length; j ++) {
-                //if my Likes array has something in common with the matchLikes array, push it to inCommon.
+                //if myLikesArray has something in common with the matchLikesArray, push it to inCommon.
                 if ((myLikesArray.indexOf(matchLikesArray[j])) !== -1) {
                   myMatch.inCommon.push(matchLikesArray[j]);                    
                 }
@@ -223,7 +225,6 @@ function showMatches (req, res) {
           res.render('./pages/matches', {currentUser: currentUser, user: user[0], myMatches: myMatches});
           console.log("HERE ARE MY MATCHES: ", myMatches);
         });
-
     //end else statement    
     }
   //end currentUser function
