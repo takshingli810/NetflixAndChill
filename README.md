@@ -1,6 +1,6 @@
 #Netflix "AND" Chill 
 ##Coming soon to a couch near you 😎
-###Welcome to NetFlix and Chill 🎥! Where you literally just watch netflix and "chill" 🤔 or not. That is entirely up to you and your future partner(s) 😉! This App will match you with someone(s) so that you can watch a show/movie with them real life or online.
+###Welcome to NetFlix and Chill 🎥! Where you literally just watch netflix and "chill" or not 😝. That is entirely up to you and your future partner(s) 😉! This App will match you with someone(s) so that you can watch a show/movie with them real life or online.
 #WELL, 
 ![alt tag](http://cdn.meme.am/instances/64372543.jpg)
 --------------------------------------------------------------------
@@ -20,7 +20,8 @@
 ####Viewing other's profile page, You can't edit their info and you can see their added favorites. 
 ![alt tag](https://trello-attachments.s3.amazonaws.com/56e27286bfbb5cf0432483cd/1024x600/03c8354926c326a14b36a797f149d138/Messages.png)
 ####Message feature coming soon to the couch near you also. Please stay tuned.
-
+------------------------------------------------------------------------------------
+##Trello 
 
 
 
