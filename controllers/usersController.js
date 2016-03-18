@@ -1,11 +1,9 @@
-var repl = require('repl');
-var routes = require('../config/routes');
-
+const repl = require('repl');
 
 /************
  * DATABASE *
  ************/
-var Like = require('../models/like');
+// var Like = require('../models/like');
 var User = require('../models/user');
 
 function returnError (err) {
@@ -83,7 +81,10 @@ function showUserAPI(req, res){
 }
 
 function showUserMoviesAPI(req, res){
+
   User.findOne({_id: req.params.id}, function(err, user){
+    // repl.start('> ').context.id = req.params.id;
+
     if(err){
       console.log("Show user movies route not working", err);
     }
@@ -99,7 +100,6 @@ function showUserMoviesAPI(req, res){
 function show (req, res) {
   // console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
-   // repl.start('> ').context.user = user;
    req.currentUser(function(err, currentUser) {
     if (err) {
       res.status(500).send();
@@ -234,6 +234,38 @@ function showMatches (req, res) {
 }
 
 
+//DELETE LIKE - push out from 'movies' array
+function deleteFromLikesAPI (req, res){
+  var imdbID = req.body.imdbID;
+  var userID = req.params.id;
+  //ensures that there are likes in the users movies
+  //if so, destroys the like based on the imdbID
+  //else it updates the like with additional users
+
+
+  console.log("IMDBID " + imdbID + " userID " + userID);
+
+  User.find({_id: userID}, function(err, user){
+    if(err){
+      console.log("ERROR: ", err);
+    }
+    else{
+      // console.log("USER MOVIES FROM DELETE: ", user[0].movies);
+      var indexOfMovie = user[0].movies.indexOf(imdbID);
+      user[0].movies.splice(indexOfMovie, 1);
+      user[0].save( function(err){
+        if(err){
+          console.log("ERROR WITH SAVE: ", err);
+        }
+        else{
+          res.status(201);
+        }
+      });
+    }
+  });
+};
+
+
 module.exports = {
   renderLandingPage: renderLandingPage,
   getAPI: getAPI,
@@ -245,6 +277,6 @@ module.exports = {
   addMoviesToUsersAPI: addMoviesToUsersAPI,
   showUserAPI: showUserAPI,
   showUserMoviesAPI: showUserMoviesAPI,
-  showMatches: showMatches
-
+  showMatches: showMatches,
+  deleteFromLikesAPI: deleteFromLikesAPI
 };

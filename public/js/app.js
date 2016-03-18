@@ -9,16 +9,68 @@ $(function() {
         console.log("no issues with jquery");
     });
 
-    //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
-    getMovies();
-    renderLikes();
+    //from the hidden input type in profile_show
+    var userID = $('#user-id').attr("user-id");
+
+    //makes sure that user is signed in before rendering likes
+    if(userID.length > 0){
+      //render all likes when they go to their profile
+      renderLikes();
+      //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
+      getMovies();
+    }
+
+    //each time the delete button is clicked, it will hide the div of the movie
+    $('.delete-btn').on('click', function(){
+      $(this).parent('div').hide( "drop", { direction: "down" }, "slow" );
+    });
+
+    $('.add-movie-btn').on('click', function(){
+      $(this).parent('div').hide( "drop", { direction: "down" }, "slow" );
+    });
 
 });
 
 
+//UPDATE USER'S MOVIES ARRAY TO DELETE THE imdbID
+function deleteLike(event){
+
+  //from the hidden input type in profile_show
+  var userID = $('#user-id').attr("user-id");
+  var imdbID = event.target.id;
+
+  console.log(imdbID);
+
+  var currentLike = {
+    imdbID: imdbID,
+    userID: userID  //will use req.body.userID to push into users array
+  };
+
+  //posting to backend (can view on API LIKES)
+  $.ajax({
+    type: 'PUT',
+    url: '/api/users/' + userID + '/movies',
+    data: currentLike,
+    dataType: 'json',
+    success: function(){
+      $('#' + imdbID).hide();
+      $('#' + imdbID).attr('type', 'hidden');
+      console.log("REMOVING A MOVIE FROM USERS");
+    },
+    error: function(err) {
+      console.log("issue with deleting movie: " + err);
+    }
+  });
+
+  renderLikes();
+
+}
+
 //show all likes in the MY LIKES div
 function renderLikes(){
 
+  //empty out My Likes before rendering
+  $('.movies-grid').empty();
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -40,7 +92,15 @@ function renderLikes(){
             console.log(result);
             // iterate over the data result set
 
-            var movieDiv = "<div class= 'movie-div col-md-4'><p>" + result.Title + "</p>" + "<img src=" + result.Poster + "></div>";
+
+            var movieDiv = "<div class= 'movie-div col-md-4' id=" + movieID + ">"
+
+            movieDiv += "<form class='delete-like' onsubmit='deleteLike(event)'>"
+                  +  "<input type='submit' class='delete-btn' value='-'></input>"
+                  +  "</form>";
+
+            movieDiv += "<p>" + result.Title + "</p>" + "<img src=" + result.Poster + "></div>";
+
 
             $('.movies-grid').prepend(movieDiv);
 
@@ -64,8 +124,6 @@ function renderLikes(){
 //ADD MOVIES TO USERS
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
-  event.preventDefault();
-
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -75,7 +133,7 @@ function addMovieToUsers(event){
   var newMovie = {
     imdbID: imdbID,
     userID: userID  //will use req.body.userID to push into users array
-  }
+  };
 
   //posting to backend (can view on API LIKES)
   $.ajax({
@@ -91,40 +149,8 @@ function addMovieToUsers(event){
     }
   });
 
-};
-
-
-//CREATE LIKE
-//newLike is a JSON object that is created in the AJAX request
-function createLike(event){
-
-  event.preventDefault();
-
-  addMovieToUsers(event);
-
-  //from the hidden input type in profile_show
-  var userID = $('#user-id').attr("user-id");
-
-  var newLike = {
-    imdbID: event.target.children[0].value,
-    userID: userID  //will use req.body.userID to push into users array
-  }
-
-  //posting to backend (can view on API LIKES)
-  $.ajax({
-    type: 'POST',
-    url: '/api/likes',
-    data: newLike,
-    dataType: 'json',
-    success: function(newLike){
-      console.log("POSTING TO Likes");
-    },
-    error: function(err) {
-      console.log("issue with create likes POST: " + err);
-    }
-  });
-
   renderLikes();
+
 };
 
 
@@ -164,7 +190,7 @@ function getMovies(){
           console.log("IMDB ID ", imdbID);
 
           //adds a button to each movie (+)
-          movie += "<form id='add-like' onsubmit='createLike(event)'>"
+          movie += "<div class='search-movie-item'><form class='add-movie-btn' onsubmit='addMovieToUsers(event)'>"
                 +  "<input class='hidden' type='hidden' value=" + imdbID + " name='like' id=" + imdbID + "></input>"
                 +  "<input type='submit' value='+'></input>"
                 +  "</form>";
@@ -174,7 +200,7 @@ function getMovies(){
           } else {
               movie += "<img src='../images/no-photo-available.jpg'>";
           }
-          movie += "<h1>" + element.Title + ", " + element.Year + "</h1>";
+          movie += "<h1>" + element.Title + ", " + element.Year + "</h1></div>";
         });
 
         movie += '</div>';
