@@ -1,0 +1,16 @@
+<div id="matches-page" class="container">
+	<h1>{{user.firstName}}'s Matches</h1>
+	<div id="matches-div">
+	{{#each myMatches}}
+		<div id="match-div" class="col-md-4">
+			<a href="/users/{{id}}"><img class="match-image" src="{{profilePic}}"></a>
+			<br>
+			<a href="/users/{{id}}"><p>{{firstName}} {{lastName}}</p></a>
+			<p>{{gender}}</p>
+			<p>{{#if location}}Location: {{location}}{{else}}Location: ?{{/if}}</p>
+			<p>{{#if sexualPref}}Interested in: {{sexualPref}}{{else}}Interested in: ?{{/if}}</p>
+			<p>You and {{firstName}} have {{inCommon.length}} movie(s) in common!</p>
+		</div>
+	{{/each}}
+	</div>
+</div>
