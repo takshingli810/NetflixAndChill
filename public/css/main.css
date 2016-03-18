@@ -9,6 +9,10 @@ body {
 	background-color: #E50914;
 }
 
+.navbar-brand {
+	color: black;
+}
+
 /* TEXT CLASSES - J */
 .text-sm {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -76,6 +80,9 @@ body {
 .btn-default {
 	color: #E50914;
 }
+.btn-default:focus {
+	color: #E50914;
+}
 
 /*Sidebar CSS - J*/
 #sidebar {
@@ -114,7 +121,6 @@ body {
 	opacity: .5;
 }
 
-
 /*MY MATCHES*/
 .fb-logo{
 	width: 5%;
@@ -142,6 +148,22 @@ body {
 
 .match-name:hover{
 	color: red;
+}
+
+/*Nidhi*/
+/*this is for the button*/
+/*push it if you need too*/
+#landing-page-title {
+	position:relative;
+	top:40vh; /* <---- */
+	/*background-color: pink;*/
+}
+
+#signup-button {
+	padding: 10px 60px 10px 60px;
+	font-size: 25px;
+	outline: none;
+	box-shadow:none;
 }
 
 
