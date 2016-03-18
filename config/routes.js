@@ -46,9 +46,6 @@ router.route('/users/:id')
 // Might be changed or deleted //
 // *************************** //
 
-//Testing create (temp)
-// router.route('/search')
-//   .get(likesController.renderSearchLikes);
 
 //matches page, just using for testing views
 router.route('/user/matches')
@@ -62,10 +59,10 @@ router.route('/otheruser')
     res.render("./pages/other_profile", {user: req.user});
   });
 
-router.route('/search')
-  .get(function(req, res){
-    res.render('./partials/searchLikes');
-  });
+// router.route('/search')
+//   .get(function(req, res){
+//     res.render('./partials/searchLikes');
+//   });
 
 // *************************** //
 // Introductory API Page Route //

@@ -44,7 +44,7 @@ function deleteLike(event){
   var currentLike = {
     imdbID: imdbID,
     userID: userID  //will use req.body.userID to push into users array
-  }
+  };
 
   //posting to backend (can view on API LIKES)
   $.ajax({
