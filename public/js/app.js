@@ -133,7 +133,7 @@ function addMovieToUsers(event){
   var newMovie = {
     imdbID: imdbID,
     userID: userID  //will use req.body.userID to push into users array
-  }
+  };
 
   //posting to backend (can view on API LIKES)
   $.ajax({
@@ -218,3 +218,4 @@ function getMovies(){
     $searchTerm.focus();
   }); //end of on submit
 };//end of getMovies
+
