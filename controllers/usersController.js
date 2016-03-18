@@ -186,7 +186,7 @@ function showMatches (req, res) {
    // repl.start('> ').context.user = user;
    var myLikesArray = user[0].movies;
    req.currentUser(function(err, currentUser) {
-    console.log("this is the current user: ", currentUser.id);
+    // console.log("this is the current user: ", currentUser.id);
     if (err) {
       res.status(500).send();
       console.log("ERROR: ", err);
@@ -210,6 +210,7 @@ function showMatches (req, res) {
               myMatch.location = matches[i].location;
               myMatch.sexualPref = matches[i].sexualPref;
               myMatch.gender = matches[i].gender;
+              myMatch.facebookID = matches[i].facebookID;
               //create an array to collect movie titles that you have in common
               myMatch.inCommon = [];
 
@@ -217,7 +218,7 @@ function showMatches (req, res) {
               for (var j = 0; j < matchLikesArray.length; j ++) {
                 //if myLikesArray has something in common with the matchLikesArray, push it to inCommon.
                 if ((myLikesArray.indexOf(matchLikesArray[j])) !== -1) {
-                  myMatch.inCommon.push(matchLikesArray[j]);                    
+                  myMatch.inCommon.push(matchLikesArray[j]);
                 }
               }
           //push myMatch to myMatches array.
@@ -226,7 +227,7 @@ function showMatches (req, res) {
           res.render('./pages/matches', {currentUser: currentUser, user: user[0], myMatches: myMatches});
           console.log("HERE ARE MY MATCHES: ", myMatches);
         });
-    //end else statement    
+    //end else statement
     }
   //end currentUser function
   });

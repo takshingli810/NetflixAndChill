@@ -9,11 +9,11 @@ $(function() {
         console.log("no issues with jquery");
     });
 
+    var userID;
     //from the hidden input type in profile_show
     var userID = $('#user-id').attr("user-id");
 
-    //makes sure that user is signed in before rendering likes
-    if(userID.length > 0){
+    if(userID !== undefined){
       //render all likes when they go to their profile
       renderLikes();
       //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
@@ -218,4 +218,3 @@ function getMovies(){
     $searchTerm.focus();
   }); //end of on submit
 };//end of getMovies
-
