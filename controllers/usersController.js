@@ -1,11 +1,9 @@
-var repl = require('repl');
-var routes = require('../config/routes');
-
+const repl = require('repl');
 
 /************
  * DATABASE *
  ************/
-var Like = require('../models/like');
+// var Like = require('../models/like');
 var User = require('../models/user');
 
 function returnError (err) {
@@ -28,7 +26,7 @@ function getAPI(req, res){
   });
 }
 
-//SHOW ALL LIKES OF ALL USERS
+//SHOW ALL USERS
 function getUsersAPI (req, res){
   User.find(function(err, users){
     if(err){
@@ -70,7 +68,6 @@ function addMoviesToUsersAPI(req, res) {
       }
 
     });
-      console.log("ohno");
 };
 
 
@@ -84,7 +81,10 @@ function showUserAPI(req, res){
 }
 
 function showUserMoviesAPI(req, res){
+
   User.findOne({_id: req.params.id}, function(err, user){
+    // repl.start('> ').context.id = req.params.id;
+
     if(err){
       console.log("Show user movies route not working", err);
     }
@@ -98,9 +98,8 @@ function showUserMoviesAPI(req, res){
 //JESSIE'S USER CRUD FUNCTIONS
 //Show profile --- Jessie -- WORKING
 function show (req, res) {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   User.find({_id: req.params.id}, function(err, user) {
-   // repl.start('> ').context.user = user;
    req.currentUser(function(err, currentUser) {
     if (err) {
       console.log("req.session", req.session);
@@ -179,6 +178,95 @@ function destroy (req, res) {
   });
 }
 
+//Show Matches page -- Jessie
+
+function showMatches (req, res) {
+  // console.log(req.params.id);
+  User.find({_id: req.params.id}, function(err, user) {
+   // repl.start('> ').context.user = user;
+   var myLikesArray = user[0].movies;
+   req.currentUser(function(err, currentUser) {
+    console.log("this is the current user: ", currentUser.id);
+    if (err) {
+      res.status(500).send();
+      console.log("ERROR: ", err);
+    } else {
+      //returns an array of users who have at least one like in common with currentUser
+        User.find({movies: {$in: myLikesArray}}, function (err, matches) {
+          if (err) {
+            console.log("ERROR: ", err);
+            res.status(400).send();
+          }
+          var myMatches = [];
+          // repl.start('> ').context.matches = matches;
+          for (var i = 0; i < matches.length; i ++) {
+            //if the match is the current user, don't add them to matches array.
+            if (matches[i]._id == currentUser.id) { continue; }
+              var myMatch = {};
+              myMatch.id = matches[i]._id;
+              myMatch.firstName = matches[i].firstName;
+              myMatch.lastName= matches[i].lastName;
+              myMatch.profilePic = matches[i].profilePic;
+              myMatch.location = matches[i].location;
+              myMatch.sexualPref = matches[i].sexualPref;
+              myMatch.gender = matches[i].gender;
+              //create an array to collect movie titles that you have in common
+              myMatch.inCommon = [];
+
+              var matchLikesArray =  matches[i].movies;
+              for (var j = 0; j < matchLikesArray.length; j ++) {
+                //if myLikesArray has something in common with the matchLikesArray, push it to inCommon.
+                if ((myLikesArray.indexOf(matchLikesArray[j])) !== -1) {
+                  myMatch.inCommon.push(matchLikesArray[j]);                    
+                }
+              }
+          //push myMatch to myMatches array.
+          myMatches.push(myMatch);
+          }
+          res.render('./pages/matches', {currentUser: currentUser, user: user[0], myMatches: myMatches});
+          console.log("HERE ARE MY MATCHES: ", myMatches);
+        });
+    //end else statement    
+    }
+  //end currentUser function
+  });
+//end user.find
+  });
+}
+
+
+//DELETE LIKE - push out from 'movies' array
+function deleteFromLikesAPI (req, res){
+  var imdbID = req.body.imdbID;
+  var userID = req.params.id;
+  //ensures that there are likes in the users movies
+  //if so, destroys the like based on the imdbID
+  //else it updates the like with additional users
+
+
+  console.log("IMDBID " + imdbID + " userID " + userID);
+
+  User.find({_id: userID}, function(err, user){
+    if(err){
+      console.log("ERROR: ", err);
+    }
+    else{
+      // console.log("USER MOVIES FROM DELETE: ", user[0].movies);
+      var indexOfMovie = user[0].movies.indexOf(imdbID);
+      user[0].movies.splice(indexOfMovie, 1);
+      user[0].save( function(err){
+        if(err){
+          console.log("ERROR WITH SAVE: ", err);
+        }
+        else{
+          res.status(201);
+        }
+      });
+    }
+  });
+};
+
+
 module.exports = {
   renderLandingPage: renderLandingPage,
   getAPI: getAPI,
@@ -187,5 +275,9 @@ module.exports = {
   destroy: destroy,
   edit: edit,
   update: update,
-  addMoviesToUsersAPI: addMoviesToUsersAPI
+  addMoviesToUsersAPI: addMoviesToUsersAPI,
+  showUserAPI: showUserAPI,
+  showUserMoviesAPI: showUserMoviesAPI,
+  showMatches: showMatches,
+  deleteFromLikesAPI: deleteFromLikesAPI
 };

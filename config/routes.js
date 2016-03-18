@@ -5,7 +5,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var usersController = require('../controllers/usersController');
-var likesController = require('../controllers/likesController');
 var passport = require('passport');
 var session = require('express-session');
 var User = require('../models/user');
@@ -42,40 +41,21 @@ router.route('/users/:id')
 //update user details
   .put(usersController.update);
 
+// *************************** //
+// Jessie's MATCHES routes     //
+// *************************** //
+
+//route to matches page
+router.route('/users/:id/matches')
+  .get(usersController.showMatches);
+
 
 // *************************** //
-// Might be changed or deleted //
-// *************************** //
-
-//Testing create (temp)
-router.route('/search')
-  .get(likesController.renderSearchLikes);
-
-//matches page, just using for testing views
-router.route('/user/matches')
-  .get(function(req, res) {
-    res.render("./pages/my_matches",  {user: req.user});
-  });
-
-//other user profile, just using for testing views
-router.route('/otheruser')
-  .get(function(req, res) {
-    res.render("./pages/other_profile", {user: req.user});
-  });
-
-// *************************** //
-// Introductory API Page Route //
+// API Routes                  //
 // *************************** //
 
 router.route('/api')
   .get(usersController.getAPI);
-
-//likes route to view all movies that have been liked
-router.route('/api/likes')
-  .get(likesController.getLikesAPI);
-
-router.route('/api/likes')
-  .post(likesController.postLikesAPI); //in testing
 
 //users route to view all users and their attributes
 router.route('/api/users')
@@ -92,6 +72,12 @@ router.route('/api/users/:id')
 //show user's movies
 router.route('/api/users/:id/movies')
   .get(usersController.showUserMoviesAPI);
+
+//delete imdbID from user
+//actually is an update since it just modifies array
+router.route('/api/users/:id/movies')
+  .put(usersController.deleteFromLikesAPI);
+
 
 // ************** //
 // FaceBook OAuth //
@@ -120,19 +106,10 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
         // repl.start('> ').context.user = user;
         // call next to call next function OR just render the view as callback
         res.redirect('/users/' + id);
-      }   
+      }
     });
   })(req, res, next);
 });
-
-//this was built by ilias, do not touch yet! 
-// router.route('/auth/facebook/callback')
-//   .get(passport.authenticate('facebook'), function(err, user, info) {
-//     repl.start('> ').context.user = user;
-//   })(req, res, next);
-  // .get(passport.authenticate('facebook', {successRedirect: "/", failureRedirect: "/"}));
-    // WORKING
-
 
 // Sign out
 router.route("/logout")
