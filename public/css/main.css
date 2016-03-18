@@ -40,12 +40,37 @@ body {
 	font-size: 28px;
 	color: white;
 }
-.header-md {
+
+.header-lg {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	font-size: 36px;
 	color: white;
 }
+
+
+/*SEARCH CSS*/
+#searchbar-div {
+	width: 100%;
+	position: relative;
+	margin-left: 5px;
+}
+
+#searchTerm {
+	width: 80%;
+	color: black;
+	display: inline;
+}
+
+#searchbar-button {
+	display: inline;
+}
+
+.search-movie-item {
+	height: 450px;
+
+}
+
 
 /*button CSS - J*/
 .btn-default {
@@ -58,7 +83,6 @@ body {
 	top: 55px;
 	min-height: 100%;
 	width: 350px;
-	background-color: red;
 }
 #sidebar-content {
 	padding: 15px;
@@ -76,19 +100,20 @@ body {
 }
 
 
-/*TEMP GRID CSS*/
-.search-results img{
-  width: 15%;
+/* Likes CSS*/
+.movie-div {
+	height: 450px;
 }
 
-.search-results h1{
-  font-size: 12px;
+.movie-image {
+	width: 200px;
+    height: 300px;
 }
 
-.search-results div{
-  display: grid;
-  position: relative;
+.movie-image:hover {
+	opacity: .5;
 }
+
 
 /*MY MATCHES*/
 .fb-logo{
@@ -118,8 +143,6 @@ body {
 .match-name:hover{
 	color: red;
 }
-
-
 
 
 /*MediaQueries*/
