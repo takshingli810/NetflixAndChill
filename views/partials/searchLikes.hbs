@@ -7,25 +7,21 @@
         <legend class="header-md">Search for your favorite movies and tv shows</legend>
 
         <!-- Search By Movie Name-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="title"></label>
-          <div class="col-md-4">
-          <input id="searchTerm" name="search" type="text" placeholder="Search by title..." class="form-control input-md text-md" required="">
-
+        <div class="form-group" id="searchbar-div">
+          <div id="searchbar">
+          <input id="searchTerm" name="search" type="text" placeholder="Search by title..." class="form-control input-md text-md" required="" style="color: black">
           </div>
-        </div>
 
-        <!-- Submit -->
-        <div class="form-group">
-          <div class="col-md-4">
-            <input id="search-movie-btn" class="btn btn-default text-md" type="submit" value="Search"></input>
+          <!-- Submit -->
+          <div class="form-group" id="searchbar-button">
+              <input id="search-movie-btn" class="btn btn-default text-md" type="submit" value="Search"></input>
           </div>
         </div>
       </fieldset>
     </form>
   </div>
 
-  <div class="search-results">
+  <div class="search-results col-md-8 col-md-offset-4">
 
   </div>
 

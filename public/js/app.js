@@ -6,13 +6,12 @@ $(function() {
     $("#signup-button").click(function(){
         $("#signUpModal").modal();
     });
-
+    var userID;
 
     //from the hidden input type in profile_show
     var userID = $('#user-id').attr("user-id");
 
-    //makes sure that user is signed in before rendering likes
-    if(userID.length > 0){
+    if(userID !== undefined){
       //render all likes when they go to their profile
       renderLikes();
       //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
@@ -98,7 +97,7 @@ function renderLikes(){
                   +  "<input type='submit' class='delete-btn' value='-'></input>"
                   +  "</form>";
 
-            movieDiv += "<p>" + result.Title + "</p>" + "<img src=" + result.Poster + "></div>";
+            movieDiv += "<img src=" + result.Poster + " class='movie-image'><p class='text-lg'>" + result.Title + "</p></div>";
 
 
             $('.movies-grid').prepend(movieDiv);
@@ -189,17 +188,17 @@ function getMovies(){
           console.log("IMDB ID ", imdbID);
 
           //adds a button to each movie (+)
-          movie += "<div class='search-movie-item'><form class='add-movie-btn' onsubmit='addMovieToUsers(event)'>"
+          movie += "<div class='search-movie-item col-md-4'><form class='add-movie-btn' onsubmit='addMovieToUsers(event)'>"
                 +  "<input class='hidden' type='hidden' value=" + imdbID + " name='like' id=" + imdbID + "></input>"
                 +  "<input type='submit' value='+'></input>"
                 +  "</form>";
           //if there is no poster URL then it just adds a default image
           if(element.Poster !== "N/A"){
-              movie += "<div><img src=" + element.Poster + ">";
+              movie += "<img class='movie-image' src=" + element.Poster + " >";
           } else {
-              movie += "<img src='../images/no-photo-available.jpg'>";
+              movie += "<img class='movie-image' src='../images/no-photo-available.jpg'>";
           }
-          movie += "<h1>" + element.Title + ", " + element.Year + "</h1></div>";
+          movie += "<p class='text-lg'>" + element.Title + ", " + element.Year + "</p></div>";
         });
 
         movie += '</div>';
@@ -217,4 +216,3 @@ function getMovies(){
     $searchTerm.focus();
   }); //end of on submit
 };//end of getMovies
-

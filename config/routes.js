@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/netflixandchill');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -16,10 +15,6 @@ var repl = require('repl');
 //Testing landing page
 router.route('/')
   .get(usersController.renderLandingPage);
-
-//Testing create (temp)
-router.route('/add-movie')
-  .get(likesController.renderAddForm);
 
 //about page
 router.route('/about')
