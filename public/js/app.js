@@ -99,7 +99,7 @@ function renderLikes(){
                   +  "<input type='submit' class='delete-btn' value='-'></input>"
                   +  "</form>";
 
-            movieDiv += "<p>" + result.Title + "</p>" + "<img src=" + result.Poster + "></div>";
+            movieDiv += "<img src=" + result.Poster + " class='movie-image'><p class='text-lg'>" + result.Title + "</p></div>";
 
 
             $('.movies-grid').prepend(movieDiv);
@@ -180,7 +180,7 @@ function getMovies(){
       dataType: 'json', //no data is being passed in
       success: function(result){
         console.log(result);
-        var movie = "<div style='background-color: pink'>";
+        var movie = "<div>";
         // iterate over the data result set
         $.each(result.Search, function(index, element) {
 
@@ -190,17 +190,17 @@ function getMovies(){
           console.log("IMDB ID ", imdbID);
 
           //adds a button to each movie (+)
-          movie += "<div class='search-movie-item'><form class='add-movie-btn' onsubmit='addMovieToUsers(event)'>"
+          movie += "<div class='search-movie-item col-md-4'><form class='add-movie-btn' onsubmit='addMovieToUsers(event)'>"
                 +  "<input class='hidden' type='hidden' value=" + imdbID + " name='like' id=" + imdbID + "></input>"
                 +  "<input type='submit' value='+'></input>"
                 +  "</form>";
           //if there is no poster URL then it just adds a default image
           if(element.Poster !== "N/A"){
-              movie += "<img src=" + element.Poster + ">";
+              movie += "<img class='movie-image' src=" + element.Poster + " >";
           } else {
-              movie += "<img src='../images/no-photo-available.jpg'>";
+              movie += "<img class='movie-image' src='../images/no-photo-available.jpg'>";
           }
-          movie += "<h1>" + element.Title + ", " + element.Year + "</h1></div>";
+          movie += "<p class='text-lg'>" + element.Title + ", " + element.Year + "</p></div>";
         });
 
         movie += '</div>';
