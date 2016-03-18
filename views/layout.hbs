@@ -15,13 +15,14 @@
 	<!--bootstrap js -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<!-- <script src="/socket.io/socket.io.js"></script> -->
+
 </head>
 <body>
 
 <div>
 {{!-- need to pass in data for user --}}
 
-  {{#if user}}
+  {{#if currentUser}}
     {{> logged_in_navbar}}
   {{else}}
     {{> logged_out_navbar}}

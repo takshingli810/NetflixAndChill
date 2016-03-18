@@ -41,34 +41,17 @@ router.route('/users/:id')
 //update user details
   .put(usersController.update);
 
+// *************************** //
+// Jessie's MATCHES routes     //
+// *************************** //
+
+//route to matches page
+router.route('/users/:id/matches')
+  .get(usersController.showMatches);
+
 
 // *************************** //
-// Might be changed or deleted //
-// *************************** //
-
-//Testing create (temp)
-// router.route('/search')
-//   .get(likesController.renderSearchLikes);
-
-//matches page, just using for testing views
-router.route('/user/matches')
-  .get(function(req, res) {
-    res.render("./pages/my_matches",  {user: req.user});
-  });
-
-//other user profile, just using for testing views
-router.route('/otheruser')
-  .get(function(req, res) {
-    res.render("./pages/other_profile", {user: req.user});
-  });
-
-router.route('/search')
-  .get(function(req, res){
-    res.render('./partials/searchLikes');
-  });
-
-// *************************** //
-// Introductory API Page Route //
+// API Routes                  //
 // *************************** //
 
 router.route('/api')
@@ -94,6 +77,7 @@ router.route('/api/users/:id/movies')
 //actually is an update since it just modifies array
 router.route('/api/users/:id/movies')
   .put(usersController.deleteFromLikesAPI);
+
 
 // ************** //
 // FaceBook OAuth //
@@ -126,7 +110,6 @@ router.route('/auth/facebook/callback').get(function(req, res, next) {
     });
   })(req, res, next);
 });
-
 
 // Sign out
 router.route("/logout")
