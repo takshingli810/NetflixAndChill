@@ -3,7 +3,7 @@ const repl = require('repl');
 /************
  * DATABASE *
  ************/
-var Like = require('../models/like');
+// var Like = require('../models/like');
 var User = require('../models/user');
 
 function returnError (err) {

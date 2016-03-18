@@ -12,14 +12,15 @@ $(function() {
     //from the hidden input type in profile_show
     var userID = $('#user-id').attr("user-id");
 
+    //makes sure that user is signed in before rendering likes
     if(userID.length > 0){
       //render all likes when they go to their profile
       renderLikes();
-
       //makes AJAX call to OMDB API and displays top ten movies w/keyword in title
       getMovies();
     }
 
+    //each time the delete button is clicked, it will hide the div of the movie
     $('.delete-btn').on('click', function(){
       $(this).parent('div').hide( "drop", { direction: "down" }, "slow" );
     });
@@ -123,7 +124,6 @@ function renderLikes(){
 //ADD MOVIES TO USERS
 //newLike is a JSON object that is created in the AJAX request
 function addMovieToUsers(event){
-  // event.preventDefault();
 
   //from the hidden input type in my_profile
   var userID = $('#user-id').attr("user-id");
@@ -149,41 +149,10 @@ function addMovieToUsers(event){
     }
   });
 
-};
-
-
-//CREATE LIKE
-//newLike is a JSON object that is created in the AJAX request
-function createLike(event){
-
-  // event.preventDefault();
-
-  addMovieToUsers(event);
-
-  //from the hidden input type in profile_show
-  var userID = $('#user-id').attr("user-id");
-
-  var newLike = {
-    imdbID: event.target.children[0].value,
-    userID: userID  //will use req.body.userID to push into users array
-  }
-
-  //posting to backend (can view on API LIKES)
-  $.ajax({
-    type: 'POST',
-    url: '/api/likes',
-    data: newLike,
-    dataType: 'json',
-    success: function(newLike){
-      console.log("POSTING TO Likes");
-    },
-    error: function(err) {
-      console.log("issue with create likes POST: " + err);
-    }
-  });
-
   renderLikes();
+
 };
+
 
 
 // function to SEARCH FOR MOVIES (searchLikes.hbs template)
@@ -198,7 +167,7 @@ function getMovies(){
   //submit form to search OMDB API
   $searchForm.on('submit', function(event){
     //prevent from refreshing page
-    // event.preventDefault();
+    event.preventDefault();
     //empty previous results
     $searchResults.empty();
     //save form data to variable
@@ -221,7 +190,7 @@ function getMovies(){
           console.log("IMDB ID ", imdbID);
 
           //adds a button to each movie (+)
-          movie += "<div class='search-movie-item'><form class='add-movie-btn' onsubmit='createLike(event)'>"
+          movie += "<div class='search-movie-item'><form class='add-movie-btn' onsubmit='addMovieToUsers(event)'>"
                 +  "<input class='hidden' type='hidden' value=" + imdbID + " name='like' id=" + imdbID + "></input>"
                 +  "<input type='submit' value='+'></input>"
                 +  "</form>";
