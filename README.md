@@ -7,6 +7,10 @@
 ##Planning Phase
 ###We have mostly used [Trello](https://trello.com/b/IG8cM9yL/netflix-chill) with animal member pictures 🐨🐶🐱 to plan our user stories due to Brian's OCD-ness. He will die if the board is not organized. Jessie wrote a bunch of Granular and "friendly" user stories and Nidhi drew the fancy wireframes by using Balsamiq.
 ---------------------------------------------------------------------
+##Trello 
+![alt tag](https://trello-attachments.s3.amazonaws.com/56eb4b13d41f193fd657e586/3352x1858/6745f7a26d87f1316df7161514254493/Screen_Shot_2016-03-17_at_4.36.54_PM.png)
+![alt tag](https://trello-attachments.s3.amazonaws.com/56eb4b15402cf11069eb38dc/3360x1860/79f697484e1069dd144435917c468194/Screen_Shot_2016-03-17_at_4.37.17_PM.png)
+---------------------------------------------------------------------
 ##Balsamiq
 ![alt tag](https://trello-attachments.s3.amazonaws.com/56e271e18ae6264478aee297/1024x600/f95d42838a647f9d88999f2d3f480635/Homepage.png)
 ####This is the landing page to join the party!!!
@@ -21,7 +25,38 @@
 ![alt tag](https://trello-attachments.s3.amazonaws.com/56e27286bfbb5cf0432483cd/1024x600/03c8354926c326a14b36a797f149d138/Messages.png)
 ####Message feature coming soon to the couch near you also. Please stay tuned.
 ------------------------------------------------------------------------------------
-##Trello 
+##Technology
+####HTML5/CSS
+####Javascript/jQuery
+####Express
+####Mongodb/Mongoose
+####OMDB API
+####Facebook OAuth
+####Github
+####Trello
+####socket.io(when messaging comes in)
+
+------------------------------------------------------------------------------------
+##How to contribute??
+####1. Please fork and clone
+####2. npm install
+####3. subl . or atom .
+####4. add whatever you want in there :D
+####5. please then proceed to do a pull request.
+------------------------------------------------------------------------------------
+##Credits
+####Whoever it is that came up with Netflix AND Chill.
+####Brian, Jessie, Nidhi, Alex, Ben, Ilias, Christine(DIR), Daniel(TA), AND DANI FOR THE MODAL.
+####Monq for the API array pushing.
+####Vien for telling us there is a party at Twitch.tv. Needed that drink badly.
+------------------------------------------------------------------------------------
+##SHOUT OUTS~
+####Thank you team for carrying me. <3 working with you guys. -Brian
+####TO all those people that helped us along the way and to those that used our Facebook OAuth. - Nidhi
+####
+
+
+
 
 
 
