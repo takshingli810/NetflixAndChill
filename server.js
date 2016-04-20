@@ -7,14 +7,10 @@ var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 var session = require('express-session');
 var User = require('./models/user');
-<<<<<<< HEAD
 // mongoose.connect('mongodb://localhost/netflixandchill');
 mongoose.connect( process.env.MONGOLAB_URI ||
                   process.env.MONGOHQ_URL ||
                   "mongodb://localhost/netflixandchill");
-=======
-mongoose.connect('mongodb://localhost/netflixandchill');
->>>>>>> bf79e189a360b675ea19be4b15e9889285c77612
 
 // passport for facebook OAuth
 var passport = require('passport');
@@ -47,22 +43,14 @@ hbs.registerHelper('ifUser', function(lvalue, rvalue, options) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(logger('dev'));
-<<<<<<< HEAD
 app.use(cookieParser() ); // requiring cookie parser
-=======
-app.use(cookieParser() ); // requiring cookie parser  
->>>>>>> bf79e189a360b675ea19be4b15e9889285c77612
 app.use(methodOverride('_method'));
 
 
 //OAUTH and sessions things
 // Setting up the Passport Strategies
 require("./config/passport")(passport);
-<<<<<<< HEAD
 app.use(passport.initialize()); // initialization for passport
-=======
-app.use(passport.initialize()); // initialization for passport 
->>>>>>> bf79e189a360b675ea19be4b15e9889285c77612
 app.use(passport.session());
 
 //sessions stuff
