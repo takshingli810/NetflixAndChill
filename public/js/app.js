@@ -94,7 +94,7 @@ function renderLikes(){
 
 
             var movieDiv = "<div class= 'movie-div col-md-4' id=" + movieID + ">"
-            
+
             movieDiv += "<form class='delete-like' onsubmit='deleteLike(event)'>"
                   +  "<input type='submit' class='delete-btn' value='-' style='color:black'></input>"
                   +  "</form>";
